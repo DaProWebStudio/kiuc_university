@@ -1,0 +1,92 @@
+{% extends 'base/base.html' %}
+{% load static i18n %}
+
+{% block title %}
+   {% trans 'Контакты' %}
+{% endblock %}
+
+{% block content %}
+    <section class="section contacts">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5 col-lg-5 col-md-4 col-12">
+                    <div class="title">
+                        <span>{% trans 'Позвоните Нам' %}</span>
+                        <h3>{% trans 'Контактные данные' %}</h3>
+                    </div>
+                    <div class="contacts__link">
+                        <ul>
+                            <li>
+                                <b>{% trans 'Наш адрес: ' %}</b>
+                                {% trans 'Чуйская обл., Сокулукский р., Шопоков, ул. Машиностроительная, 25а' %}
+                            </li>
+                            <hr>
+                            <li>
+                                <b>{% trans 'Менеджеры КМУК' %}</b>
+                                <ul>
+                                    <li class="mt-3">{% trans 'Конурбаева Айгерим Бакытбековна' %} <a href="tel:+996771922265">+996 (771) 92-22-65</a></li>
+                                    <li class="mt-3">{% trans 'Замирбек кызы Айгерим' %} <a href="tel:+996703369776">+996 (703) 36-97-76</a></li>
+                                    <li class="mt-3">{% trans 'Анарбек кызы Айкерим' %} <a href="tel:+996702140551">+996 (702) 14-05-51</a></li>
+                                </ul>
+                            </li>
+                            <hr>
+                            <li>
+                                <b>{% trans 'Приемная' %}</b>
+                                <span>...... - <a href="#">.....</a></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-7 col-lg-7 col-md-8 col-12">
+                    <div class="title">
+                        <span>{% trans 'Система Обратной Связи' %}</span>
+                        <h3>{% trans 'Есть идея' %}</h3>
+                    </div>
+                    <div class="contacts-feedback">
+                        <form action="#" method="post" class="contacts__form">
+                            {% csrf_token %}
+                            <div class="contacts__form-field">
+                                {{ form.name }}
+                                <label for="id_name">{% trans 'Ваше имя' %}</label>
+                            </div>
+                            <div class="contacts__form-field">
+                                {{ form.email }}
+                                <label for="id_email">{% trans 'Ваша почта' %}</label>
+                            </div>
+                            <div class="contacts__form-field field-full">
+                                {{ form.message }}
+                                <label for="id_message">{% trans 'Ваше сообщение' %}</label>
+                            </div>
+                            <div class="contacts__form-field field-full field__agree">
+                                <input id="agree" required type="checkbox">
+                                <label for="agree" class="field__agree-label">{% trans 'Согласен на обработку персональных данных' %}</label>
+                            </div>
+                            <div class="contacts__form-field">
+                                <img src="{{ recaptcha.image.url }}" alt="">
+                            </div>
+                            <div class="contacts__form-field {% if form.user_answer.errors %}field-invalid{% endif %}">
+                                {{ form.user_answer }}
+                                <label for="id_user_answer">
+                                    {% if form.user_answer.errors %}
+                                        {% for error in form.user_answer.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    {% else %}
+                                        {% trans 'Напишите ответ' %}
+                                    {% endif %}
+                                </label>
+                            </div>
+                            <button type="submit" class="contacts__form-field field-full btn btn-primary py-3">
+                                {% trans 'Отправить сообщение' %}
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="contacts-map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1056.5517421664722!2d74.33675432651926!3d42.86404867698774!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389ed965acdeec3b%3A0xa3d3a2bafb4618e1!2z0JrRi9GA0LPRi9C30YHQutC40Lkg0JzQtdC20LTRg9C90LDRgNC-0LTQvdGL0Lkg0KPQvdC40LLQtdGA0YHQsNC70YzQvdGL0Lkg0JrQvtC70LvQtdC00LYgKNCa0JzQo9CaKQ!5e1!3m2!1sru!2skg!4v1682148536639!5m2!1sru!2skg" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+{% endblock %}

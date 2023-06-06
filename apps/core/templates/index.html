@@ -1,0 +1,265 @@
+{% extends 'base/base.html' %}
+{% load static imagekit  i18n %}
+
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'libs/glightbox/glightbox.min.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="section header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 col-lg-6 col-md-6 header__title">
+                    <h2>{% trans 'Кыргызский институт языков и культуры' %}</h2>
+                    <p class="desc-body">
+                        {% trans 'Миссия' %}:
+                        {% blocktranslate %}Повышение качества образования, воспитание лидеров и профессионалов, способных работать в условиях глобализации, через освоение новейших технологий.{% endblocktranslate %}
+                    </p>
+                    <a href="{% url 'contacts' %}" class="btn btn-primary">{% trans 'Связаться с нами ' %}</a>
+                </div>
+                <div class="col-12 col-lg-6 col-md-6">
+                    <div class="header__slider">
+                        <div class="header__slider-item">
+                            <img src="{% static 'images/college/MY6H7718.webp' %}" alt="">
+                        </div>
+                        <div class="header__slider-item">
+                            <img src="{% static 'images/college/MY6H7776.webp' %}" alt="">
+                        </div>
+                        <div class="header__slider-item">
+                            <img src="{% static 'images/college/MY6H7772.webp' %}" alt="">
+                        </div>
+                        <div class="header__slider-item">
+                            <img src="{% static 'images/college/MY6H7726.webp' %}" alt="">
+                        </div>
+                        <div class="header__slider-item">
+                            <img src="{% static 'images/college/MY6H8076.webp' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section fast_menu">
+        <div class="container">
+            <div class="fast_menu-row">
+                <a href="{% url 'cooperation' %}" class="fast_menu-link">{% trans 'Сотрудничество' %}</a>
+                <a href="{% url 'internationals' %}" class="fast_menu-link">{% trans 'Международная деятельность' %}</a>
+                <a href="{% url 'student_live_list' %}" class="fast_menu-link">{% trans 'Студенческая жизнь' %}</a>
+                <a href="{% url 'reception' %}" class="fast_menu-link">{% trans 'Абитуриентам' %}</a>
+                <a href="{% url 'specialties_list' %}" class="fast_menu-link">{% trans 'Наши специальности' %}</a>
+                <a href="{% url 'documents_list' %}" class="fast_menu-link">{% trans 'Нормативные документы' %}</a>
+                <a href="#" class="fast_menu-link">{% trans 'Дистанционное обучение «AVN»' %}</a>
+                <a href="{% url 'news_list' %}" class="fast_menu-link">{% trans 'Новости' %}</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section foreword">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6 col-md-6 mb-3">
+                    <div class="foreword-img">
+                        <img src="{% static 'images/college/MY6H7263.webp' %}" alt="">
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 col-md-6 pl-lg-5">
+                    <div class="title mb-3">
+                        <span>{% trans 'Приветственное слово' %}</span>
+                        <h3>{% trans 'Лю Бенг Ил' %}</h3>
+                        <p>{% trans 'Генерального директора КМУК, профессора, доктора филологических наук' %}</p>
+                        <p class="">{% trans 'Заслуженного работника образования  Республики Корея' %}</p>
+                    </div>
+                    <p class="desc-body">
+                        {% blocktranslate %}Приветствую Вас на официальном сайте Кыргызского международного универсального колледжа. Кыргызский институт языков и культуры – это один из самых престижных международных колледжей нашей страны.{% endblocktranslate %}
+                    </p>
+                    <a href="{% url 'welcoming_remarks' %}" class="btn btn-primary">{% trans 'Почитать' %}</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section history">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6 col-md-6 pl-lg-5 mb-3">
+                    <div class="title mb-3">
+                        <span>{% trans 'История колледжа' %}</span>
+                        <h3>{% trans 'История развития учебного заведения' %}</h3>
+                    </div>
+                    <p class="desc-body">
+                        {% blocktranslate %}История колледжа зародилась в 2013 году – в г. Шопоков были открыты языковые курсы для школьников и взрослых: английского, корейского языков. Курсы SOSI Educational centre стали популярными в Сокулукском районе, благодаря эффективному обучению и результативности. Школьники, успешно завершившие курсы, стали победителями программы FLEX. На курсах стали обучаться более 250 школьников из вблизи расположенных школ и гимназий.{% endblocktranslate %}
+                    </p>
+                    <a href="{% url 'history' %}" class="btn btn-primary">{% trans 'Подробно' %}</a>
+                </div>
+                <div class="col-12 col-lg-6 col-md-6 mb-3">
+                    <div class="video-banner">
+                        <img src="{% static 'images/bg/univer-front.webp' %}" alt="">
+                        <a class="glightbox video" href="https://www.youtube.com/watch?v=ClbZKRqv7mk">
+                            <i class="fa fa-play"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section news">
+        <div class="container">
+            <div class="title">
+                <span>{% trans 'Новости колледжа' %}</span>
+                <h3><a href="{% url 'news_list' %}">{% trans 'Новости' %}</a></h3>
+            </div>
+            <div class="slider_tree slider">
+                {% for item in news %}
+                    <div class="card">
+                        <a href="{{ item.get_absolute_url }}" class="card-link">
+                            <div class="card-img">
+                                {% generateimage 'main:thumbnail' source=item.image -- class="mypicture" %}
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">{{ item.title|truncatechars:63 }}</h4>
+                            </div>
+                            <div class="card-inner">
+                                <span class="card-inner_btn_right">{{ item.created|date }}</span>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="section specialties">
+        <div class="container">
+            <div class="title">
+                <span>{% trans 'Наши специальности' %}</span>
+                <h3><a href="#">{% trans 'Специальности' %}</a></h3>
+            </div>
+            <div class="slider_tree slider">
+                {% for specialty in specialties %}
+                    <div class="card">
+                        <a href="{{ specialty.get_absolute_url }}" class="card-link">
+                            <div class="card-img">
+                                {% generateimage 'main:thumbnail' source=specialty.image -- class="mypicture" %}
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">{{ specialty.title|truncatechars:63 }}</h4>
+                            </div>
+                            <div class="card-inner">
+                                <span class="card-inner_btn_left">{{ specialty.form_verbose }}</span>
+                                <span class="card-inner_btn_right">{{ specialty.contract }} сом</span>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <section class="section cooperation">
+        <div class="container">
+            <div class="title">
+                <span>{% trans 'Студентам' %}</span>
+                <h3><a href="{% url 'student_live_list' %}">{% trans 'Студенческая жизнь' %}</a></h3>
+            </div>
+            <div class="slider_tree slider">
+                {% for live in lives %}
+                    <div class="card international-card">
+                        <a href="{{ live.get_absolute_url }}" class="card-link">
+                            <div class="card-img">
+                                {% generateimage 'main:thumbnail' source=live.image -- class="mypicture" %}
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">{{ live.title|truncatechars:63 }}</h4>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <section class="section cooperation">
+        <div class="container">
+            <div class="title">
+                <span>{% trans 'О колледже' %}</span>
+                <h3><a href="{% url 'employees' %}">{% trans 'Структура' %}</a></h3>
+            </div>
+            <div class="slider_employee slider list_employee">
+                {% for employee in employees %}
+                    <a href="{{ employee.get_absolute_url }}" class="card">
+                        <div class="image-content">
+                            <span class="overlay"></span>
+                            <div class="card-image">
+                                <img src="{{ employee.image.url }}" class="card-img" alt="">
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h2 class="name">{{ employee.get_full_name }}</h2>
+                            <p class="description">{{ employee.position }}</p>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <section class="section cooperation">
+        <div class="container">
+            <div class="title">
+                <span>{% trans 'Студентам' %}</span>
+                <h3><a href="{% url 'students' %}">{% trans 'Члены студенческого совета' %}</a></h3>
+            </div>
+            <div class="slider_employee slider list_employee">
+                {% for student in students %}
+                    <a href="{{ student.get_absolute_url }}" class="card">
+                        <div class="image-content">
+                            <span class="overlay"></span>
+                            <div class="card-image">
+                                <img src="{{ student.image.url }}" class="card-img" alt="">
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h2 class="name">{{ student.get_full_name }}</h2>
+                            <p class="description">{{ student.position }}</p>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <section class="section cooperation">
+        <div class="container">
+            <div class="title">
+                <span>{% trans 'Сотрудничество' %}</span>
+                <h3><a href="{% url 'internationals' %}">{% trans 'Международное сотрудничество' %}</a></h3>
+            </div>
+            <div class="slider_tree slider">
+                {% for international in internationals %}
+                    <div class="card international-card">
+                        <a href="{{ international.get_absolute_url }}" class="card-link">
+                            <div class="card-img">
+                                {% generateimage 'main:thumbnail' source=international.image -- class="mypicture" %}
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">{{ international.title|truncatechars:63 }}</h4>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'libs/glightbox/glightbox.min.js' %}"></script>
+    <script type="text/javascript">
+        GLightbox({
+            'href': 'https://www.youtube.com/watch?v=ClbZKRqv7mk',
+            'type': 'video',
+            'source': 'youtube', //vimeo, youtube or local
+            'width': 900,
+            'autoplayVideos': true,
+        });
+    </script>
+{% endblock %}

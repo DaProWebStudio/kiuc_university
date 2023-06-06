@@ -1,0 +1,1016 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-11 01:25+0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: apps/core/models.py:17 apps/core/models.py:30 apps/core/models.py:71
+#: apps/employee/models.py:17 apps/news/models.py:15
+msgid "Название"
+msgstr "Аталышы"
+
+#: apps/core/models.py:18 apps/core/models.py:86
+msgid "Файл"
+msgstr "Файл"
+
+#: apps/core/models.py:24 apps/core/models.py:25
+#: apps/core/templates/collaborations/cooperation.html:5
+#: apps/core/templates/collaborations/cooperation.html:14
+#: apps/core/templates/collaborations/internationals.html:13
+#: apps/core/templates/index.html:163 templates/base/footer.html:34
+#: templates/base/menu.html:52
+msgid "Сотрудничество"
+msgstr "Кызматташуу"
+
+#: apps/core/models.py:32 apps/news/models.py:17 apps/specialty/models.py:28
+msgid "Описание"
+msgstr "Баяндоо"
+
+#: apps/core/models.py:33 apps/news/models.py:19 apps/specialty/models.py:32
+msgid "Фото"
+msgstr "Сүрөт"
+
+#: apps/core/models.py:53
+#: apps/core/templates/collaborations/international-detail.html:21
+#: apps/core/templates/collaborations/internationals.html:5
+#: apps/core/templates/collaborations/internationals.html:14
+#: apps/core/templates/index.html:164 templates/base/menu.html:53
+msgid "Международное сотрудничество"
+msgstr "Эл аралык кызматташтык"
+
+#: apps/core/models.py:54
+#, fuzzy
+#| msgid "Международное сотрудничество"
+msgid "Международные сотрудничество"
+msgstr "Эл аралык кызматташтык"
+
+#: apps/core/models.py:60 apps/core/models.py:66 apps/news/models.py:48
+#: apps/news/models.py:59
+msgid "Фотография"
+msgstr "Сүрөттөр"
+
+#: apps/core/models.py:67 apps/news/models.py:60
+msgid "Фотографии"
+msgstr "Сүрөттөр"
+
+#: apps/core/models.py:72
+msgid "Активный"
+msgstr "Активдүү"
+
+#: apps/core/models.py:78
+msgid "Нормативный документ"
+msgstr "Ченемдик документ"
+
+#: apps/core/models.py:79 apps/core/templates/documents/list.html:13
+#: apps/core/templates/index.html:52 templates/base/menu.html:50
+msgid "Нормативные документы"
+msgstr "Ченемдик документтер"
+
+#: apps/core/models.py:83
+msgid "Документ"
+msgstr "Документ"
+
+#: apps/core/models.py:84
+msgid "Название файла"
+msgstr "Файлдын аталышы"
+
+#: apps/core/models.py:93
+msgid "Файл документа"
+msgstr "Документ файлы"
+
+#: apps/core/models.py:94
+msgid "Файлы документа"
+msgstr "Документ файлдары"
+
+#: apps/core/templates/collaborations/cooperation.html:13
+#: apps/core/templates/documents/list.html:12
+msgid "О Колледже"
+msgstr "Колледж Жөнүндө"
+
+#: apps/core/templates/collaborations/international-detail.html:32
+#: apps/news/templates/news/detail.html:31
+#, fuzzy
+#| msgid "Фотография"
+msgid "Фотогалерея"
+msgstr "Сүрөттөр"
+
+#: apps/core/templates/collaborations/international-detail.html:38
+#: apps/news/templates/news/detail.html:37
+msgid "Посмотреть"
+msgstr ""
+
+#: apps/core/templates/history.html:4 apps/core/templates/history.html:11
+msgid "История создания и развития учебного заведения"
+msgstr "Окуу жайдын түзүлүү жана өнүгүү тарыхы"
+
+#: apps/core/templates/history.html:10
+#: apps/core/templates/passport-college.html:18 templates/base/menu.html:42
+msgid "О колледже"
+msgstr "Колледж жөнүндө "
+
+#: apps/core/templates/index.html:14 templates/base/base.html:9
+#: templates/base/footer.html:8
+msgid "Кыргызский международный универсальный колледж"
+msgstr "Кыргызстан эл аралык универсалдуу колледжи"
+
+#: apps/core/templates/index.html:16
+msgid "Миссия колледжа"
+msgstr "Колледждин миссиясы"
+
+#: apps/core/templates/index.html:17
+msgid ""
+"Подготовка специалистов, имеющих международный уровень теоретических и "
+"практических навыков, обладающих высокими личностными качествами и способных "
+"повысить уровень производственного потенциала и экономики Кыргызстана"
+msgstr ""
+"Эл аралык деңгээлдеги теориялык жана практикалык көндүмдөрү бар, "
+"Кыргызстандын өндүрүштүк потенциалын жана экономикасын көтөрүүгө жөндөмдүү, "
+"жеке сапаттары жогору адистерди даярдоо"
+
+#: apps/core/templates/index.html:19
+msgid "Связаться с нами "
+msgstr "Биз менен байланыш"
+
+#: apps/core/templates/index.html:47
+msgid "Учебный процесс колледжа"
+msgstr "Колледждин окуу процесси"
+
+#: apps/core/templates/index.html:48
+msgid "Международная деятельность"
+msgstr "Эл-аралык ишмердүүлүк"
+
+#: apps/core/templates/index.html:49
+msgid "Воспитательная деятельность"
+msgstr "Тарбиялык иштери"
+
+#: apps/core/templates/index.html:50
+msgid "Цифровая трансформация"
+msgstr "Санариптик трансформация"
+
+#: apps/core/templates/index.html:51 apps/core/templates/index.html:137
+#: apps/specialty/templates/specialty/list.html:4
+#: apps/specialty/templates/specialty/list.html:13
+#: templates/base/footer.html:32
+msgid "Наши специальности"
+msgstr "Биздин адистиктер"
+
+#: apps/core/templates/index.html:53 templates/base/menu.html:79
+msgid "Дистанционное обучение «AVN»"
+msgstr "Дистанттык окутуу «AVN»"
+
+#: apps/core/templates/index.html:54 apps/core/templates/index.html:112
+#: apps/news/models.py:42 apps/news/templates/news/detail.html:21
+#: apps/news/templates/news/list.html:13 templates/base/footer.html:31
+#: templates/base/menu.html:49
+msgid "Новости"
+msgstr "Жаңылыктар"
+
+#: apps/core/templates/index.html:69
+msgid "Приветственное слово"
+msgstr "Саламдашуу сөзү"
+
+#: apps/core/templates/index.html:70
+#: apps/core/templates/welcoming-remarks.html:5
+#: apps/core/templates/welcoming-remarks.html:16
+msgid "Лю Бенг Ил"
+msgstr "Лю Бенг Ил"
+
+#: apps/core/templates/index.html:71
+#: apps/core/templates/welcoming-remarks.html:17
+msgid "Генерального директора КМУК, профессора, доктора филологических наук"
+msgstr "КМУКТУН башкы директору, профессор, филология илимдеринин доктору"
+
+#: apps/core/templates/index.html:72
+#: apps/core/templates/welcoming-remarks.html:18
+msgid "Заслуженного работника образования  Республики Корея"
+msgstr "Корея Республикасынын билим берүүсүнүн эмгек сиңирген кызматкери"
+
+#: apps/core/templates/index.html:75
+msgid ""
+"Приветствую Вас на официальном сайте Кыргызского международного "
+"универсального колледжа. Кыргызский международный универсальный колледж – "
+"это один из самых престижных международных колледжей нашей страны."
+msgstr ""
+"Мен сиздерди Кыргыз Интернешнлдин расмий сайтына кош келиңиздерУниверсал "
+"колледжи. Кыргыз эл аралык универсалдуу колледжи -Бул биздин өлкөдөгү эң "
+"абройлуу эл аралык колледждердин бири."
+
+#: apps/core/templates/index.html:77
+msgid "Почитать"
+msgstr "Окуу"
+
+#: apps/core/templates/index.html:88
+msgid "История колледжа"
+msgstr "Колледждин тарыхы"
+
+#: apps/core/templates/index.html:89
+msgid "История развития учебного заведения"
+msgstr "Окуу жайдын өнүгүү тарыхы"
+
+#: apps/core/templates/index.html:92
+msgid ""
+"История колледжа зародилась в 2013 году – в г. Шопоков были открыты языковые "
+"курсы для школьников и взрослых: английского, корейского языков. Курсы SOSI "
+"Educational centre стали популярными в Сокулукском районе, благодаря "
+"эффективному обучению и результативности. Школьники, успешно завершившие "
+"курсы, стали победителями программы FLEX. На курсах стали обучаться более "
+"250 школьников из вблизи расположенных школ и гимназий."
+msgstr ""
+"Колледждин тарыхы 2013 – жылы башталган-Шопоков шаарында Тил ачылды мектеп "
+"окуучулары жана чоңдор үчүн курстар: англис, корей тилдери. ТооСокулук "
+"районунда популярдуу болуп калдынатыйжалуу окутуу жана натыйжалуулугун. "
+"Мектепти ийгиликтүү аяктаган окуучуларкурстар, МСК программасынын "
+"жеңүүчүлөрү болушту. Курстарда көбүрөөк окутула баштады Жакын жайгашкан "
+"мектептердин жана гимназиялардын 250 окуучусу."
+
+#: apps/core/templates/index.html:94
+msgid "Подробно"
+msgstr "Кененирээк"
+
+#: apps/core/templates/index.html:111 apps/news/templates/news/list.html:4
+#: apps/news/templates/news/list.html:12
+msgid "Новости колледжа"
+msgstr "Колледж жаңылыктары"
+
+#: apps/core/templates/index.html:138 apps/specialty/models.py:61
+msgid "Специальности"
+msgstr "Адистиктер"
+
+#: apps/core/templates/passport-college.html:5
+#: apps/core/templates/passport-college.html:19 templates/base/menu.html:47
+msgid "Паспорт колледжа"
+msgstr "Колледждин паспорту"
+
+#: apps/core/templates/reception.html:5 apps/core/templates/reception.html:14
+#: apps/core/templates/reception.html:42 templates/base/menu.html:59
+msgid "Абитуриентам"
+msgstr "Талапкерлерге"
+
+#: apps/core/templates/reception.html:15
+msgid "Уважаемые абитуриенты!"
+msgstr "Урматтуу талапкерлер!"
+
+#: apps/core/templates/reception.html:19
+msgid ""
+"Кыргызский международный универсальный колледж, рад пригласить Вас на наше "
+"учебное заведение. Наш колледж предоставляет широкую возможность выбора "
+"специальностей, приносящих успех и стабильный доход в различных сферах "
+"деятельности! Наши специальности были, есть и будут перспективными, "
+"высокооплачиваемыми и интересными!"
+msgstr ""
+"Кыргыз эл аралык универсалдуу колледжи, сиздерди биздин окуу жайга чакырууга кубанычтамын "
+"окуу жай. Биздин колледж кеңири тандоо мүмкүнчүлүгүн берет "
+"ар кайсы тармактарда ийгилик жана туруктуу киреше алып келүүчү адистиктер"
+"иш-аракеттер! Биздин адистиктер келечектүү болуп келген, боло берет жана боло берет, "
+"жогорку акы төлөнүүчү жана кызыктуу!"
+
+#: apps/core/templates/reception.html:21
+msgid "В настоящее время колледж ведет подготовку по специальностям:"
+msgstr "Учурда колледж адистиктер боюнча билим берет:"
+
+#: apps/core/templates/reception.html:31
+msgid ""
+"Образовательный процесс в колледже организуют квалифицированные "
+"преподаватели. Колледж располагает оборудованными кабинетами и компьютерными "
+"классами, позволяющими осуществлять подготовку специалистов на высоком "
+"уровне. Мы поддерживаем тесные контакты с нашими зарубежными партнерами, "
+"можете обучаться в одном из лучших вузов Республики Корея."
+msgstr ""
+"Колледжде билим берүү процессин квалификациялуу адистер уюштурат "
+"окутуучулар. Колледжде жабдылган кабинеттер жана компьютердик"
+"адистерди жогорку деңгээлде даярдоого мүмкүндүк берген класстар менен"
+"деңгээлде. Биз чет өлкөлүк өнөктөштөрүбүз менен тыгыз байланышта болобуз, "
+"Корея Республикасынын мыкты ЖОЖдорунун биринде окуй аласыздар."
+
+#: apps/core/templates/reception.html:34
+msgid ""
+"Годы учебы в колледже запомнятся Вам яркими впечатлениями об интересной и "
+"насыщенной жизни."
+msgstr ""
+"Колледждеги жылдар кызыктуу жана кызыктуу окуялар менен эсте калат "
+"каныккан жашоо."
+
+#: apps/core/templates/reception.html:37
+msgid ""
+"Каждый для себя найдет специальность, профессию по своему характеру, стилю "
+"жизни, темпераменту, складу ума."
+msgstr ""
+"Ар ким өзүнүн мүнөзү, стили боюнча адистигин, кесибин табат "
+"жашоо, темперамент,акыл-эс."
+
+#: apps/core/templates/reception.html:43
+msgid "Как поступить в наш колледж"
+msgstr "Колледжге кантип кирсе болот?"
+
+#: apps/core/templates/reception.html:46
+msgid "Условия приема"
+msgstr "Кабыл алуу шарттары"
+
+#: apps/core/templates/reception.html:48
+msgid ""
+"Колледж принимают выпускников 9, 10 и 11 классов. Чтобы поступить в наш "
+"колледж, абитуриентам достаточно оставить заявку на и предоставить аттестат "
+"об окончании 9 или 11 классов. Конкурсный отбор первокурсников проводится по "
+"среднему баллу аттестата. Чем лучше школьник учился последний год в школе (9 "
+"или 11 класс), тем выше его шансы быть зачисленным."
+msgstr ""
+"Колледж 9, 10 жана 11-класстын бүтүрүүчүлөрүн кабыл алат. Биздин кирүү үчүн "
+"колледж, абитуриенттерге арыз таштап, аттестат тапшыруу жетиштүү"
+"9 же 11-класстарды бүтүрүү жөнүндө. Биринчи курстун студенттерин конкурстук тандоо"
+"аттестаттын орточо баллына. Окуучу мектептин акыркы жылында жакшы окуган (9 "
+"же 11-класс), анын катталуу мүмкүнчүлүгү ошончолук жогору болот."
+
+#: apps/core/templates/reception.html:51
+msgid ""
+"Если Вам необходима помощь в выборе, специалисты приемной комиссии всегда "
+"готовы проконсультировать и дать ответы на все интересующие вопросы. "
+"Позвоните по телефону"
+msgstr ""
+"Эгер тандоодо жардам керек болсо, кабыл алуу боюнча адистер ар дайым "
+"бардык суроолоруңузга консультация берүүгө жана жооп берүүгө даярбыз. "
+"Телефон чалуу"
+
+#: apps/core/templates/reception.html:53
+msgid "или напишите на e-mail"
+msgstr "же e-mail почтабызга жазыңыз"
+
+#: apps/core/templates/reception.html:58
+msgid "Основной список документов для поступающих в колледж:"
+msgstr "Кабыл алуу үчүн кандай документтер талап кылынат?"
+
+#: apps/core/templates/reception.html:60
+msgid "Оригинал Аттестата и Оригинал Свидетельство об образовании;"
+msgstr "Түпнуска күбөлүк жана оригиналдуу билим жөнүндө күбөлүк;"
+
+#: apps/core/templates/reception.html:61
+msgid "Медицинская справка №086-У;"
+msgstr "Медициналык справка 086-У;"
+
+#: apps/core/templates/reception.html:62
+msgid "Свидетельства о рождении или паспорт (копия);"
+msgstr "Туулгандыгы тууралуу күбөлүк же паспорт (көчүрмөсү);"
+
+#: apps/core/templates/reception.html:63
+msgid "Фотографии 3х4 (6 штук);"
+msgstr "Сүрөт  3х4 (6 даана);"
+
+#: apps/core/templates/reception.html:64
+msgid "Скоросшиватель и конверт"
+msgstr "Дело жана конверт"
+
+#: apps/core/templates/reception.html:69
+msgid ""
+"Подайте документы онлайн через информационную систему колледжа или посетите "
+"лично приемную комиссию для подачи заявления и документов. Адрес: "
+"Сокулукский район., г.Шопоков., ул. Машиностроительная 13а."
+msgstr ""
+"Колледждин маалымат тутуму аркылуу онлайн режиминде документтерди тапшырыңыз же барыңыз "
+"арыздарды жана документтерди тапшыруу үчүн жеке кабыл алуу комиссиясы. Дареги: "
+"Сокулук району. Шопоков шаары., машина куруу көчөсү 13а."
+
+#: apps/core/templates/reception.html:72
+msgid ""
+"Последний день тура формируются списки рекомендованных к зачислению в "
+"колледж, поэтому будьте на связи."
+msgstr ""
+"Турдун акыркы күнү кабыл алууга сунушталгандардын тизмеси түзүлөт "
+"колледж, ошондуктан байланышта болуңуз."
+
+#: apps/core/templates/reception.html:75
+msgid ""
+"Списки рекомендованных к зачислению составляются по убыванию среднего балла "
+"аттестата."
+msgstr ""
+"Кабыл алууга сунушталгандардын тизмеси орточо баллдын төмөндөшү боюнча түзүлөт "
+"күбөлүк."
+
+
+#: apps/core/templates/reception.html:79
+msgid "Как считается средний балл аттестата"
+msgstr "Аттестаттын орточо упайы кандайча эсептелет"
+
+#: apps/core/templates/reception.html:81
+msgid ""
+"Вам нужно подсчитать общее количество оценок, сложить все оценки вместе "
+"(найти сумму всех оценок) и разделить эту сумму на общее количество оценок. "
+"Полученное число и будет средним баллом Вашего аттестата. Средний балл "
+"ведется с точностью до сотых долей."
+msgstr ""
+"Сиз баалардын жалпы санын эсептеп, бардык бааларды кошушуңуз керек "
+"(бардык баалардын суммасын табыңыз) жана бул сумманы баалардын жалпы санына бөлүңүз. "
+"Алынган сан сиздин аттестатыңыздагы орточо балл болот. Орточо балл "
+"жүздөн бир бөлүгүнө чейин тактык менен жүргүзүлөт."
+
+#: apps/core/templates/reception.html:84
+msgid "Например:"
+msgstr "Мисалы:"
+
+#: apps/core/templates/reception.html:85
+msgid ""
+"В Вашем аттестате стоят оценки по 12 предметам. Из них 5 пятерок, 3 четверки "
+"и 4 тройки. Найдем сумму всех оценок : 5*5 + 4*3 + 3*4 = 25 + 12 + 12= 49. "
+"Разделим сумму всех оценок на количество предметов: 49 : 12 = 4.08. Средний "
+"балл рассчитывается с точностью до сотых долей. Таким образом, средний балл "
+"Вашего аттестата – 4.08"
+msgstr ""
+"Сиздин аттестатыңызда 12 предмет боюнча баалар бар. Анын ичинен 5 беш, 3 төрт "
+"жана 4 үчөө. Бардык баалардын суммасын табыңыз : 5*5 + 4*3 + 3*4 = 25 + 12 + 12= 49. "
+"Бардык баалардын суммасын предметтердин санына бөлөлү : 49: 12 = 4.08. Орточо "
+"упай жүздөн бир бөлүккө чейин эсептелет. Ошентип, орточо балл "
+"Сиздин аттестатыңыз-4.08"
+
+#: apps/core/templates/reception.html:92
+#: apps/specialty/templates/specialty/detail.html:32
+msgid "Срок обучение"
+msgstr "Окутуу формасы"
+
+#: apps/core/templates/reception.html:94
+#: apps/specialty/templates/specialty/detail.html:33
+msgid "На базе 9 класса"
+msgstr "9-класстын базасында"
+
+#: apps/core/templates/reception.html:94
+#: apps/specialty/templates/specialty/detail.html:33
+msgid "2 года 10 месяцев"
+msgstr "2 жыл 10 ай"
+
+#: apps/core/templates/reception.html:95
+#: apps/specialty/templates/specialty/detail.html:34
+msgid "На базе 11 класса"
+msgstr "11-класстын базасында"
+
+#: apps/core/templates/reception.html:95
+#: apps/specialty/templates/specialty/detail.html:34
+msgid "1 год 10 месяцев"
+msgstr "1 жыл 10 ай"
+
+#: apps/core/templates/reception.html:96
+msgid "Заочная"
+msgstr "Сырттан окуу"
+
+#: apps/core/templates/reception.html:96
+msgid "2 года 6 месяцев"
+msgstr "2 жыл 6 ай"
+
+#: apps/core/templates/reception.html:100
+#: apps/feedback/templates/contacts.html:5 templates/base/footer.html:38
+#: templates/base/menu.html:7 templates/base/menu.html:87
+msgid "Контакты"
+msgstr "Байланыш"
+
+#: apps/core/templates/reception.html:102
+msgid "Телефон"
+msgstr "Байланыш"
+
+#: apps/core/templates/reception.html:111
+msgid "Сайт"
+msgstr "Сайт"
+
+#: apps/core/templates/welcoming-remarks.html:5
+#: apps/core/templates/welcoming-remarks.html:15
+msgid "Приветственное слово "
+msgstr "Саламдашуу сөзү"
+
+#: apps/employee/models.py:18
+msgid "Короткое название"
+msgstr "Кыска аталышы"
+
+#: apps/employee/models.py:23 apps/employee/models.py:59
+#: apps/employee/models.py:134
+msgid "Должность"
+msgstr "Кызмат орду"
+
+#: apps/employee/models.py:24
+msgid "Должности"
+msgstr "Кызмат орундары"
+
+#: apps/employee/models.py:36
+msgid "Кыргыз"
+msgstr "Кыргыз"
+
+#: apps/employee/models.py:37 apps/employee/models.py:166
+msgid "Русский"
+msgstr "Русский"
+
+#: apps/employee/models.py:38
+msgid "Казах"
+msgstr "Казах"
+
+#: apps/employee/models.py:42
+msgid "не женат"
+msgstr "бойдок"
+
+#: apps/employee/models.py:43
+msgid "женат"
+msgstr "үй-бүлөлүү"
+
+#: apps/employee/models.py:44
+msgid "не замужем"
+msgstr "бойдок"
+
+#: apps/employee/models.py:45
+msgid "замужем"
+msgstr "үй-бүлөлүү"
+
+#: apps/employee/models.py:46
+msgid "разведен(а)"
+msgstr "ажырашкан"
+
+#: apps/employee/models.py:50
+msgid "Мужской"
+msgstr "Эркек"
+
+#: apps/employee/models.py:51
+msgid "Женский"
+msgstr "Аял"
+
+#: apps/employee/models.py:54
+msgid "Порядковый номер"
+msgstr "Ирэттик саны"
+
+#: apps/employee/models.py:55
+msgid "Фамилия"
+msgstr "Фамилия"
+
+#: apps/employee/models.py:56
+msgid "Имя"
+msgstr "Аты"
+
+#: apps/employee/models.py:57
+msgid "Отчество"
+msgstr "Отчество"
+
+#: apps/employee/models.py:60
+msgid "Пол"
+msgstr "Жынысы"
+
+#: apps/employee/models.py:61
+msgid "День рождения"
+msgstr "Туулган күн"
+
+#: apps/employee/models.py:62
+msgid "Национальность"
+msgstr "Улуту"
+
+#: apps/employee/models.py:64
+msgid "Семейное положение"
+msgstr "Үй-бүлөлүк абалы"
+
+#: apps/employee/models.py:66
+msgid "Цель"
+msgstr "Максат"
+
+#: apps/employee/models.py:67
+msgid "Навыки работы"
+msgstr "Жумуш көндүмдөрү"
+
+#: apps/employee/models.py:68
+msgid "Фото сотрудника "
+msgstr "Кызматкердин сүрөтү"
+
+#: apps/employee/models.py:107
+msgid "Преподаватель"
+msgstr "Окутуучу"
+
+#: apps/employee/models.py:108
+msgid "Преподаватели"
+msgstr "Окутуучулар"
+
+#: apps/employee/models.py:113 apps/employee/models.py:130
+#: apps/employee/models.py:147 apps/employee/models.py:171
+#: apps/employee/models.py:187
+msgid "Сотрудник"
+msgstr "Кызматкер"
+
+#: apps/employee/models.py:114 apps/employee/models.py:131
+msgid "Начальный год"
+msgstr "Баштапкы жыл"
+
+#: apps/employee/models.py:115 apps/employee/models.py:132
+msgid "Год выпуска"
+msgstr "Чыккан жылы"
+
+#: apps/employee/models.py:116
+msgid "Название ВУЗа или СПО"
+msgstr "ЖОЖдун же КОБдун аталышы"
+
+#: apps/employee/models.py:117
+msgid "Направление"
+msgstr "Багыты"
+
+#: apps/employee/models.py:124
+msgid "Образование"
+msgstr "Билим"
+
+#: apps/employee/models.py:125
+msgid "Образовании"
+msgstr "Билими"
+
+#: apps/employee/models.py:133 apps/employee/models.py:149
+msgid "Название организации"
+msgstr "Уюмдун аталышы"
+
+#: apps/employee/models.py:141
+msgid "Опыт работы"
+msgstr "Иш тажрыйбасы"
+
+#: apps/employee/models.py:142
+msgid "Опыты работы"
+msgstr "Иш тажрыйбасы"
+
+#: apps/employee/models.py:148 apps/employee/models.py:188
+msgid "Год"
+msgstr "Жыл"
+
+#: apps/employee/models.py:150
+msgid "Описание награды"
+msgstr "Сыйлык сүрөттөмөсү"
+
+#: apps/employee/models.py:157
+msgid "Награда"
+msgstr "Сыйлык"
+
+#: apps/employee/models.py:158
+msgid "Награды"
+msgstr "Сыйлыктар"
+
+#: apps/employee/models.py:164
+msgid "Кыргызский"
+msgstr "Кыргыз тили"
+
+#: apps/employee/models.py:165
+msgid "Казахский"
+msgstr "Казак тили"
+
+#: apps/employee/models.py:167
+msgid "Английский"
+msgstr "Англис тили"
+
+#: apps/employee/models.py:168
+msgid "Немецкий"
+msgstr "Немец тили"
+
+#: apps/employee/models.py:172 apps/employee/models.py:181
+msgid "Язык"
+msgstr "Тил"
+
+#: apps/employee/models.py:182
+msgid "Языки"
+msgstr "Тилдер"
+
+#: apps/employee/models.py:189
+msgid "Описание по повышению квалификации"
+msgstr "Квалификацияны жогорулатуу боюнча баяндама"
+
+#: apps/employee/models.py:196
+msgid "Повышение квалификацию"
+msgstr "Квалификацияны жогорулатуу"
+
+#: apps/employee/models.py:197
+msgid "Повышение квалификации"
+msgstr "Квалификацияны жогорулатуу"
+
+#: apps/employee/models.py:202
+msgid "1-курс"
+msgstr "1-тайпа"
+
+#: apps/employee/models.py:203
+msgid "2-курс"
+msgstr "2-тайпа"
+
+#: apps/employee/models.py:204
+msgid "3-курс"
+msgstr "3-тайпа"
+
+#: apps/employee/models.py:205
+msgid "4-курс"
+msgstr "4-тайпа"
+
+#: apps/employee/models.py:208
+msgid "Имя группы"
+msgstr "Топтун аты"
+
+#: apps/employee/models.py:210
+msgid "Курс"
+msgstr "Тайпа"
+
+#: apps/employee/models.py:211 apps/specialty/models.py:60
+#: apps/specialty/templates/specialty/detail.html:17
+msgid "Специальность"
+msgstr "Адистиги"
+
+#: apps/employee/models.py:226
+msgid "Группа"
+msgstr "Топ"
+
+#: apps/employee/models.py:227
+msgid "Группы"
+msgstr "Топтор"
+
+#: apps/feedback/forms.py:13 apps/feedback/templates/contacts.html:75
+msgid "Напишите ответ"
+msgstr "Жоопту жазыңыз"
+
+#: apps/feedback/forms.py:21 apps/feedback/models.py:12
+#: apps/feedback/templates/contacts.html:50
+msgid "Ваше имя"
+msgstr "Сиздин атыңыз"
+
+#: apps/feedback/forms.py:27 apps/feedback/models.py:13
+msgid "Ваша электронная почта"
+msgstr "Сиздин электрондук почтаңыз"
+
+#: apps/feedback/forms.py:31 apps/feedback/models.py:14
+#: apps/feedback/templates/contacts.html:58
+msgid "Ваше сообщение"
+msgstr "Сиздин билдирүү"
+
+#: apps/feedback/models.py:22 apps/feedback/models.py:23
+msgid "Обратная связь"
+msgstr "Кайтарым байланыш"
+
+#: apps/feedback/models.py:28
+msgid "Изображение в Формате JPG 60X350"
+msgstr "Сүрөт JPG 60X350 форматында"
+
+#: apps/feedback/models.py:31
+msgid "Ответ"
+msgstr "Жооп"
+
+#: apps/feedback/templates/contacts.html:14
+msgid "Позвоните Нам"
+msgstr "Бизге Чалыңыз"
+
+#: apps/feedback/templates/contacts.html:15
+msgid "Контактные данные"
+msgstr "Байланыш маалыматтары"
+
+#: apps/feedback/templates/contacts.html:20
+msgid "Наш адрес: "
+msgstr "Биздин дарек:"
+
+#: apps/feedback/templates/contacts.html:21 templates/base/footer.html:62
+msgid "Чуйская обл., Сокулукский р., Шопоков, ул. Машиностроительная, 25а"
+msgstr "Чуй обл., Сокулук р., Шопоков, көч. Машиностроительная, 25а"
+
+#: apps/feedback/templates/contacts.html:25
+msgid "Менеджеры КМУК"
+msgstr "КМУК менеджерлери"
+
+#: apps/feedback/templates/contacts.html:27
+msgid "Конурбаева Айгерим Бакытбековна"
+msgstr ""
+
+#: apps/feedback/templates/contacts.html:28
+msgid "Замирбек кызы Айгерим"
+msgstr ""
+
+#: apps/feedback/templates/contacts.html:29
+msgid "Анарбек кызы Айкерим"
+msgstr ""
+
+#: apps/feedback/templates/contacts.html:34
+msgid "Приемная"
+msgstr "Кабыл алуу бөлмөсү"
+
+#: apps/feedback/templates/contacts.html:42
+msgid "Система Обратной Связи"
+msgstr "Кайтарым байланыш системасы"
+
+#: apps/feedback/templates/contacts.html:43
+msgid "Есть идея"
+msgstr "Идея бар"
+
+#: apps/feedback/templates/contacts.html:54
+msgid "Ваша почта"
+msgstr "Сиздин почта"
+
+#: apps/feedback/templates/contacts.html:62
+msgid "Согласен на обработку персональных данных"
+msgstr "Жеке маалыматтарды иштеп чыгууга макулмун"
+
+#: apps/feedback/templates/contacts.html:80
+msgid "Отправить сообщение"
+msgstr "Билдирүү жөнөтүү"
+
+#: apps/feedback/views.py:30
+msgid "Не правильный ответ"
+msgstr "Туура эмес жооп"
+
+#: apps/news/models.py:18
+msgid "Ссылка на видео"
+msgstr "Видеого шилтеме"
+
+#: apps/news/models.py:21 apps/specialty/models.py:34
+msgid "Статус"
+msgstr "Статус"
+
+#: apps/news/models.py:26
+msgid "Создано"
+msgstr "Түзүлдү"
+
+#: apps/news/models.py:41
+msgid "Новость"
+msgstr "Жаңылыктар"
+
+#: apps/news/templates/news/aside.html:4
+msgid "Поиск новостей"
+msgstr "Жаңылыктарды издөө"
+
+#: apps/news/templates/news/aside.html:6
+msgid "Поиск по ключевому слову..."
+msgstr "Ачкыч сөз боюнча издөө..."
+
+#: apps/news/templates/news/aside.html:7
+msgid "Поиск"
+msgstr "Издөө"
+
+#: apps/news/templates/news/detail.html:23
+#: apps/specialty/templates/specialty/detail.html:19
+#, fuzzy
+#| msgid "Направление"
+msgid "Добавлено"
+msgstr "Багыты"
+
+#: apps/specialty/models.py:18
+msgid "Очный"
+msgstr "Күндүз"
+
+#: apps/specialty/models.py:19
+msgid "Очный/Заочный"
+msgstr "Күндүзгү/Сырттан окуу"
+
+#: apps/specialty/models.py:20
+msgid "Заочный"
+msgstr "Сырттан окуу"
+
+#: apps/specialty/models.py:23
+#: apps/specialty/templates/specialty/detail.html:31
+msgid "Контракт"
+msgstr "Келишим"
+
+#: apps/specialty/models.py:24
+msgid "Контракт/Бюджет"
+msgstr "Келишим/Бюджет"
+
+#: apps/specialty/models.py:26
+msgid "Наименование"
+msgstr "Аталышы"
+
+#: apps/specialty/models.py:29
+msgid "Сумма контракта"
+msgstr "Келишимдин суммасы"
+
+#: apps/specialty/models.py:30
+msgid "Форма обучение"
+msgstr "Окутуу формасы"
+
+#: apps/specialty/models.py:31
+#: apps/specialty/templates/specialty/detail.html:30
+msgid "Основа обучения"
+msgstr "Окутуунун негизи"
+
+#: apps/specialty/templates/specialty/detail.html:27
+#, fuzzy
+#| msgid "Повышение квалификации"
+msgid "Полезные информации"
+msgstr "Квалификацияны жогорулатуу"
+
+#: apps/specialty/templates/specialty/detail.html:29
+#, fuzzy
+#| msgid "Форма обучение"
+msgid "Форма обучения"
+msgstr "Окутуу формасы"
+
+#: apps/specialty/templates/specialty/detail.html:31
+msgid "сом"
+msgstr "сом"
+
+#: apps/specialty/templates/specialty/detail.html:35
+msgid "Часто задаваемые вопросы"
+msgstr "Көп берилүүчү суроолор"
+
+#: apps/specialty/templates/specialty/detail.html:36
+#, fuzzy
+#| msgid "Новости колледжа"
+msgid "Как поступить в колледж?"
+msgstr "Колледжге кантип кирсе болот?"
+
+#: apps/specialty/templates/specialty/detail.html:37
+msgid "Какие документы нужны для поступления?"
+msgstr "Кабыл алуу үчүн кандай документтер талап кылынат?"
+
+#: apps/specialty/templates/specialty/list.html:12
+msgid "Что мы вам предлагаем"
+msgstr "Сизге эмне сунуштайбыз"
+
+#: config/settings.py:119
+msgid "Russia"
+msgstr ""
+
+#: config/settings.py:120
+msgid "English"
+msgstr ""
+
+#: config/settings.py:121
+msgid "Kyrgyz"
+msgstr ""
+
+#: templates/base/footer.html:11
+msgid ""
+"Жизнь студентов нашего колледжа насыщена яркими событиями, семинарами, "
+"дебатами, творчествами, экскурсиями, а также знакомством с интересными "
+"людьми."
+msgstr ""
+"Биздин колледждин студенттеринин жашоосу жаркын окуяларга, семинарларга бай."
+"дебаттар, чыгармачылык, экскурсиялар, ошондой эле кызыктуу менен "
+"таанышууадамдар тарабынан."
+
+#: templates/base/footer.html:13
+msgid "Наши социальные сети"
+msgstr "Биздин социалдык тармактар"
+
+#: templates/base/footer.html:28
+msgid "Быстрое меню"
+msgstr "Ылдам меню"
+
+#: templates/base/footer.html:30
+msgid "О Нас"
+msgstr "Биз жөнүндө"
+
+#: templates/base/footer.html:33
+msgid "Наши достижении"
+msgstr "Биздин жетишкендиктер"
+
+#: templates/base/footer.html:74
+msgid "«КМУК» - Все права защищены."
+msgstr "«КМУК» - Бардык укуктар корголгон."
+
+#: templates/base/footer.html:77
+msgid "Наш институт"
+msgstr "Биздин институт "
+
+#: templates/base/menu.html:39
+msgid "Главная"
+msgstr "Башкы"
+
+#: templates/base/menu.html:46
+msgid "История"
+msgstr "Тарыхы"
+
+#: templates/base/menu.html:48
+msgid "Структура"
+msgstr "Структурасы"
+
+#: templates/base/menu.html:51
+msgid "Библиотека"
+msgstr "Китепкана"
+
+#: templates/base/menu.html:56
+msgid "Учебный процесс"
+msgstr "Окуу процесси"
+
+#: templates/base/menu.html:64
+msgid "Приемная комиссия"
+msgstr "Кабыл алуу комиссиясы"
+
+#: templates/base/menu.html:68
+msgid "Наши Специальности"
+msgstr "Биздин Адистиктер"
+
+#: templates/base/menu.html:74
+msgid "Студентам"
+msgstr "Студенттерге"
+
+#: templates/base/menu.html:82
+msgid "Студенческий совет"
+msgstr "Студенттик кеңеш"
+
+#~ msgid "Является международным"
+#~ msgstr "Эл аралык болуп саналат"
+
+#~ msgid "Директор"
+#~ msgstr "Мүдүр"
+
+#~ msgid "Заместитель директора по УР"
+#~ msgstr "ОК боюнча мүдүрүрүнүн орун басары"
+
+#~ msgid "Бюджет"
+#~ msgstr "Бюджет"
+
+#~ msgid "Подробнее"
+#~ msgstr "Кененирээк"
