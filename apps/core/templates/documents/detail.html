@@ -1,5 +1,5 @@
 {% extends 'base/base.html' %}
-{% load static %}
+{% load static i18n %}
 
 {% block title %}
     {{ document.title }}
@@ -10,7 +10,7 @@
         <div class="container">
             <div class="row">
                 <div class="title col-12 m-auto">
-                    <span>О Колледже</span>
+                    <span>{% trans 'Об институте' %}</span>
                     <h3>{{ document.title }}</h3>
                 </div>
                 <ul class="cooperation-list col-12 m-auto">
