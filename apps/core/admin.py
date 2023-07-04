@@ -11,6 +11,10 @@ from .models import (
 )
 
 
+admin.site.site_title = 'Админ-панель сайта КИЯК'
+admin.site.site_header = 'Админ-панель сайта КИЯК'
+
+
 @admin.register(Cooperation)
 class CooperationAdmin(admin.ModelAdmin):
     list_display = ('title',)
