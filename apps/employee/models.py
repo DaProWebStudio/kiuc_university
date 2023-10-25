@@ -7,7 +7,6 @@ from imagekit.processors import ResizeToFill
 
 from apps.core.models import AbstractResume
 from common.upload_to_files import employee_file
-from common import constants as cons
 
 
 class Position(models.Model):
@@ -29,17 +28,21 @@ class Position(models.Model):
 
 
 class Nationality(models.Model):
+    """ Национальность """
     title = models.CharField(_('Название'), max_length=100, unique=True)
 
     class Meta:
         verbose_name = _('Национальность')
         verbose_name_plural = _('Национальности')
 
+    def __str__(self):
+        return self.title
+
 
 class Employee(AbstractResume):
     """ Работник """
     position = models.ForeignKey(Position, verbose_name=_('Должность'), on_delete=models.PROTECT, related_name='resume')
-    nationality = models.ForeignKey(Nationality, verbose_name=_('Национальность'), on_delete=models.PROTECT, null=True, blank=True)
+    nationality = models.ForeignKey(Nationality, verbose_name=_('Национальность'), on_delete=models.PROTECT)
     work_skills = models.TextField(_('Навыки работы'))
     image = ProcessedImageField(verbose_name=_('Фото сотрудника'), upload_to=employee_file, format='webp',
                                 processors=[ResizeToFill(500, 500)], options={'quality': 90})
