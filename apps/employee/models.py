@@ -28,17 +28,18 @@ class Position(models.Model):
         return self.title
 
 
+class Nationality(models.Model):
+    title = models.CharField(_('Название'), max_length=100, unique=True)
+
+    class Meta:
+        verbose_name = _('Национальность')
+        verbose_name_plural = _('Национальности')
+
+
 class Employee(AbstractResume):
     """ Работник """
-    NATIONALITY_CHOICES = (
-        (cons.KYRGYZSTAN, _('Кыргыз')),
-        (cons.RUSSIA, _('Русский')),
-        (cons.KAZAKHSTAN, _('Казах')),
-        (cons.KOREAN, _('Кореец')),
-    )
     position = models.ForeignKey(Position, verbose_name=_('Должность'), on_delete=models.PROTECT, related_name='resume')
-    nationality = models.CharField(_('Национальность'), max_length=10,
-                                   choices=NATIONALITY_CHOICES, default=cons.KYRGYZSTAN)
+    nationality = models.ForeignKey(Nationality, verbose_name=_('Национальность'), on_delete=models.PROTECT, null=True, blank=True)
     work_skills = models.TextField(_('Навыки работы'))
     image = ProcessedImageField(verbose_name=_('Фото сотрудника'), upload_to=employee_file, format='webp',
                                 processors=[ResizeToFill(500, 500)], options={'quality': 90})
@@ -50,7 +51,3 @@ class Employee(AbstractResume):
 
     def get_absolute_url(self):
         return reverse('employees_detail', kwargs={'slug': self.slug})
-
-    def nationality_v(self):
-        return dict(self.NATIONALITY_CHOICES)[self.nationality]
-
