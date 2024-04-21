@@ -4,6 +4,8 @@
 
 {% block links %}
     <link rel="stylesheet" href="{% static 'libs/glightbox/glightbox.min.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/Swiper/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/ebs-el-kitep/el-kitep.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -157,6 +159,51 @@
             </div>
         </div>
     </section>
+
+
+
+    <section class="el-kitep section header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-12">
+                    <div class="feature-content pl-3 text-left">
+                        <div class="title text-left ml-auto p-1 mb-3">
+                            <span class="wow fadeInRight" data-wow-delay=".3s">
+                                {% trans 'О библиотеке' %}
+                            </span>
+                            <h3 class="wow fadeInRight text-white" data-wow-delay=".5s">
+                                {% trans 'Электронно-библиотечная система «Эл-Китеп»' %}
+                            </h3>
+                        </div>
+                        <div class="feature-item wow fadeInUp" data-wow-delay=".5s">
+                            <div class="banner-content">
+                                <p class="text-white">
+                                    {% blocktrans %}
+                                        Это система доступа к копиям электронных учебников, научной и другой
+                                        дополнительной
+                                        литературы, с возможностью цитирования и иными сервисами работы с текстом.
+                                        Также ЭБС включает в себя мультимедийные (аудиовизуальные, программные,
+                                        интерактивные) продукты и материалы.
+                                    {% endblocktrans %}
+                                </p>
+                                <div class="button mt-4">
+                                    <a class="btn btn-primary white-bg mouse-dir border-white border-1" target="_blank" href="https://ebs.el-kitep.kg/">
+                                        {% trans 'Перейти' %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-12">
+                    <div class="swiper el-kitep-book-slider wow fadeInRight" data-wow-delay=".5s">
+                        <div class="swiper-wrapper"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="section cooperation">
         <div class="container">
             <div class="title">
@@ -262,4 +309,6 @@
             'autoplayVideos': true,
         });
     </script>
+    <script src="{% static 'libs/Swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'libs/ebs-el-kitep/el-kitep.js' %}"></script>
 {% endblock %}
