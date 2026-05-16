@@ -8,79 +8,45 @@
     <div class="container">
         <header class="page-hero reveal">
             <div class="page-hero__eye">{% trans 'Абитуриентам' %}</div>
-            <h1 class="page-hero__h">{% trans 'Дорогие' %} <span class="ital">абитуриенты!</span></h1>
-            <p class="page-hero__lead">{% trans 'Кыргызский институт языков и культуры ждёт Вас. Два направления бакалавриата, международные стажировки и носители языка.' %}</p>
+            <h1 class="page-hero__h">{{ page.heading }} <span class="ital">{{ page.heading_italic }}</span></h1>
+            <p class="page-hero__lead">{{ page.lead }}</p>
         </header>
 
         <div class="page-layout page-layout--with-aside">
             <div class="page-layout__main">
                 <div class="prose reveal">
-                    <p>{% trans 'Кыргызский институт языков и культуры  ждет Вас!' %}</p>
-                    <p>{% trans 'Наш институт обучает студентов по двум направлениям высшего образования (бакалавриат).' %}</p>
-
-                    <div class="reception-block">
-                        <h5>{% trans 'Срок обучения — 4 года' %}</h5>
-                        <ol>
-                            {% for specialty in specialties %}
-                                <li><a href="{{ specialty.get_absolute_url }}">{{ specialty.title }}</a></li>
-                            {% endfor %}
-                        </ol>
-                    </div>
-
-                    <div class="reception-block">
-                        <h5>{% trans 'Стоимость обучения — 40 000 сомов' %}</h5>
-                        <ul>
-                            <li>{% trans 'Абитуриенты принимаются по результатам Общереспубликанского тестирования (ОРТ).' %}</li>
-                            <li>{% trans 'Пороговый балл — 110.' %}</li>
-                            <li>{% trans 'ОРТ 180 баллов и выше — 4 года бесплатного обучения (при условии успешной учёбы и активного участия в жизни вуза).' %}</li>
-                            <li>{% trans 'ОРТ 170 и выше — 1 год бесплатного обучения.' %}</li>
-                            <li>{% trans 'ОРТ 150 и выше — 1 год с 30 % скидкой.' %}</li>
-                        </ul>
-                    </div>
-
-                    <p>{% trans 'Выпускники колледжа поступают сразу на 2 курс по направлению «Лингвистика» и «Туризм».' %}</p>
-                    <p>{% trans 'Выпускники направления «Лингвистика» могут работать на высокооплачиваемых должностях: преподавателями в государственных и частных школах, колледжах, международных компаниях, а также переводчиками в международных организациях.' %}</p>
-                    <p>{% trans 'Направление «Лингвистика» было и остаётся востребованным.' %}</p>
-                    <p>{% trans 'Выпускники направления «Туризм» смогут работать в туристических агентствах, международных турфирмах, быть гидами.' %}</p>
-
-                    <blockquote>
-                        {% trans 'Добро пожаловать в Кыргызский институт языков и культуры! Желаем успехов — надеемся, что вы станете нашими студентами!' %}
-                    </blockquote>
-
-                    <div class="reception-block">
-                        <h5>{% trans 'Основной список документов для поступающих' %}</h5>
-                        <ul>
-                            <li>{% trans 'Сертификат ОРТ' %}</li>
-                            <li>{% trans 'Оригинал аттестата за 11 класс (2 копии)' %}</li>
-                            <li>{% trans 'Паспорт — 2 копии' %}</li>
-                            <li>{% trans 'Медицинская справка №086-У' %}</li>
-                            <li>{% trans 'Фотографии 3 × 4 (6 штук)' %}</li>
-                            <li>{% trans 'Справка с места жительства' %}</li>
-                        </ul>
-                    </div>
+                    {{ page.body|safe }}
                 </div>
             </div>
 
             <aside class="page-layout__aside">
                 <div class="info-card reveal">
-                    <h3 class="info-card__title">{% trans 'Контакты приёмной' %}</h3>
+                    <h3 class="info-card__title">{{ page.contacts_title }}</h3>
                     <ul class="info-card__list">
+                        {% if page.contact_phone %}
                         <li>
                             <span>{% trans 'Телефон' %}</span>
-                            <a href="tel:+996555106886">+996 (555) 10-68-86</a>
+                            <a href="tel:{{ page.contact_phone|cut:' '|cut:'('|cut:')'|cut:'-' }}">{{ page.contact_phone }}</a>
                         </li>
+                        {% endif %}
+                        {% if page.contact_whatsapp %}
                         <li>
                             <span>WhatsApp</span>
-                            <a href="https://api.whatsapp.com/send/?phone=996555106886&text=Здравствуйте%21%0A%0AПишу+из+вашего+сайта+www.kiuc.kg.%0A%0A&type=phone_number&app_absent=0" target="_blank" rel="noopener">+996 (555) 10-68-86</a>
+                            <a href="https://api.whatsapp.com/send/?phone={{ page.contact_whatsapp|cut:' '|cut:'('|cut:')'|cut:'-'|cut:'+' }}&text=Здравствуйте%21%0A%0AПишу+из+вашего+сайта+www.kiuc.kg.%0A%0A&type=phone_number&app_absent=0" target="_blank" rel="noopener">{{ page.contact_whatsapp }}</a>
                         </li>
+                        {% endif %}
+                        {% if page.contact_website_url %}
                         <li>
                             <span>{% trans 'Сайт' %}</span>
-                            <a href="https://2020.edu.gov.kg/spuz/reports?id_university=168" target="_blank" rel="noopener">2020.edu.gov.kg</a>
+                            <a href="{{ page.contact_website_url }}" target="_blank" rel="noopener">{{ page.contact_website_label }}</a>
                         </li>
+                        {% endif %}
+                        {% if page.contact_email %}
                         <li>
                             <span>Email</span>
-                            <a href="mailto:info@kiuc.kg">info@kiuc.kg</a>
+                            <a href="mailto:{{ page.contact_email }}">{{ page.contact_email }}</a>
                         </li>
+                        {% endif %}
                     </ul>
                 </div>
             </aside>

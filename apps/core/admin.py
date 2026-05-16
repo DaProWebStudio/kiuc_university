@@ -8,6 +8,7 @@ from .models import (
     InternationalCooperationImages,
     Document,
     DocumentFile, EduProcessFile, EduProcess,
+    ReceptionPage,
 )
 
 
@@ -66,3 +67,39 @@ class EduProcessFileInlines(admin.TabularInline):
 class EduProcessAdmin(admin.ModelAdmin):
     list_display = ('title',)
     inlines = [EduProcessFileInlines]
+
+
+@admin.register(ReceptionPage)
+class ReceptionPageAdmin(TabbedTranslationAdmin):
+    fieldsets = (
+        ('Хиро (заголовок страницы)', {
+            'fields': ('heading', 'heading_italic', 'lead'),
+        }),
+        ('Основной текст', {
+            'fields': ('body',),
+            'description': 'Большой блок с правилами поступления, стоимостью, требованиями к документам и т.д. '
+                           'Поддерживает форматирование, списки, цитаты — всё через WYSIWYG.',
+        }),
+        ('Сайдбар «Контакты приёмной»', {
+            'fields': ('contacts_title', 'contact_phone', 'contact_whatsapp',
+                       'contact_email', 'contact_website_label', 'contact_website_url'),
+        }),
+    )
+
+    def has_add_permission(self, request):
+        # Singleton: разрешаем добавление только пока записи нет
+        return not ReceptionPage.objects.exists()
+
+    def has_delete_permission(self, request, obj=None):
+        # Singleton: запретить удаление через админку
+        return False
+
+    def changelist_view(self, request, extra_context=None):
+        # Если запись существует — сразу открываем её на редактирование,
+        # минуя список. Если нет — пускаем на создание.
+        obj = ReceptionPage.objects.first()
+        if obj:
+            from django.shortcuts import redirect
+            from django.urls import reverse
+            return redirect(reverse('admin:core_receptionpage_change', args=[obj.pk]))
+        return super().changelist_view(request, extra_context)

@@ -138,6 +138,87 @@ class EduProcessFile(models.Model):
         verbose_name_plural = _('Файлы учебных процессов')
 
 
+RECEPTION_DEFAULT_BODY = """\
+<p>Кыргызский институт языков и культуры ждет Вас!</p>
+<p>Наш институт обучает студентов по двум направлениям высшего образования (бакалавриат).</p>
+
+<h5>Срок обучения — 4 года</h5>
+<ol>
+  <li>Лингвистика</li>
+  <li>Туризм</li>
+</ol>
+
+<h5>Стоимость обучения — 40 000 сомов</h5>
+<ul>
+  <li>Абитуриенты принимаются по результатам Общереспубликанского тестирования (ОРТ).</li>
+  <li>Пороговый балл — 110.</li>
+  <li>ОРТ 180 баллов и выше — 4 года бесплатного обучения (при условии успешной учёбы и активного участия в жизни вуза).</li>
+  <li>ОРТ 170 и выше — 1 год бесплатного обучения.</li>
+  <li>ОРТ 150 и выше — 1 год с 30 % скидкой.</li>
+</ul>
+
+<p>Выпускники колледжа поступают сразу на 2 курс по направлению «Лингвистика» и «Туризм».</p>
+<p>Выпускники направления «Лингвистика» могут работать на высокооплачиваемых должностях: преподавателями в государственных и частных школах, колледжах, международных компаниях, а также переводчиками в международных организациях.</p>
+<p>Направление «Лингвистика» было и остаётся востребованным.</p>
+<p>Выпускники направления «Туризм» смогут работать в туристических агентствах, международных турфирмах, быть гидами.</p>
+
+<blockquote>Добро пожаловать в Кыргызский институт языков и культуры! Желаем успехов — надеемся, что вы станете нашими студентами!</blockquote>
+
+<h5>Основной список документов для поступающих</h5>
+<ul>
+  <li>Сертификат ОРТ</li>
+  <li>Оригинал аттестата за 11 класс (2 копии)</li>
+  <li>Паспорт — 2 копии</li>
+  <li>Медицинская справка №086-У</li>
+  <li>Фотографии 3 × 4 (6 штук)</li>
+  <li>Справка с места жительства</li>
+</ul>
+"""
+
+
+class ReceptionPage(models.Model):
+    """Singleton-страница «Абитуриентам». В админке всегда ровно одна запись —
+    редактор института может править hero/lead/основной текст и сайдбар-контакты."""
+    heading = models.CharField(_('Заголовок (обычный)'), max_length=120, default='Дорогие')
+    heading_italic = models.CharField(_('Заголовок (курсив)'), max_length=120, default='абитуриенты!')
+    lead = models.TextField(_('Подзаголовок'),
+                            default='Кыргызский институт языков и культуры ждёт Вас. Два направления '
+                                    'бакалавриата, международные стажировки и носители языка.')
+    body = RichTextField(_('Основной текст'), blank=True, default=RECEPTION_DEFAULT_BODY)
+
+    contacts_title = models.CharField(_('Заголовок контактов'), max_length=120, default='Контакты приёмной')
+    contact_phone = models.CharField(_('Телефон'), max_length=40, blank=True, default='+996 (555) 10-68-86')
+    contact_whatsapp = models.CharField(_('WhatsApp (номер)'), max_length=40, blank=True, default='+996 (555) 10-68-86')
+    contact_email = models.EmailField(_('Email'), blank=True, default='info@kiuc.kg')
+    contact_website_label = models.CharField(_('Подпись сайта'), max_length=120, blank=True, default='2020.edu.gov.kg')
+    contact_website_url = models.URLField(_('Ссылка на сайт'), blank=True,
+                                          default='https://2020.edu.gov.kg/spuz/reports?id_university=168')
+
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(_('Страница «Абитуриентам»'))
+
+    def save(self, *args, **kwargs):
+        # Singleton: всегда pk=1, любые попытки создать ещё одну запись
+        # схлопываются в обновление существующей.
+        self.pk = 1
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        # Не даём удалить singleton через ORM.
+        pass
+
+    @classmethod
+    def load(cls):
+        obj, _created = cls.objects.get_or_create(pk=1)
+        return obj
+
+    class Meta:
+        verbose_name = _('Страница «Абитуриентам»')
+        verbose_name_plural = _('Страница «Абитуриентам»')
+
+
 class AbstractResume(models.Model):
     GENDER_CHOICES = (
         (cons.MEN, _('Мужской')),
