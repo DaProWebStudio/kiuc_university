@@ -12,8 +12,10 @@
   grid-auto-columns: calc((100% - 3 * 20px) / 4);
   gap: 20px;
   overflow-x: auto;
+  overflow-y: hidden;          // не перехватываем вертикальный wheel-scroll
+  overscroll-behavior-x: contain;  // не цепляем скролл страницы при достижении края
   scroll-snap-type: x mandatory;
-  padding-bottom: 8px;
+  padding: 8px 0;              // место сверху/снизу под hover translateY(-6px)
   scrollbar-width: none;
   -ms-overflow-style: none;
 
