@@ -128,16 +128,20 @@ LOCALE_PATHS = (
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
+#
+# DEV (DEBUG=True): Django runserver раздаёт из STATICFILES_DIRS автоматически.
+# PROD (DEBUG=False): collectstatic копирует всё (наш static/ + admin/ + ckeditor/ + ...)
+#   в STATIC_ROOT, оттуда раздаёт nginx через alias /static/ → /var/www/.../staticfiles/.
 
-STATIC_URL = 'static/'
-# STATIC_ROOT = BASE_DIR / 'static'
-STATIC_DIR = BASE_DIR / 'static'
-STATICFILES_DIRS = [STATIC_DIR]
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_DIR = BASE_DIR / 'static'  # alias для urls.py при DEBUG
 
 STYLE_CORE_VERSION = os.environ.get("STYLE_CORE_VERSION", "v1.0")
 STYLE_RESPONSIVE_VERSION = os.environ.get("STYLE_RESPONSIVE_VERSION", "v1.0")
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_DIR = MEDIA_ROOT
 MEDIA_DIRS = [MEDIA_DIR]
