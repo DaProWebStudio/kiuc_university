@@ -8,7 +8,7 @@
     <div class="container">
         <header class="page-hero reveal">
             <div class="page-hero__eye">{% trans 'Абитуриентам' %}</div>
-            <h1 class="page-hero__h">{{ page.heading }} <span class="ital">{{ page.heading_italic }}</span></h1>
+            <h1 class="page-hero__h">{{ page.heading|safe }}</h1>
             <p class="page-hero__lead">{{ page.lead }}</p>
         </header>
 

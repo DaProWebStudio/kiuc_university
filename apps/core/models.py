@@ -179,8 +179,10 @@ RECEPTION_DEFAULT_BODY = """\
 class ReceptionPage(models.Model):
     """Singleton-страница «Абитуриентам». В админке всегда ровно одна запись —
     редактор института может править hero/lead/основной текст и сайдбар-контакты."""
-    heading = models.CharField(_('Заголовок (обычный)'), max_length=120, default='Дорогие')
-    heading_italic = models.CharField(_('Заголовок (курсив)'), max_length=120, default='абитуриенты!')
+    heading = models.CharField(_('Заголовок'), max_length=240,
+                               default='Дорогие <i>абитуриенты!</i>',
+                               help_text=_('Можно вставить HTML — например, оберни слово в '
+                                           '&lt;i&gt;...&lt;/i&gt; чтобы выделить курсивом.'))
     lead = models.TextField(_('Подзаголовок'),
                             default='Кыргызский институт языков и культуры ждёт Вас. Два направления '
                                     'бакалавриата, международные стажировки и носители языка.')

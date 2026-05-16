@@ -9,4 +9,4 @@ class InternationalCooperationTranslation(TranslationOptions):
 
 @register(ReceptionPage)
 class ReceptionPageTranslation(TranslationOptions):
-    fields = ('heading', 'heading_italic', 'lead', 'body', 'contacts_title')
+    fields = ('heading', 'lead', 'body', 'contacts_title')

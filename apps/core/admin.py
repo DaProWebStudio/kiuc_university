@@ -73,7 +73,7 @@ class EduProcessAdmin(admin.ModelAdmin):
 class ReceptionPageAdmin(TabbedTranslationAdmin):
     fieldsets = (
         ('Хиро (заголовок страницы)', {
-            'fields': ('heading', 'heading_italic', 'lead'),
+            'fields': ('heading', 'lead'),
         }),
         ('Основной текст', {
             'fields': ('body',),
