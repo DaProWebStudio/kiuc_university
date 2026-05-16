@@ -1,52 +1,101 @@
+@use "../base/tokens" as *;
+
+// ==========================================================================
+// Section title block (eyebrow + heading)
+// ==========================================================================
+
+.title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.title-eye {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  align-self: flex-start;
+  font-family: $f-mono;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: $c-blue;
+
+  &::before {
+    content: "";
+    width: 22px;
+    height: 1.5px;
+    background: $c-blue;
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  .n {
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: $c-blue-10;
+    color: $c-blue-dark;
+    font-size: 11px;
+    margin-left: 2px;
+  }
+}
+
+.title-h {
+  font-family: $f-display;
+  font-weight: 500;
+  color: $c-title;
+  letter-spacing: -.02em;
+  font-size: clamp(30px, 3.2vw, 46px);
+  line-height: 1.04;
+  margin: 0;
+  font-variation-settings: "opsz" 144, "SOFT" 20;
+
+  a {
+    color: inherit;
+    transition: color .25s $ease;
+
+    &:hover {
+      color: $c-blue;
+    }
+  }
+}
+
+// Старые хуки — сохраняем минимальную совместимость со внутренними страницами
+// (они будут переписаны позже, но пока сайт не должен ломаться).
 .section .title {
   & span {
     display: inline-block;
-    font-size: 14px;
+    font-family: $f-mono;
+    font-size: 12px;
     font-weight: 500;
-    color: $--bs-orange;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: $c-blue;
     margin-bottom: .5rem;
-    position: relative;
-    &::before {
-      content: '';
-      display: inline-block;
-      width: 1.5rem;
-      height: 1px;
-      background-color: $--bs-orange;
-      position: absolute;
-      top: 50%;
-      left: -1.7rem;
-    }
   }
+
   & h3 {
-    font-size: 2rem;
-    font-weight: 700;
-    font-style: normal;
-    text-align: left;
-    color: $--bs-title;
+    font-family: $f-display;
+    font-size: clamp(26px, 2.6vw, 36px);
+    font-weight: 500;
+    color: $c-title;
+    letter-spacing: -.015em;
+    line-height: 1.1;
+
     & a {
       text-decoration: none;
-      color: $--bs-title;
+      color: inherit;
     }
   }
-  & .news-title {
-    font-size: 22px;
-  }
 }
 
-.header__title {
-  & h2 {
-    font-size: 50px;
-    font-weight: bold;
-    color: $--bs-white;
-  }
+.contacts-title {
+  font-family: $f-display;
+  font-weight: 500;
+  font-size: 32px;
+  color: $c-title;
+  padding-top: 15px;
+  letter-spacing: -.015em;
 }
-
-.contacts {
-    &-title {
-      font-weight: 700;
-      font-size: 32px;
-      color: $--bs-title;
-      padding-top: 15px;
-    }
-}
-

@@ -1,11 +1,13 @@
+@use "../base/varibales" as *;
+
 .widget {
   width: 100%;
   &-title {
-    background-color: $--bs-blue;
-    color: $--bs-white;
+    background-color: $bs-blue;
+    color: $bs-white;
     padding: 15px 10px;
     margin-bottom: 20px;
-    border-radius: $--bs-radius-small;
+    border-radius: $bs-radius-small;
     font-size: 18px;
     margin-top: 10px;
   }
@@ -20,7 +22,7 @@
       font-size: 16px;
       font-weight: 400;
       border: 2px solid #eee;
-      border-radius: $--bs-radius-small;
+      border-radius: $bs-radius-small;
     }
     & button {
       position: absolute;
@@ -29,14 +31,14 @@
       width: 100px;
       height: 100%;
       z-index: 1;
-      background-color: $--bs-blue;
+      background-color: $bs-blue;
       font-size: 17px;
       color: #fff;
       border: none;
-      border-radius: 0 $--bs-radius-small $--bs-radius-small 0;
+      border-radius: 0 $bs-radius-small $bs-radius-small 0;
       transition: all .3s ease-out;
       &:hover {
-        background-color: $--bs-dark-blue;
+        background-color: $bs-dark-blue;
       }
     }
   }

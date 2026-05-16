@@ -1,35 +1,35 @@
 {% extends 'base/base.html' %}
 {% load static i18n %}
 
-{% block title %}
-    {% trans 'Паспорт колледжа' %}
-{% endblock %}
+{% block title %}{% trans 'Паспорт колледжа' %}{% endblock %}
 
 {% block links %}
     <link rel="stylesheet" href="{% static 'libs/flipbook/flipbook.style.css' %}">
 {% endblock %}
 
 {% block content %}
-    <section class="section password_college">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="title">
-                        <span>{% trans 'Об институте' %}</span>
-                        <h3>{% trans 'Паспорт института' %}</h3>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div id="flip_book" style="height: 600px; position: relative;">
-                        <input type="hidden" id="url_pdf" value="{% static 'documents/password-college.pdf' %}">
-                    </div>
+<section class="section">
+    <div class="container">
+        <header class="page-hero reveal">
+            <div class="page-hero__eye">{% trans 'Об институте' %}</div>
+            <h1 class="page-hero__h">{% trans 'Паспорт' %} <span class="ital">института</span></h1>
+            <p class="page-hero__lead">{% trans 'Официальный документ с полной информацией об институте — учредители, структура, материально-техническая база.' %}</p>
+        </header>
+
+        <div class="page-layout">
+            <div class="flipbook-wrap reveal">
+                <div id="flip_book" style="height: 600px; position: relative;">
+                    <input type="hidden" id="url_pdf" value="{% static 'documents/password-college.pdf' %}">
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 {% endblock %}
 
 {% block scripts %}
+    {# flipbook — единственная жива́я зависимость от jQuery, грузим точечно. #}
+    <script src="{% static 'libs/jquery/jquery.js' %}"></script>
     <script src="{% static 'libs/flipbook/js/flipbook.min.js' %}"></script>
     <script src="{% static 'libs/flipbook/js/book.js' %}"></script>
 {% endblock %}

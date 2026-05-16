@@ -1,0 +1,1171 @@
+@use "../base/tokens" as *;
+
+// ==========================================================================
+// Page — shared building blocks внутренних страниц (v8)
+// ==========================================================================
+// Включает: page-hero, page-layout (main+aside), prose (CKEditor output),
+// widget (aside), info-card, file-list, gallery-grid, resume, form, map-embed.
+// Заменяют старые Bootstrap-сетки (.row/.col-*) на CSS Grid.
+
+// --------------------------------------------------------------------------
+// Page hero — заголовок внутренней страницы
+// --------------------------------------------------------------------------
+.page-hero {
+  padding: 0 0 24px;
+  position: relative;
+
+  &__eye {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: $f-mono;
+    font-size: 12px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: $c-blue;
+    margin-bottom: 14px;
+
+    &::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: currentColor;
+      opacity: .6;
+    }
+  }
+
+  &__h {
+    font-family: $f-display;
+    font-weight: 500;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -.02em;
+    color: $c-title;
+    margin: 0 0 12px;
+
+    em, i, .ital {
+      font-style: italic;
+      font-variation-settings: 'SOFT' 60, 'WONK' 1;
+      color: $c-blue;
+    }
+  }
+
+  &__lead {
+    max-width: 680px;
+    color: $c-text;
+    font-size: 17px;
+    line-height: 1.55;
+    margin: 0 0 4px;
+  }
+
+  &__meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: $f-mono;
+    font-size: 12px;
+    letter-spacing: .08em;
+    color: $c-text;
+    margin-top: 16px;
+
+    b, strong {
+      color: $c-blue;
+      font-weight: 600;
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Page layout — main + aside (замена Bootstrap row/col)
+// --------------------------------------------------------------------------
+.page-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+  padding-bottom: 80px;
+
+  &--with-aside {
+    @media (min-width: 980px) {
+      grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+      gap: 40px;
+    }
+  }
+
+  &--aside-left {
+    @media (min-width: 980px) {
+      grid-template-columns: minmax(280px, 1fr) minmax(0, 2fr);
+      gap: 40px;
+    }
+  }
+
+  &__main {
+    min-width: 0;
+  }
+
+  &__aside {
+    min-width: 0;
+
+    @media (min-width: 980px) {
+      position: sticky;
+      top: 96px;
+      align-self: start;
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Prose — типографика для RichText / CKEditor output
+// --------------------------------------------------------------------------
+// Алиас .content_dynamic_block оставлен, чтобы старая разметка не сломалась.
+.prose,
+.content_dynamic_block {
+  color: $c-text;
+  font-size: 17px;
+  line-height: 1.7;
+  font-family: $f-body;
+
+  > * + * {
+    margin-top: 18px;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  h2, h3, h4 {
+    font-family: $f-display;
+    font-weight: 500;
+    color: $c-title;
+    line-height: 1.2;
+    letter-spacing: -.015em;
+    margin-top: 32px;
+  }
+
+  h2 {
+    font-size: clamp(24px, 3.2vw, 32px);
+  }
+
+  h3 {
+    font-size: clamp(20px, 2.6vw, 26px);
+  }
+
+  h4 {
+    font-size: 20px;
+  }
+
+  h5 {
+    font-family: $f-body;
+    font-size: 17px;
+    font-weight: 600;
+    color: $c-title;
+    margin: 24px 0 12px;
+    letter-spacing: -.01em;
+  }
+
+  ul, ol {
+    padding-left: 22px;
+    margin: 0;
+
+    li + li {
+      margin-top: 8px;
+    }
+
+    li::marker {
+      color: $c-blue;
+    }
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  a {
+    color: $c-blue;
+    text-decoration: underline;
+    text-decoration-color: rgba($c-blue, .3);
+    text-underline-offset: 3px;
+    transition: color .25s $ease;
+
+    &:hover {
+      color: $c-blue-dark;
+      text-decoration-color: currentColor;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius-lg);
+    margin: 24px 0;
+  }
+
+  blockquote {
+    border-left: 3px solid $c-blue;
+    padding: 4px 0 4px 20px;
+    font-family: $f-display;
+    font-style: italic;
+    color: $c-title;
+    font-size: 20px;
+    line-height: 1.5;
+    margin: 24px 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    margin: 24px 0;
+
+    th, td {
+      padding: 12px 14px;
+      border-bottom: 1px solid $c-line;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: $c-title;
+      font-weight: 600;
+      background: $c-soft;
+    }
+  }
+
+  strong, b {
+    color: $c-title;
+    font-weight: 600;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid $c-line;
+    margin: 32px 0;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Detail image — крупная картинка в начале detail-страницы
+// --------------------------------------------------------------------------
+.detail-cover {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  aspect-ratio: 16/9;
+  background: $c-soft;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 28px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Widget (aside-блок, бывш. .widget в _aside.scss)
+// --------------------------------------------------------------------------
+.widget {
+  background: #fff;
+  border: 1px solid $c-line;
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  margin-bottom: 20px;
+
+  &-title {
+    font-family: $f-display;
+    font-weight: 500;
+    font-size: 20px;
+    color: $c-title;
+    margin: 0 0 16px;
+    letter-spacing: -.015em;
+  }
+
+  &-form-search {
+    position: relative;
+
+    input {
+      width: 100%;
+      background: $c-soft;
+      border: 1px solid $c-line;
+      border-radius: var(--radius-md);
+      height: 48px;
+      padding: 0 100px 0 16px;
+      font-family: $f-body;
+      font-size: 15px;
+      color: $c-title;
+      transition: border-color .25s $ease, background .25s $ease;
+
+      &:focus {
+        outline: none;
+        border-color: $c-blue;
+        background: #fff;
+      }
+
+      &::placeholder {
+        color: $c-text;
+      }
+    }
+
+    button {
+      position: absolute;
+      right: 4px;
+      top: 4px;
+      bottom: 4px;
+      background: $c-blue;
+      color: #fff;
+      border: 0;
+      border-radius: calc(var(--radius-md) - 4px);
+      padding: 0 18px;
+      font-family: $f-mono;
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .25s $ease;
+
+      &:hover {
+        background: $c-blue-dark;
+      }
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Info card — карточка справа (для specialty, reception, internationals)
+// --------------------------------------------------------------------------
+.info-card {
+  background: #fff;
+  border: 1px solid $c-line;
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+
+  &__title {
+    font-family: $f-display;
+    font-weight: 500;
+    font-size: 22px;
+    color: $c-title;
+    margin: 0 0 18px;
+    letter-spacing: -.015em;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 12px 0;
+      border-bottom: 1px solid $c-line;
+      font-size: 15px;
+      color: $c-title;
+
+      &:last-child {
+        border-bottom: 0;
+      }
+
+      span {
+        color: $c-text;
+        font-size: 12px;
+        font-family: $f-mono;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+      }
+
+      a {
+        color: $c-blue;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// News / article list grid + shared card styles (используется и в spec-grid)
+// --------------------------------------------------------------------------
+.news-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+
+  @media (min-width: 620px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.news-list,
+.spec-grid {
+  .card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid $c-line;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform .35s $ease, box-shadow .35s $ease, border-color .35s $ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: transparent;
+    }
+
+    .card-link {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card-img {
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      background: $c-soft;
+
+      img, .mypicture {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform .6s $ease;
+      }
+    }
+
+    &:hover .card-img img,
+    &:hover .card-img .mypicture {
+      transform: scale(1.04);
+    }
+
+    .card-body {
+      padding: 20px 22px 8px;
+      flex: 1;
+    }
+
+    .card-title {
+      font-family: $f-display;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 1.25;
+      letter-spacing: -.015em;
+      color: $c-title;
+      margin: 0;
+    }
+
+    .card-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 22px 18px;
+      font-family: $f-mono;
+      font-size: 12px;
+      letter-spacing: .08em;
+      color: $c-text;
+
+      .card-inner_btn_left {
+        color: $c-green;
+      }
+
+      .card-inner_btn_right {
+        color: $c-blue;
+      }
+    }
+  }
+}
+
+.news_paginates {
+  margin-top: 32px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+// --------------------------------------------------------------------------
+// Specialty grid — 3 колонки на десктопе
+// --------------------------------------------------------------------------
+.spec-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+
+  @media (min-width: 620px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 980px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// --------------------------------------------------------------------------
+// File list — для документов и edu_process_detail
+// --------------------------------------------------------------------------
+.file-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+
+  @media (min-width: 720px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  li {
+    margin: 0;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 20px;
+    background: #fff;
+    border: 1px solid $c-line;
+    border-radius: var(--radius-lg);
+    color: $c-title;
+    text-decoration: none;
+    font-size: 15px;
+    line-height: 1.4;
+    transition: border-color .25s $ease, transform .25s $ease, box-shadow .25s $ease;
+    position: relative;
+    padding-right: 56px;
+
+    &::before {
+      content: "";
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+      background: $c-blue-10;
+      border-radius: 10px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23396EF8' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpolyline points='14 2 14 8 20 8'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    &::after {
+      content: "↓";
+      position: absolute;
+      right: 20px;
+      color: $c-blue;
+      font-family: $f-mono;
+      font-size: 18px;
+      opacity: 0;
+      transition: opacity .25s $ease, transform .25s $ease;
+    }
+
+    &:hover {
+      border-color: $c-blue;
+      transform: translateX(2px);
+      box-shadow: var(--shadow-sm);
+
+      &::after {
+        opacity: 1;
+        transform: translateY(2px);
+      }
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Gallery grid — v8-стиль для magnific-popper
+// --------------------------------------------------------------------------
+.gallery-v8 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+
+  @media (min-width: 720px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  &__item {
+    position: relative;
+    display: block;
+    aspect-ratio: 4/3;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: $c-soft;
+
+    img, .mypicture {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s $ease;
+    }
+
+    &::after {
+      content: attr(data-label);
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba($c-title, .65));
+      color: #fff;
+      font-family: $f-mono;
+      font-size: 12px;
+      letter-spacing: .1em;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 14px;
+      opacity: 0;
+      transition: opacity .35s $ease;
+    }
+
+    &:hover {
+      img, .mypicture {
+        transform: scale(1.06);
+      }
+
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    .gallery-item-hover {
+      display: none; // старая разметка — скрываем, используем ::after
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Resume — employee/student detail
+// --------------------------------------------------------------------------
+.resume-v8 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  padding-bottom: 80px;
+
+  @media (min-width: 900px) {
+    grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+    gap: 48px;
+    align-items: start;
+  }
+
+  &__side {
+    background: linear-gradient(180deg, $c-title, $c-ink);
+    color: #fff;
+    border-radius: var(--radius-xl);
+    padding: 28px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: var(--shadow-md);
+
+    @media (min-width: 900px) {
+      position: sticky;
+      top: 96px;
+    }
+  }
+
+  &__avatar {
+    aspect-ratio: 1/1;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: $c-soft;
+    margin-bottom: 22px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  &__name {
+    font-family: $f-display;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.15;
+    letter-spacing: -.015em;
+    color: #fff;
+    margin: 0 0 8px;
+  }
+
+  &__role {
+    font-family: $f-mono;
+    font-size: 12px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .6);
+    margin: 0 0 20px;
+  }
+
+  &__section {
+    border-top: 1px solid rgba(255, 255, 255, .12);
+    padding-top: 18px;
+    margin-top: 18px;
+
+    h4 {
+      font-family: $f-display;
+      font-weight: 500;
+      font-size: 16px;
+      color: #fff;
+      margin: 0 0 10px;
+    }
+
+    p {
+      margin: 0 0 8px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, .75);
+
+      b, strong {
+        color: #fff;
+        font-weight: 600;
+      }
+    }
+  }
+
+  &__contact-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 14px;
+    margin-bottom: 10px;
+
+    .lbl {
+      font-family: $f-mono;
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .55);
+    }
+
+    .val, a {
+      color: #fff;
+      text-decoration: none;
+
+      &:hover {
+        color: $c-blue;
+      }
+    }
+  }
+
+  &__social {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+
+    a {
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .08);
+      color: rgba(255, 255, 255, .8);
+      transition: background .25s $ease, color .25s $ease, transform .25s $ease;
+
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      &:hover {
+        background: $c-blue;
+        color: #fff;
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  &__main {
+    min-width: 0;
+  }
+
+  &__intro {
+    margin-bottom: 28px;
+
+    .eye {
+      font-family: $f-mono;
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: $c-blue;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    .name {
+      font-family: $f-display;
+      font-weight: 500;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.05;
+      letter-spacing: -.02em;
+      color: $c-title;
+      margin: 0 0 8px;
+    }
+
+    .role {
+      font-family: $f-body;
+      font-size: 17px;
+      color: $c-text;
+      margin: 0;
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Form — v8-стиль для contacts
+// --------------------------------------------------------------------------
+.form-v8 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+
+  @media (min-width: 620px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .field {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    &--full {
+      grid-column: 1 / -1;
+    }
+
+    input:not([type="checkbox"]),
+    textarea {
+      width: 100%;
+      background: $c-soft;
+      border: 1px solid $c-line;
+      border-radius: var(--radius-md);
+      padding: 18px 16px 10px;
+      font-family: $f-body;
+      font-size: 15px;
+      color: $c-title;
+      line-height: 1.4;
+      transition: border-color .25s $ease, background .25s $ease;
+
+      &:focus {
+        outline: none;
+        border-color: $c-blue;
+        background: #fff;
+      }
+
+      &::placeholder {
+        color: transparent;
+      }
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    label {
+      position: absolute;
+      top: 18px;
+      left: 17px;
+      font-family: $f-mono;
+      font-size: 12px;
+      letter-spacing: .04em;
+      color: $c-text;
+      pointer-events: none;
+      transition: top .2s $ease, font-size .2s $ease, color .2s $ease;
+      background: transparent;
+    }
+
+    input:focus ~ label,
+    textarea:focus ~ label,
+    input:not(:placeholder-shown) ~ label,
+    textarea:not(:placeholder-shown) ~ label {
+      top: 6px;
+      font-size: 10px;
+      color: $c-blue;
+    }
+
+    &.field--agree {
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+
+      input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        accent-color: $c-blue;
+        flex-shrink: 0;
+      }
+
+      label {
+        position: static;
+        pointer-events: auto;
+        font-family: $f-body;
+        font-size: 14px;
+        color: $c-text;
+        line-height: 1.4;
+      }
+    }
+
+    &.field--captcha {
+      flex-direction: row;
+      gap: 14px;
+      align-items: flex-start;
+
+      img {
+        border-radius: var(--radius-sm);
+        border: 1px solid $c-line;
+      }
+    }
+
+    &.field--invalid {
+      input, textarea {
+        border-color: #ef4444;
+      }
+
+      label {
+        color: #ef4444;
+      }
+    }
+  }
+
+  .form-submit {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Contacts — блок с контактной информацией
+// --------------------------------------------------------------------------
+.contacts-card {
+  background: #fff;
+  border: 1px solid $c-line;
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  box-shadow: var(--shadow-sm);
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    > li {
+      padding: 16px 0;
+      border-bottom: 1px solid $c-line;
+
+      &:last-child {
+        border-bottom: 0;
+      }
+
+      > b {
+        display: block;
+        font-family: $f-mono;
+        font-size: 12px;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        color: $c-blue;
+        margin-bottom: 6px;
+        font-weight: 500;
+      }
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 0;
+
+      li {
+        font-size: 15px;
+        color: $c-title;
+        padding: 4px 0;
+      }
+    }
+
+    a {
+      color: $c-title;
+      text-decoration: none;
+      transition: color .2s $ease;
+
+      &:hover {
+        color: $c-blue;
+      }
+    }
+  }
+}
+
+.map-embed {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  margin: 0 auto 60px;
+  max-width: 1280px;
+  box-shadow: var(--shadow-md);
+
+  iframe {
+    display: block;
+    width: 100%;
+    border: 0;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Reception — абитуриентам (info-card + большой prose)
+// --------------------------------------------------------------------------
+.reception-block {
+  background: $c-soft;
+  border-radius: var(--radius-xl);
+  padding: 24px 28px;
+  margin: 24px 0;
+
+  h5, &__title {
+    font-family: $f-display;
+    font-weight: 500;
+    font-size: 20px;
+    color: $c-title;
+    margin: 0 0 10px;
+    letter-spacing: -.015em;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Flipbook wrapper (passport-college) — делаем контейнер узнаваемо v8
+// --------------------------------------------------------------------------
+.flipbook-wrap {
+  background: linear-gradient(180deg, $c-soft, #fff);
+  border: 1px solid $c-line;
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  min-height: 640px;
+  position: relative;
+}
+
+// --------------------------------------------------------------------------
+// Lightbox — zero-dep, заменяет magnific-popper
+// --------------------------------------------------------------------------
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba($c-ink, .92);
+  backdrop-filter: blur(18px) saturate(140%);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity .25s $ease;
+
+  &._open {
+    display: flex;
+    opacity: 1;
+  }
+
+  &__stage {
+    margin: 0;
+    max-width: min(90vw, 1280px);
+    max-height: 86vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+
+    img {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: var(--radius-md);
+      box-shadow: 0 40px 100px -20px rgba(0, 0, 0, .6);
+      animation: lb-pop .35s $ease;
+    }
+  }
+
+  &__count {
+    font-family: $f-mono;
+    font-size: 12px;
+    letter-spacing: .12em;
+    color: rgba(255, 255, 255, .6);
+    text-transform: uppercase;
+  }
+
+  &__close,
+  &__nav {
+    position: absolute;
+    background: rgba(255, 255, 255, .08);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .25s $ease, transform .25s $ease, border-color .25s $ease;
+
+    &:hover {
+      background: $c-blue;
+      border-color: $c-blue;
+      transform: scale(1.08);
+    }
+  }
+
+  &__close {
+    top: 24px;
+    right: 24px;
+    font-size: 28px;
+  }
+
+  &__nav {
+    top: 50%;
+    transform: translateY(-50%);
+
+    &--prev {
+      left: 24px;
+    }
+
+    &--next {
+      right: 24px;
+    }
+
+    &:hover {
+      transform: translateY(-50%) scale(1.08);
+    }
+  }
+
+  @media (max-width: 620px) {
+    &__close {
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      font-size: 22px;
+    }
+
+    &__nav {
+      width: 40px;
+      height: 40px;
+
+      &--prev { left: 12px; }
+      &--next { right: 12px; }
+    }
+  }
+}
+
+@keyframes lb-pop {
+  from { transform: scale(.96); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}

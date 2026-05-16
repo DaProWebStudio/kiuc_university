@@ -1,39 +1,55 @@
 {% extends 'base/base.html' %}
 {% load static i18n %}
 
-{% block title %}
-    {{ specialty.title }}
-{% endblock %}
+{% block title %}{{ specialty.title }}{% endblock %}
 
 {% block content %}
-    <section class="section detail">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-sm-8 col-12">
-                    <div class="detail__img">
-                        <img src="{{ specialty.image.url }}" alt="image" class="w-100">
-                    </div>
-                    <div class="title mt-3">
-                        <span>{% trans 'Специальность' %}</span>
-                        <h1 class="font-weight-bold">{{ specialty.title }}</h1>
-                        <p style="color: #0d6efd">{% trans 'Добавлено' %}: {{ specialty.created|date }}</p>
-                    </div>
-                    <div class="content_dynamic_block">
-                        {% autoescape off %}{{ specialty.description }}{% endautoescape %}
-                    </div>
+<section class="section">
+    <div class="container">
+        <div class="page-layout page-layout--with-aside">
+            <div class="page-layout__main">
+                <div class="detail-cover reveal">
+                    <img src="{{ specialty.image.url }}" alt="{{ specialty.title }}">
                 </div>
-                <div class="col-lg-4 col-sm-4 col-12">
-                    <div class="detail__info">
-                        <h4>{% trans 'Полезные информации' %}</h4>
-                        <ul class="p-4">
-                            <li><span>{% trans 'Форма обучения' %}:</span> {{ specialty.form_verbose }}</li>
-                            <li><span>{% trans 'Основа обучения' %}:</span> {{ specialty.basis_verbose }}</li>
-                            <li><span>{% trans 'Контракт' %}:</span> {{ specialty.contract }} {% trans 'сом' %}</li>
-                            <li><span>{% trans 'Срок обучение' %}:</span> {% trans '4 года' %}</li>
-                        </ul>
+
+                <header class="page-hero" style="padding-top: 0;">
+                    <div class="page-hero__eye">{% trans 'Специальность' %}</div>
+                    <h1 class="page-hero__h">{{ specialty.title }}</h1>
+                    <div class="page-hero__meta">
+                        <span>{% trans 'Добавлено' %}</span>
+                        <b>{{ specialty.created|date }}</b>
                     </div>
+                </header>
+
+                <div class="prose">
+                    {% autoescape off %}{{ specialty.description }}{% endautoescape %}
                 </div>
             </div>
+
+            <aside class="page-layout__aside">
+                <div class="info-card">
+                    <h3 class="info-card__title">{% trans 'Полезная информация' %}</h3>
+                    <ul class="info-card__list">
+                        <li>
+                            <span>{% trans 'Форма обучения' %}</span>
+                            {{ specialty.form_verbose }}
+                        </li>
+                        <li>
+                            <span>{% trans 'Основа обучения' %}</span>
+                            {{ specialty.basis_verbose }}
+                        </li>
+                        <li>
+                            <span>{% trans 'Контракт' %}</span>
+                            {{ specialty.contract }} {% trans 'сом' %}
+                        </li>
+                        <li>
+                            <span>{% trans 'Срок обучения' %}</span>
+                            {% trans '4 года' %}
+                        </li>
+                    </ul>
+                </div>
+            </aside>
         </div>
-    </section>
+    </div>
+</section>
 {% endblock %}

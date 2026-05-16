@@ -1,3 +1,5 @@
+@use "../base/varibales" as *;
+
 .detail {
   &__img {
     width: 100%;
@@ -22,8 +24,8 @@
     h4 {
       border-radius: 0.5rem;
       padding: 16px 20px;
-      background: $--bs-blue;
-      color: $--bs-white;
+      background: $bs-blue;
+      color: $bs-white;
       margin-bottom: 0;
       font-weight: 700;
       font-size: 23px;

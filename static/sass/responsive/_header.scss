@@ -1,20 +1,30 @@
-@media (max-width: 1024px) {
-.header {
-    &__title {
-      h2 {
-        font-size: 39px;
-      }
+@media (max-width: 980px) {
+  .header {
+    padding: 48px 0 72px;
+
+    &-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    &-mini {
+      left: 16px;
+      top: 16px;
+    }
+
+    &-chip {
+      left: 16px;
+      bottom: -20px;
     }
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 560px) {
   .header {
-    &__title {
-      margin-bottom: 1rem;
-      h2 {
-        font-size: 28px;
-      }
+    padding: 36px 0 56px;
+
+    h2 {
+      font-size: 38px;
     }
   }
 }

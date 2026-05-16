@@ -4,34 +4,34 @@
 {% block title %}{% trans 'Наши специальности' %}{% endblock %}
 
 {% block content %}
-    <section class="section specialization">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="title mb-3">
-                        <span>{% trans 'Что мы вам предлагаем' %}</span>
-                        <h3>{% trans 'Наши специальности' %}</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="specialties__wrap">
-            {% for specialty in specialties %}
-                <div class="card">
-                    <a href="{{ specialty.get_absolute_url }}" class="card-link">
-                        <div class="card-img">
-                            {% generateimage 'main:thumbnail' source=specialty.image -- class="mypicture" %}
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">{{ specialty.title|truncatechars:63 }}</h4>
-                        </div>
-                        <div class="card-inner">
-                            <span class="card-inner_btn_left">{{ specialty.form_verbose }}</span>
-                            <span class="card-inner_btn_right">{{ specialty.contract }} сом</span>
-                        </div>
-                    </a>
-                </div>
-            {% endfor %}
+<section class="section">
+    <div class="container">
+        <header class="page-hero reveal">
+            <div class="page-hero__eye">{% trans 'Что мы вам предлагаем' %}</div>
+            <h1 class="page-hero__h">{% trans 'Наши' %} <span class="ital">специальности</span></h1>
+            <p class="page-hero__lead">{% trans 'Программы бакалавриата с практикой у носителей языка, стажировками и сильной академической базой.' %}</p>
+        </header>
+
+        <div class="page-layout">
+            <div class="spec-grid reveal">
+                {% for specialty in specialties %}
+                    <article class="card">
+                        <a href="{{ specialty.get_absolute_url }}" class="card-link">
+                            <div class="card-img">
+                                {% generateimage 'main:thumbnail' source=specialty.image -- class="mypicture" %}
+                            </div>
+                            <div class="card-body">
+                                <h2 class="card-title">{{ specialty.title|truncatechars:63 }}</h2>
+                            </div>
+                            <div class="card-inner">
+                                <span class="card-inner_btn_left">{{ specialty.form_verbose }}</span>
+                                <span class="card-inner_btn_right">{{ specialty.contract }} {% trans 'сом' %}</span>
+                            </div>
+                        </a>
+                    </article>
+                {% endfor %}
             </div>
         </div>
-    </section>
+    </div>
+</section>
 {% endblock %}

@@ -1,168 +1,205 @@
-@media (min-width: 767px) {
-  .nav {
-    &__menu {
-      &-list {
-        display: flex;
-        align-items: center;
-      }
-      &__sub {
-        &-list {
-          transform: translate(0px, 10%);
-          opacity: 0;
-          visibility: hidden;
-          pointer-events: none;
-          transition: all 0.3s ease 0s;
-        }
+@use "../base/tokens" as *;
+
+// ==========================================================================
+// Топбар / верхнее меню — адаптивное поведение
+// ==========================================================================
+
+@media (max-width: 980px) {
+  .top-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: min(380px, 92vw);
+    height: 100dvh;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 96px 22px 40px;
+    background:
+      radial-gradient(ellipse 120% 50% at 100% 0%, rgba(57, 110, 248, .08), transparent 70%),
+      #fff;
+    box-shadow: -20px 0 50px -16px rgba(15, 24, 64, .18);
+    transition: right .42s cubic-bezier(.4, 0, .2, 1);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    z-index: 45;
+
+    &._active {
+      right: 0;
+    }
+
+    // Заголовок «МЕНЮ» сверху drawer'а
+    &::before {
+      content: "Меню";
+      display: block;
+      font-family: $f-mono;
+      font-size: 11px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: $c-blue;
+      padding: 0 6px 14px;
+      border-bottom: 1px solid rgba($c-blue, .15);
+      margin-bottom: 6px;
+    }
+
+    > li {
+      width: 100%;
+      border-bottom: 1px solid rgba(15, 24, 64, .05);
+      opacity: 0;
+      transform: translateX(18px);
+      transition: opacity .45s $ease, transform .45s $ease;
+
+      &:last-child {
+        border-bottom: none;
       }
     }
-  }
-}
 
-@media (max-width: 1100px) {
-  .nav {
-    &__menu {
-      &-logo img {
-        width: 60px;
-      }
-      &-link {
-        font-size: 14px;
-      }
-      &__sub {
-        &-link {
-          font-size: 14px;
-        }
+    &._active > li {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    // Stagger-вход пунктов меню при открытии
+    @for $i from 1 through 8 {
+      > li:nth-child(#{$i}) { transition-delay: #{0.06s + ($i - 1) * 0.045s}; }
+    }
+
+    a,
+    button {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 6px;
+      font-family: $f-display;
+      font-size: 22px;
+      font-weight: 400;
+      color: $c-title;
+      letter-spacing: -.01em;
+      line-height: 1.15;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      text-align: left;
+      cursor: pointer;
+      transition: color .25s $ease, transform .25s $ease;
+
+      &:hover,
+      &:focus-visible {
+        background: transparent;
+        color: $c-blue;
+        transform: translateX(4px);
       }
     }
-  }
-}
 
-@media (max-width: 991px) {
-  .nav {
-    &__menu {
-      &-link {
-        font-size: 12px;
-        padding: 0 3px;
-      }
-      &__sub {
-        &-link {
-          font-size: 12px;
-          padding: 10px 3px;
-        }
-      }
+    .chev {
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(45deg);
+      transition: transform .3s $ease;
+      margin-left: auto;
+      opacity: .55;
     }
-  }
-}
 
-@media (max-width: 767px) {
-  .nav {
-    &__menu {
-      &-icon {
-        z-index: 5;
+    > li._active > button .chev,
+    > li._active > a .chev {
+      transform: rotate(225deg);
+      opacity: 1;
+      color: $c-blue;
+    }
+
+    .sub-list {
+      position: static;
+      display: none;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      box-shadow: none;
+      border: none;
+      padding: 0 6px 14px 14px;
+      margin: 0;
+      background: transparent;
+      min-width: 0;
+
+      a {
         display: block;
-        position: relative;
-        width: 30px;
-        height: 18px;
-        cursor: pointer;
-        & span,
-        &::before,
-        &::after {
-          left: 0;
-          position: absolute;
-          height: 10%;
-          width: 100%;
-          transition: all 0.3s ease 0s;
-          background-color: $--bs-blue;
-        }
-        &::before, &::after {content: ''}
-        &::before {top: 0}
-        &::after {bottom: 0}
-        & span {
-          top: 50%;
-          transform: scale(1) translate(0px, -50%);
-        }
-        &._active {
-          & span {
-            transform: scale(0) translate(0px, -50%);
-          }
-          &::before {
-            top: 50%;
-            transform: rotate(-45deg) translate(0px, -50%);
-          }
-          &::after {
-            bottom: 50%;
-            transform: rotate(45deg) translate(0px, 50%);
-          }
-        }
-      }
-      &-body {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 350px;
-        height: 100%;
-        background-color: $--bs-white;
-        transition: all 0.3s ease 0s;
-        overflow: auto;
-        &._active {
-          left: 0;
-          z-index: 1;
-        }
-        &::before {
-          content: "";
-          width: 100%;
-          top: 0;
-          left: 0;
-          height: 70px;
-          background-color: $--bs-blue;
-          z-index: 2;
-        }
-      }
-      &-list {
-        padding-left: 0;
-        & li {
-          flex-wrap: wrap;
-          margin: 0;
-          border-bottom: 1px dashed $--bs-disabled;
-          &:last-child {
-            margin-bottom: 0;
-          }
-          &._active {
-            & .nav__menu__sub-list {
-              display: block;
-            }
-          }
-        }
-      }
-      &-link {
+        padding: 9px 12px;
+        font-family: $f-body;
         font-size: 15px;
-        padding: 15px;
+        font-weight: 500;
+        color: $c-text;
+        border-radius: var(--radius-sm);
+        white-space: normal;
+        line-height: 1.4;
+        transition: color .2s $ease, background .2s $ease, transform .2s $ease;
+
         &:hover {
-          background-color: $--bs-blue;
-          color: $--bs-white;
-          & .nav__menu-arrow {
-            border-top-color: $--bs-white;
-          }
+          color: $c-blue;
+          background: rgba($c-blue, .06);
+          transform: none;
         }
       }
-      &__sub {
-        &-list {
-          position: relative;
-          flex: 1 1 100%;
-          display: none;
-          padding: 0;
-          margin: 0 20px;
-          & li:last-child {
-            border-bottom: none;
-          }
-        }
-        &-link {
-          font-size: 15px;
-          padding: 10px;
-          &:last-child {
-            border-bottom: none;
-          }
-        }
-      }
+    }
+
+    > li._active .sub-list {
+      display: block;
+      animation: subListSlide .3s $ease;
+    }
+
+    > li:hover .sub-list {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
+  }
+
+  @keyframes subListSlide {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .nav-burger {
+    display: inline-flex;
+    z-index: 50;
+    position: relative;
+  }
+
+  .top-lang {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .logo {
+    font-size: 16px;
+
+    img {
+      height: 28px;
+    }
+  }
+
+  .top-nav {
+    width: min(340px, 92vw);
+    padding-left: 18px;
+    padding-right: 18px;
+
+    a,
+    button {
+      font-size: 20px;
+      padding: 14px 4px;
+    }
+
+    &::before {
+      padding-left: 4px;
+      padding-right: 4px;
     }
   }
 }

@@ -1,102 +1,90 @@
 {% extends 'base/base.html' %}
 {% load static i18n %}
 
-{% block title %}
-    {% trans 'Абитуриентам' %}
-{% endblock %}
+{% block title %}{% trans 'Абитуриентам' %}{% endblock %}
 
 {% block content %}
-    <section class="section reception">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-lg-8 col-md-8">
-                    <div class="title">
-                        <span>{% trans 'Абитуриентам' %}</span>
-                        <h3>{% trans 'Дорогие абитуриенты!' %}</h3>
-                    </div>
-                    <div class="my-3">
-                        <p class="reception__description">
-                            {% blocktrans %}Кыргызский институт языков и культуры  ждет Вас!{% endblocktrans %}
-                        </p>
-                        <p class="reception__description">
-                            {% blocktrans %}Наш институт обучает студентов по двум направлениям высшего образования (бакалавриат).{% endblocktrans %}
-                        </p>
-                        <h5 class="reception__title">{% trans 'Срок обучения - 4 года.' %}</h5>
-                        <ul class="ml-4 mb-3 pl-0 mb-0">
+<section class="section">
+    <div class="container">
+        <header class="page-hero reveal">
+            <div class="page-hero__eye">{% trans 'Абитуриентам' %}</div>
+            <h1 class="page-hero__h">{% trans 'Дорогие' %} <span class="ital">абитуриенты!</span></h1>
+            <p class="page-hero__lead">{% trans 'Кыргызский институт языков и культуры ждёт Вас. Два направления бакалавриата, международные стажировки и носители языка.' %}</p>
+        </header>
+
+        <div class="page-layout page-layout--with-aside">
+            <div class="page-layout__main">
+                <div class="prose reveal">
+                    <p>{% trans 'Кыргызский институт языков и культуры  ждет Вас!' %}</p>
+                    <p>{% trans 'Наш институт обучает студентов по двум направлениям высшего образования (бакалавриат).' %}</p>
+
+                    <div class="reception-block">
+                        <h5>{% trans 'Срок обучения — 4 года' %}</h5>
+                        <ol>
                             {% for specialty in specialties %}
-                                <li class="mt-2">
-                                    <a class="reception__link" href="#"><span
-                                            class="forloop">{{ forloop.counter }}.</span> {{ specialty.title }}</a>
-                                </li>
+                                <li><a href="{{ specialty.get_absolute_url }}">{{ specialty.title }}</a></li>
                             {% endfor %}
+                        </ol>
+                    </div>
+
+                    <div class="reception-block">
+                        <h5>{% trans 'Стоимость обучения — 40 000 сомов' %}</h5>
+                        <ul>
+                            <li>{% trans 'Абитуриенты принимаются по результатам Общереспубликанского тестирования (ОРТ).' %}</li>
+                            <li>{% trans 'Пороговый балл — 110.' %}</li>
+                            <li>{% trans 'ОРТ 180 баллов и выше — 4 года бесплатного обучения (при условии успешной учёбы и активного участия в жизни вуза).' %}</li>
+                            <li>{% trans 'ОРТ 170 и выше — 1 год бесплатного обучения.' %}</li>
+                            <li>{% trans 'ОРТ 150 и выше — 1 год с 30 % скидкой.' %}</li>
                         </ul>
                     </div>
-                    <div class="my-3">
-                        <h5 class="reception__title">{% trans 'Стоимость обучения -  40 000 сомов.' %}</h5>
-                        <ul class="reception__list">
-                            <li class="my-3">- {% trans 'Абитуриенты принимаются по результатам Общереспубликанского тестирования (ОРТ).' %}</li>
-                            <li class="my-3">- {% trans 'Пороговый балл - 110.' %}</li>
-                            <li class="my-3">- {% trans 'ОРТ 180 баллов и выше -  4 года бесплатного обучения (при условии успешной учёбы и  активного участия в жизни вуза)' %}</li>
-                            <li class="my-3">- {% trans 'ОРТ 170 и выше  - 1 год бесплатного обучения' %}</li>
-                            <li>- {% trans 'СОРТ 150 выше – 1 год с 30% скидкой' %}</li>
-                        </ul>
-                    </div>
-                    <div class="my-3">
-                        <p class="reception__description">
-                            {% blocktrans %}Выпускники колледжа поступают сразу  на 2 курс по направлению: “Лингвистика” и “Туризм".{% endblocktrans %}
-                        </p>
-                        <p class="reception__description">
-                            {% blocktrans %}Выпускники  по направлению “Лингвистика”  могут работать на высокооплачиваемых должностях. Могут стать  преподавателями в государственных и в частных  школах, в колледжах,  в международных компаниях, а также работать переводчиками в международных организациях.{% endblocktrans %}
-                        </p>
-                        <p class="reception__description">
-                            {% trans 'Направление “Лингвистика” было и остается востребованным на сегодняшний день.' %}
-                        </p>
-                        <p class="reception__description">
-                            {% trans 'Выпускники по направлению “Туризм” смогут работать в туристических агентствах, в международных туристических фирмах, могут быть гидами.' %}
-                        </p>
-                        <h5 class="text-center my-3"><b>Добро пожаловать в Кыргызский институт языков и культуры!</b></h5>
-                        <h4 class="text-center my-3">ЖЕЛАЕМ УСПЕХОВ!  НАДЕЕМСЯ, ЧТО ВЫ СТАНЕТЕ НАШИМИ СТУДЕНТАМИ!</h4>
-                    </div>
-                    <div class="my-3">
-                        <h5 class="reception__title">{% trans 'Основной список документов для поступающих в вуз:' %}</h5>
-                        <ul class="reception__list">
-                            <li class="my-3">- {% trans 'Сертификат ОРТ;' %}</li>
-                            <li class="my-3">- {% trans 'Оригинал аттестата за 11 класс (2 копии);' %}</li>
-                            <li class="my-3">- {% trans 'Паспорт -  2 копии;' %}</li>
-                            <li class="my-3">- {% trans 'Медицинская справка №086-У;' %}</li>
-                            <li class="my-3">- {% trans 'Фотографии 3х4 (6 штук);' %}</li>
-                            <li>- {% trans 'Справка с места жительства;' %}</li>
+
+                    <p>{% trans 'Выпускники колледжа поступают сразу на 2 курс по направлению «Лингвистика» и «Туризм».' %}</p>
+                    <p>{% trans 'Выпускники направления «Лингвистика» могут работать на высокооплачиваемых должностях: преподавателями в государственных и частных школах, колледжах, международных компаниях, а также переводчиками в международных организациях.' %}</p>
+                    <p>{% trans 'Направление «Лингвистика» было и остаётся востребованным.' %}</p>
+                    <p>{% trans 'Выпускники направления «Туризм» смогут работать в туристических агентствах, международных турфирмах, быть гидами.' %}</p>
+
+                    <blockquote>
+                        {% trans 'Добро пожаловать в Кыргызский институт языков и культуры! Желаем успехов — надеемся, что вы станете нашими студентами!' %}
+                    </blockquote>
+
+                    <div class="reception-block">
+                        <h5>{% trans 'Основной список документов для поступающих' %}</h5>
+                        <ul>
+                            <li>{% trans 'Сертификат ОРТ' %}</li>
+                            <li>{% trans 'Оригинал аттестата за 11 класс (2 копии)' %}</li>
+                            <li>{% trans 'Паспорт — 2 копии' %}</li>
+                            <li>{% trans 'Медицинская справка №086-У' %}</li>
+                            <li>{% trans 'Фотографии 3 × 4 (6 штук)' %}</li>
+                            <li>{% trans 'Справка с места жительства' %}</li>
                         </ul>
                     </div>
                 </div>
-                <aside class="col-12 col-lg-4 col-md-4">
-                    <div class="reception__carousel">
-                        <div class="mt-2">
-                            <h4 class="reception__border">{% trans 'Контакты' %}</h4>
-                            <ul class="p-4 mb-0 reception__info">
-                                <li><span>{% trans 'Телефон' %}:</span> <a href="tel:+996555106886" target="_blank">+996
-                                    (555) 10-68-86</a></li>
-                                <li>
-                                    <span>WhatsApp:</span>
-                                    <a href="https://api.whatsapp.com/send/?phone=996555106886&text=Здравствуйте%21%0A%0AПишу+из+вашего+сайта+www.kiuc.kg.%0A%0A&type=phone_number&app_absent=0"
-                                       target="_blank">
-                                        +996 (555) 10-68-86
-                                    </a>
-                                </li>
-                                <li><span>{% trans 'Сайт' %}:</span> <a
-                                        href="https://2020.edu.gov.kg/spuz/reports?id_university=168" target="_blank">2020.edu.gov.kg</a>
-                                </li>
-                                <li>
-                                    <span>Email:</span>
-                                    <a href="mailto:info@kiuc.kg" target="_blank">
-                                        info@kiuc.kg
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </aside>
             </div>
+
+            <aside class="page-layout__aside">
+                <div class="info-card reveal">
+                    <h3 class="info-card__title">{% trans 'Контакты приёмной' %}</h3>
+                    <ul class="info-card__list">
+                        <li>
+                            <span>{% trans 'Телефон' %}</span>
+                            <a href="tel:+996555106886">+996 (555) 10-68-86</a>
+                        </li>
+                        <li>
+                            <span>WhatsApp</span>
+                            <a href="https://api.whatsapp.com/send/?phone=996555106886&text=Здравствуйте%21%0A%0AПишу+из+вашего+сайта+www.kiuc.kg.%0A%0A&type=phone_number&app_absent=0" target="_blank" rel="noopener">+996 (555) 10-68-86</a>
+                        </li>
+                        <li>
+                            <span>{% trans 'Сайт' %}</span>
+                            <a href="https://2020.edu.gov.kg/spuz/reports?id_university=168" target="_blank" rel="noopener">2020.edu.gov.kg</a>
+                        </li>
+                        <li>
+                            <span>Email</span>
+                            <a href="mailto:info@kiuc.kg">info@kiuc.kg</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
         </div>
-    </section>
+    </div>
+</section>
 {% endblock %}

@@ -1,0 +1,120 @@
+@use "../base/tokens" as *;
+
+// ==========================================================================
+// El-Kitep dark promo section
+// ==========================================================================
+
+.el-kitep {
+  padding: 72px 56px;
+  border-radius: 32px;
+  background:
+    radial-gradient(ellipse 80% 60% at 100% 0%, rgba(57, 110, 248, .42), transparent 60%),
+    radial-gradient(ellipse 80% 60% at 0% 100%, rgba(30, 165, 154, .3), transparent 60%),
+    linear-gradient(135deg, #1B1C57 0%, #131453 60%, #0b0d3a 100%);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, .03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, .03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent 90%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent 90%);
+  }
+
+  &-grid {
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap: 56px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .title-eye {
+    color: #7eb3ff;
+
+    &::before {
+      background: #7eb3ff;
+    }
+
+    .n {
+      background: rgba(126, 179, 255, .14);
+      color: #7eb3ff;
+    }
+  }
+
+  h3 {
+    font-family: $f-display;
+    font-weight: 400;
+    color: #fff;
+    font-size: clamp(32px, 3.6vw, 50px);
+    line-height: 1.02;
+    letter-spacing: -.02em;
+    margin: 6px 0 20px;
+    max-width: 640px;
+    font-variation-settings: "opsz" 144, "SOFT" 20;
+
+    .ital {
+      color: #7eb3ff;
+    }
+  }
+
+  p {
+    color: rgba(255, 255, 255, .78);
+    font-size: 16.5px;
+    line-height: 1.6;
+    margin: 0 0 30px;
+    max-width: 560px;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .stat {
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: 16px;
+    padding: 22px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, #7eb3ff, transparent);
+    }
+
+    .v {
+      font-family: $f-display;
+      font-style: italic;
+      font-weight: 500;
+      color: #7eb3ff;
+      font-size: 42px;
+      line-height: 1;
+      letter-spacing: -.02em;
+    }
+
+    .l {
+      color: rgba(255, 255, 255, .72);
+      font-size: 13px;
+      margin-top: 6px;
+      font-weight: 500;
+    }
+  }
+}

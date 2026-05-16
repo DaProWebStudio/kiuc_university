@@ -1,110 +1,161 @@
-.nav {
-  padding: 10px 0;
-  &__menu {
-    display: flex;
-    justify-content: space-between;
+@use "../base/tokens" as *;
+
+// ==========================================================================
+// Top navigation (основное меню в topbar)
+// ==========================================================================
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+
+  > li {
+    position: relative;
+  }
+
+  a,
+  button {
+    display: inline-flex;
     align-items: center;
-    &-logo img {width: 80px}
-    &-list {
-      margin-bottom: 0;
-      & li {
-        position: relative;
-        margin:  0 4px;
-        list-style: none;
-        z-index: 2000;
-      }
+    gap: 4px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 14.5px;
+    font-weight: 500;
+    font-family: inherit;
+    color: $c-text;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: background .25s $ease, color .25s $ease;
+
+    &:hover {
+      background: $c-soft;
+      color: $c-title;
     }
-    &-link {
-      font-size: 16px;
-      font-weight: bold;
-      text-transform: uppercase;
-      color: $--bs-silver;
-      text-decoration: none;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px;
+  }
+
+  .chev {
+    width: 7px;
+    height: 7px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: translateY(-1px) rotate(45deg);
+    transition: transform .25s $ease;
+    margin-left: 2px;
+  }
+
+  // Sub-menu
+  .sub-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 240px;
+    padding: 8px;
+    margin-top: 8px;
+    background: #fff;
+    border: 1px solid $c-line;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity .25s $ease, transform .25s $ease, visibility .25s $ease;
+    z-index: 50;
+
+    li {
+      list-style: none;
     }
-    &-arrow {
+
+    a {
       display: block;
-      width: 0;
-      height: 0;
-      margin: 0 0 0 5px;
-      transition: transform 0.3s ease 0s;
-      border-right: 5px solid transparent;
-      border-left: 5px solid transparent;
-      border-top: 10px solid $--bs-silver;
-    }
-    &__sub {
-      &-list {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        padding: 10px 0 0 0;
-        background: $--bs-white;
-        min-width: 300px;
-        & li {
-          margin:0;
-          &:last-child {
-            margin: 0;
-          }
-        }
-      }
-      &-link {
-        display: inline-block;
-        width: 100%;
-        font-size: 17px;
-        color: $--bs-silver;
-        text-decoration: none;
-        padding: 10px;
-        border-bottom: 1px dashed $--bs-disabled;
-        &:hover {
-          background-color: $--bs-blue;
-          color: $--bs-white;
-        }
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      color: $c-text;
+      font-size: 14px;
+      font-weight: 500;
+      white-space: nowrap;
+      transition: background .2s $ease, color .2s $ease;
+
+      &:hover {
+        background: $c-blue-10;
+        color: $c-blue-dark;
       }
     }
   }
-}
 
-body._ps {
-  & .nav__menu-list {
-    & li:hover {
-      & .nav__menu__sub-list {
-        opacity: 1;
-        visibility: visible;
-        transform: translate(0px, 0px);
-        pointer-events: all;
-      }
-    }
+  > li:hover .sub-list,
+  > li:focus-within .sub-list {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  > li:hover > a .chev,
+  > li:hover > button .chev {
+    transform: translateY(1px) rotate(225deg);
   }
 }
 
-body._touch {
-  & .nav__menu {
-    &-list {
-      & li {
-        display: flex;
-        align-items: center;
-        &._active {
-          & .nav__menu-arrow {
-            transform: rotate(-180deg);
-          }
-          & .menu__sub-list {
-            opacity: 1;
-            visibility: visible;
-            transform: translate(0px, 0px);
-            pointer-events: all;
-          }
-        }
-      }
-    }
-    &-link {
-      flex: 1 1 auto;
-    }
+// Mobile burger
+.nav-burger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: $c-soft;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+
+  span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: $c-title;
+    border-radius: 2px;
+    transition: transform .3s $ease, opacity .3s $ease;
+  }
+
+  &._active span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  &._active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  &._active span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
   }
 }
 
 body._lock {
   overflow: hidden;
+}
+
+// Backdrop поверх контента при открытом мобильном меню
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(27, 28, 87, .55);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s $ease, visibility .3s $ease;
+  z-index: 44;
+  cursor: pointer;
+
+  &._active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  @media (min-width: 981px) {
+    display: none;
+  }
 }

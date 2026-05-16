@@ -1,6 +1,8 @@
+@use "../base/varibales" as *;
+
 .reception {
   &__title {
-    color: $--bs-title;
+    color: $bs-title;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
@@ -8,7 +10,7 @@
     font-size: 18px;
     text-align: justify;
     line-height: 30px;
-    color: $--bs-text;
+    color: $bs-text;
     margin-top: 10px;
   }
   li {
@@ -18,29 +20,29 @@
     font-size: 18px;
     line-height: 25px;
     font-weight: bold;
-    color: $--bs-blue;
+    color: $bs-blue;
     text-decoration: none;
     &:hover {
-      color: $--bs-text;
+      color: $bs-text;
     }
   }
   &__phone {
-    background-color: $--bs-blue;
-    color: $--bs-white;
+    background-color: $bs-blue;
+    color: $bs-white;
     padding: 3px;
-    border: 2px solid $--bs-blue;
+    border: 2px solid $bs-blue;
     transition: all .3s linear;
     text-decoration: none;
     &:hover {
       background: transparent;
-      color: $--bs-blue;
+      color: $bs-blue;
     }
   }
   &__list {
     li {
       font-size: 17px;
       line-height: 25px;
-      color: $--bs-text;
+      color: $bs-text;
     }
   }
   &__indent {
@@ -53,8 +55,8 @@
     top: 50px;
     h4 {
       padding: 16px 20px;
-      background: $--bs-blue;
-      color: $--bs-white;
+      background: $bs-blue;
+      color: $bs-white;
       margin-bottom: 0;
       font-weight: 700;
       font-size: 23px;
@@ -73,7 +75,7 @@
       span {
         width: 150px;
         display: inline-block;
-        color: $--bs-black;
+        color: $bs-black;
         font-weight: 600;
       }
     }

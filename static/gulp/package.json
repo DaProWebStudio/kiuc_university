@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/Daniar02/Univer/issues"
   },
-  "homepage": "https://github.com/Daniar02/Univer#readme"
+  "homepage": "https://github.com/Daniar02/Univer#readme",
+  "devDependencies": {
+    "sass-migrator": "^2.5.7"
+  }
 }

@@ -1,3 +1,5 @@
+@use "../base/varibales" as *;
+
 .resume_wrapper {
   display: flex;
   margin: auto;
@@ -6,9 +8,9 @@
   padding: 10px;
   .resume_left {
     width: 25%;
-    background-color: $--bs-blue;
+    background-color: $bs-blue;
     overflow: hidden;
-    border-radius: $--bs-radius-medium;
+    border-radius: $bs-radius-medium;
     .resume_image {
       width: 100%;
       img {
@@ -35,12 +37,12 @@
           margin-right: 10px;
           width: 50px;
           height: 50px;
-          background-color: $--bs-white;
-          border-radius: $--bs-radius-small;
+          background-color: $bs-white;
+          border-radius: $bs-radius-small;
           text-decoration: none;
           &:hover {
-            background-color: $--bs-dark-blue;
-            color: $--bs-white;
+            background-color: $bs-dark-blue;
+            color: $bs-white;
           }
         }
       }

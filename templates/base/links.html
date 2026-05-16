@@ -1,12 +1,15 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/bootstrap-5.0.0-alpha-2.min.css' %}">
+
+{# Google Fonts — дизайн-система v8 #}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Bricolage+Grotesque:opsz,wght@12..96,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+{# Основные стили — дизайн-система v8 #}
 <link rel="stylesheet" href="{% static 'css/core.min.css' %}?{{ style_core_version }}">
 <link rel="stylesheet" href="{% static 'css/responsive.min.css' %}?{{ style_responsive_version }}">
-<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-<link rel="stylesheet" href="{% static 'css/LineIcons.2.0.css' %}">
-<link rel="stylesheet" href="{% static 'libs/slick-1.8.1/slick.css' %}">
-<!-- Favicon-->
+
+{# Favicon #}
 <link rel="apple-touch-icon" sizes="57x57" href="{% static 'images/favicon/apple-icon-57x57.png' %}">
 <link rel="apple-touch-icon" sizes="60x60" href="{% static 'images/favicon/apple-icon-60x60.png' %}">
 <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/favicon/android-icon-72x72.png' %}">

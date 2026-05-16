@@ -1,3 +1,14 @@
+@media (max-width: 560px) {
+  .title-h {
+    font-size: 28px;
+  }
+
+  .title-eye {
+    font-size: 11px;
+  }
+}
+
+// Устаревший хук (для внутренних страниц, временно)
 @media (max-width: 380px) {
   .section .title {
     h3 {

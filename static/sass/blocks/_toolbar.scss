@@ -1,58 +1,115 @@
-.toolbar {
-  &__area {
-    background-color: $--bs-blue;
-    padding: 5px 0;
-    &-contacts a {
-      font-size: 18px;
-      text-decoration: none;
-      color: $--bs-white;
-      &:hover {
-        color: $--bs-disabled;
-      }
+@use "../base/tokens" as *;
+
+// ==========================================================================
+// Top bar — sticky шапка, заменяет старый .toolbar-area
+// ==========================================================================
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(251, 251, 253, .78);
+  border-bottom: 1px solid $c-line;
+
+  // backdrop-filter вынесен в псевдо-элемент, чтобы .topbar не становилась
+  // containing block для position:fixed детей (.top-nav в мобильном меню).
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    backdrop-filter: saturate(160%) blur(14px);
+    -webkit-backdrop-filter: saturate(160%) blur(14px);
+    pointer-events: none;
+  }
+}
+
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  // padding-top/bottom отдельными свойствами, чтобы не затереть
+  // padding: 0 24px у .container (этот же элемент несёт оба класса).
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: $c-title;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  font-size: 18px;
+  text-decoration: none;
+
+  &-mark {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, $c-blue, $c-blue-dark);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-family: $f-display;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1;
+    box-shadow: var(--shadow-sm);
+    flex-shrink: 0;
+  }
+
+  img {
+    height: 32px;
+    width: auto;
+  }
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.top-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  border-radius: 999px;
+  background: $c-soft;
+  font-family: $f-mono;
+  font-size: 11.5px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+
+  button {
+    padding: 5px 10px;
+    border-radius: 999px;
+    color: $c-text;
+    font-weight: 500;
+    font: inherit;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+
+    &.on {
+      background: #fff;
+      color: $c-title;
+      box-shadow: var(--shadow-xs);
     }
-    &-languages {
-      & select {
-        background-color: $--bs-white-transparent;
-        background-image: none;
-        border: transparent;
-        color: $--bs-white;
-        height: calc(1.2em + 0.75rem + 2px);
-        padding: 0.175rem .75rem .175rem .75rem;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        &:hover {
-          cursor: pointer;
-        }
-        & option {
-          background-color: $--bs-blue;
-        }
-      }
+
+    &:hover:not(.on) {
+      color: $c-title;
     }
   }
-  &__main {
-    padding: 12px 0;
-    &-row {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-    }
-    &-logo {
-      & img {
-        width: 100px;
-        height: 100px;
-      }
-      &.logo-left {text-align: left}
-      &.logo-right {text-align: right}
-    }
-    &-title {
-      padding: 0 15px;
-      & h1 {
-        font-size: 30px;
-        font-weight: bold;
-        text-align: center;
-        color: $--bs-blue;
-      }
-    }
+
+  // Форма select_send_language — скрытая, управляем через JS
+  select {
+    display: none;
   }
 }

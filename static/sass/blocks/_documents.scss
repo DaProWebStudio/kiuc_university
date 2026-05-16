@@ -1,3 +1,5 @@
+@use "../base/varibales" as *;
+
 .documents {
   &__card {
     padding-top: 30px;
@@ -6,8 +8,8 @@
     gap: 10px;
     &-item {
       background-image: url("../images/bg/pattern.png");
-      background-color: $--bs-blue;
-      border-radius: $--bs-radius-small;
+      background-color: $bs-blue;
+      border-radius: $bs-radius-small;
       height: 80px;
       & a {
         width: 100%;
@@ -15,7 +17,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: $--bs-white;
+        color: $bs-white;
         font-size: 16px;
         font-weight: 500;
         text-align: center;

@@ -1,14 +1,121 @@
+@use "../base/tokens" as *;
 
 .history {
-  padding-top: 30px;
-  &-text {
-    & p {
-      padding-top: 20px;
-      text-align: justify;
-      font-size: 18px;
-      line-height: 30px;
-      color: $--bs-text;
-      margin: 0;
+  padding: 88px 24px;
+  position: relative;
+
+  &-wrap {
+    padding: 64px 56px;
+    background: linear-gradient(135deg, #fff 0%, $c-soft 100%);
+    border: 1px solid $c-line;
+    border-radius: 32px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: auto -10% -40% auto;
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, $c-blue-06, transparent 60%);
+      pointer-events: none;
+    }
+  }
+
+  &-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+    position: relative;
+  }
+
+  &-lead {
+    color: $c-text;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0 0 4px;
+    max-width: 520px;
+  }
+
+  &-timeline {
+    display: flex;
+    gap: 0;
+    margin: 24px 0 32px;
+    padding: 24px 0 0;
+    list-style: none;
+    border-top: 1px solid $c-line;
+
+    li {
+      flex: 1;
+      position: relative;
+      padding-left: 14px;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 4px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: $c-blue;
+        box-shadow: 0 0 0 4px $c-blue-10;
+      }
+
+      &.future::before {
+        background: $c-green;
+        box-shadow: 0 0 0 4px rgba(30, 165, 154, .15);
+      }
+    }
+
+    .y {
+      font-family: $f-display;
+      font-style: italic;
+      font-weight: 500;
+      color: $c-title;
+      font-size: 22px;
+      letter-spacing: -.01em;
+      line-height: 1;
+    }
+
+    .e {
+      display: block;
+      margin-top: 4px;
+      color: $c-text;
+      font-size: 12.5px;
+      line-height: 1.35;
+      font-weight: 500;
+      max-width: 110px;
+    }
+  }
+
+  &-stats {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 32px;
+    padding-top: 28px;
+    border-top: 1px solid $c-line;
+  }
+
+  &-stat {
+    .v {
+      font-family: $f-display;
+      font-style: italic;
+      font-weight: 500;
+      color: $c-blue;
+      font-size: 44px;
+      line-height: 1;
+      letter-spacing: -.02em;
+    }
+
+    .l {
+      color: $c-text;
+      font-size: 13px;
+      margin-top: 4px;
+      font-weight: 500;
     }
   }
 }

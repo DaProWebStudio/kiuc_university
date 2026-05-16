@@ -1,29 +1,25 @@
 {% extends 'base/base.html' %}
 {% load static i18n %}
 
-{% block title %}
-    {{ process.title }}
-{% endblock %}
+{% block title %}{{ process.title }}{% endblock %}
 
 {% block content %}
-    <section class="section documents">
-        <div class="container">
-            <div class="row">
-                <div class="title col-12 m-auto">
-                    <span>{% trans 'Учебный процесс' %}</span>
-                    <h3>{{ process.title }}</h3>
-                </div>
-                <ul class="cooperation-list col-12 m-auto">
-                    {% for item in process.files.all %}
-                        <li>
-                            <a href="{{ item.file.url }}">
-                                <i class="fa fa-file mr-2"></i>
-                                {{ item.title }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
+<section class="section">
+    <div class="container">
+        <header class="page-hero reveal">
+            <div class="page-hero__eye">{% trans 'Учебный процесс' %}</div>
+            <h1 class="page-hero__h">{{ process.title }}</h1>
+        </header>
+
+        <div class="page-layout">
+            <ul class="file-list reveal">
+                {% for item in process.files.all %}
+                    <li>
+                        <a href="{{ item.file.url }}">{{ item.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
-    </section>
+    </div>
+</section>
 {% endblock %}

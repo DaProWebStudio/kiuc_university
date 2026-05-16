@@ -1,24 +1,26 @@
 {% extends 'base/base.html' %}
-{% load static i18n%}
+{% load static i18n %}
 
-{% block title %}
-    Нормативные документы
-{% endblock %}
+{% block title %}{% trans 'Нормативные документы' %}{% endblock %}
 
 {% block content %}
-    <section class="section documents">
-        <div class="container">
-            <div class="title">
-                <span>{% trans 'Об институте' %}</span>
-                <h3>{% trans 'Нормативные документы' %}</h3>
-            </div>
-            <div class="documents__card">
+<section class="section">
+    <div class="container">
+        <header class="page-hero reveal">
+            <div class="page-hero__eye">{% trans 'Об институте' %}</div>
+            <h1 class="page-hero__h">{% trans 'Нормативные' %} <span class="ital">документы</span></h1>
+            <p class="page-hero__lead">{% trans 'Уставы, положения и публичные документы института.' %}</p>
+        </header>
+
+        <div class="page-layout">
+            <ul class="file-list reveal">
                 {% for document in documents %}
-                    <div class="documents__card-item">
-                        <a href="{% url 'documents_detail' document.pk %}">{{ document}}</a>
-                    </div>
+                    <li>
+                        <a href="{% url 'documents_detail' document.pk %}">{{ document }}</a>
+                    </li>
                 {% endfor %}
-            </div>
+            </ul>
         </div>
-    </section>
+    </div>
+</section>
 {% endblock %}

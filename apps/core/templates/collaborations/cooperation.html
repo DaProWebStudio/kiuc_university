@@ -1,24 +1,26 @@
 {% extends 'base/base.html' %}
 {% load static i18n %}
 
-{% block title %}
-    {% trans 'Сотрудничество' %}
-{% endblock %}
+{% block title %}{% trans 'Сотрудничество' %}{% endblock %}
 
 {% block content %}
-    <section class="section cooperation">
-        <div class="container">
-            <div class="row">
-                <div class="title">
-                    <span>{% trans 'Об институте' %}</span>
-                    <h3>{% trans 'Сотрудничество' %}</h3>
-                </div>
-                <ul class="cooperation-list">
-                    {% for item in cooperation %}
-                        <li><a href="{{ item.file.url }}">{{ item.title }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
+<section class="section">
+    <div class="container">
+        <header class="page-hero reveal">
+            <div class="page-hero__eye">{% trans 'Об институте' %}</div>
+            <h1 class="page-hero__h">{% trans 'Локальное' %} <span class="ital">сотрудничество</span></h1>
+            <p class="page-hero__lead">{% trans 'Партнёры и документы о совместной работе с вузами и организациями.' %}</p>
+        </header>
+
+        <div class="page-layout">
+            <ul class="file-list reveal">
+                {% for item in cooperation %}
+                    <li>
+                        <a href="{{ item.file.url }}">{{ item.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
-    </section>
+    </div>
+</section>
 {% endblock %}

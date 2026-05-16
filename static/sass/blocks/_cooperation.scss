@@ -1,25 +1,34 @@
+@use "../base/tokens" as *;
+
+// Hook для страницы сотрудничества — карточки используют общий .card.
+// Специфика страницы оставлена минимальной.
+
 .cooperation {
   &-list {
-    & li {
-      list-style-type: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
       margin: 10px 0;
-      & a {
-        color: $--bs-text;
-        font-weight: 700;
+
+      a {
+        color: $c-text;
+        font-weight: 600;
         text-decoration: none;
-        font-size: 18px;
+        font-size: 16px;
+        transition: color .2s $ease;
+
+        &:hover {
+          color: $c-blue;
+        }
       }
     }
   }
+
   &__wrap {
     display: grid;
-    grid-template-columns: repeat(3,1fr);
-  }
-  .international-card {
-    height: 350px !important;
-    .card-body {
-      height: 66px;
-      margin-bottom: 15px;
-    }
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
   }
 }

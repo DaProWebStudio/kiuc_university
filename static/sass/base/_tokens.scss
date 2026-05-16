@@ -1,0 +1,69 @@
+// ==========================================================================
+// Design system v8 — токены (CSS custom properties + SCSS vars)
+// ==========================================================================
+// CSS-переменные доступны в inline-стилях и рантайме (transitions, анимации),
+// SCSS-переменные удобны в @include/вычислениях.
+
+:root {
+  // Цвет
+  --blue: #396EF8;
+  --blue-dark: #1D4ED8;
+  --blue-10: rgba(57, 110, 248, .10);
+  --blue-06: rgba(57, 110, 248, .06);
+  --green: #1EA59A;
+  --green-dark: #129388;
+  --title: #1B1C57;
+  --text: #626687;
+  --ink: #12132e;
+  --bg: #fbfbfd;
+  --soft: #f2f4fb;
+  --line: #e4e8f2;
+  --chip: #eef2ff;
+
+  // Типографика
+  --f-display: 'Fraunces', ui-serif, Georgia, serif;
+  --f-body: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  // Радиусы
+  --radius-xl: 24px;
+  --radius-lg: 18px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+
+  // Анимация
+  --ease: cubic-bezier(.22, 1, .36, 1);
+
+  // Тени
+  --shadow-xs: 0 1px 2px rgba(27, 28, 87, .04);
+  --shadow-sm: 0 1px 2px rgba(27, 28, 87, .04), 0 2px 8px rgba(27, 28, 87, .04);
+  --shadow-md: 0 10px 30px -12px rgba(27, 28, 87, .18);
+  --shadow-lg: 0 30px 60px -24px rgba(27, 28, 87, .28);
+  --shadow-xl: 0 50px 120px -30px rgba(27, 28, 87, .32);
+}
+
+// SCSS-переменные — зеркало токенов для @include и вычислений
+$c-blue: #396EF8;
+$c-blue-dark: #1D4ED8;
+$c-blue-10: rgba(57, 110, 248, .10);
+$c-blue-06: rgba(57, 110, 248, .06);
+$c-green: #1EA59A;
+$c-green-dark: #129388;
+$c-title: #1B1C57;
+$c-text: #626687;
+$c-ink: #12132e;
+$c-bg: #fbfbfd;
+$c-soft: #f2f4fb;
+$c-line: #e4e8f2;
+$c-chip: #eef2ff;
+
+$f-display: 'Fraunces', ui-serif, Georgia, serif;
+$f-body: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+$f-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+$ease: cubic-bezier(.22, 1, .36, 1);
+
+// Брейкпоинты
+$bp-lg: 1200px;
+$bp-md: 980px;
+$bp-sm: 560px;
