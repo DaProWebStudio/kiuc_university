@@ -1,0 +1,35 @@
+// ==========================================================================
+// Specialty detail — адаптив (отключаем sticky, уменьшаем заголовки)
+// ==========================================================================
+
+@media (max-width: 980px) {
+  .detail {
+    &__info {
+      position: static;
+      margin-top: 24px;
+
+      h4 {
+        font-size: 20px;
+        padding: 14px 16px;
+      }
+    }
+
+    &__img {
+      margin-bottom: 16px;
+    }
+  }
+}
+
+@media (max-width: 560px) {
+  .detail {
+    &__info {
+      h4 {
+        font-size: 18px;
+      }
+
+      ul li {
+        font-size: 14px;
+      }
+    }
+  }
+}

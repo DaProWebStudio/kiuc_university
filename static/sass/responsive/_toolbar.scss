@@ -1,0 +1,45 @@
+@use "../base/tokens" as *;
+
+// ==========================================================================
+// Topbar (sticky-шапка) — адаптив
+// ==========================================================================
+
+@media (max-width: 980px) {
+  .topbar-inner {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  // На мобиле прячем правую группу действий целиком: язык/Связаться уезжают
+  // в выдвижное меню, оставляя логотип слева и бургер справа.
+  .top-actions {
+    display: none;
+  }
+
+  // Боковые отступы у nav-обёртки (между логотипом и бургером)
+  .topbar-inner > nav {
+    padding: 0 4px;
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .topbar-inner {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .logo {
+    font-size: 15px;
+
+    &-mark {
+      width: 28px;
+      height: 28px;
+      font-size: 18px;
+    }
+
+    img {
+      height: 26px;
+    }
+  }
+}
