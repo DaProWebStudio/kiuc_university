@@ -1,0 +1,126 @@
+КАК ПОЧИНИТЬ МИГРАЦИЮ core.0002_receptionpage НА ПРОДЕ
+=======================================================
+
+Симптом
+-------
+На странице /reception-applicants/ ошибка:
+    ProgrammingError: relation "core_receptionpage" does not exist
+
+При этом `python manage.py migrate core` отвечает:
+    No migrations to apply.
+
+Причина
+-------
+Django видит запись о миграции 0002_receptionpage в таблице
+django_migrations и считает её применённой, но реально таблицы
+core_receptionpage в БД нет. Скорее всего кто-то когда-то прервал
+миграцию посередине или применил её с --fake.
+
+
+Шаги починки
+------------
+
+1. Подключиться к серверу:
+   ssh user@kiuc.kg
+   cd /var/www/kiuc_university
+
+2. (рекомендую) сделать дамп БД на всякий случай:
+   ./scripts/backup_db.sh
+
+3. Проверить состояние миграций — должно быть [X] напротив 0002:
+   uv run python manage.py showmigrations core
+
+   Если так:
+       core
+        [X] 0001_initial
+        [X] 0002_receptionpage    ← ложная запись
+
+   значит проблема та самая, идём дальше.
+
+4. Удалить ложную запись из django_migrations.
+
+   Вариант 4а (однострочник через manage.py shell):
+
+   uv run python manage.py shell -c "from django.db import connection; connection.cursor().execute(\"DELETE FROM django_migrations WHERE app='core' AND name='0002_receptionpage'\"); print('cleaned')"
+
+   ВАЖНО: команда ОДНОЙ строкой, без переносов и пробелов в начале —
+   иначе будет IndentationError.
+
+   Вариант 4б (если 4а ругается — через dbshell в psql):
+
+   uv run python manage.py dbshell
+
+   Внутри psql:
+       DELETE FROM django_migrations WHERE app='core' AND name='0002_receptionpage';
+       \q
+
+5. Применить миграцию заново (на этот раз создаст таблицу):
+   uv run python manage.py migrate core
+
+   Ожидаемый вывод:
+       Applying core.0002_receptionpage... OK
+
+6. Перезапустить gunicorn:
+   sudo supervisorctl restart university
+
+7. Открыть /reception-applicants/ — страница должна работать.
+   В админке /admin/core/receptionpage/ появится запись с дефолтным
+   контентом, готовая к редактированию.
+
+
+Если опять «No migrations to apply» после удаления записи
+---------------------------------------------------------
+
+Значит запись не удалилась. Проверь напрямую через dbshell:
+
+   uv run python manage.py dbshell
+   > SELECT * FROM django_migrations WHERE app='core';
+   > DELETE FROM django_migrations WHERE app='core' AND name='0002_receptionpage';
+   > \q
+
+И снова: uv run python manage.py migrate core
+
+
+Если migrate выдаёт «table core_receptionpage already exists»
+-------------------------------------------------------------
+
+Симптом: после удаления записи из django_migrations и повторного
+migrate ловишь:
+    django.db.utils.OperationalError: table "core_receptionpage" already exists
+
+Это значит таблица в БД реально есть, просто Django забыл об этом
+после удаления записи. Пометить миграцию как применённую без
+выполнения SQL — флаг --fake:
+
+   uv run python manage.py migrate core 0002_receptionpage --fake
+
+После этого showmigrations core покажет [X] на 0002, таблица уже
+есть в БД — всё консистентно.
+
+
+Проверка какой БД управляешь (sqlite vs postgres)
+--------------------------------------------------
+
+Иногда путаница в том, какую БД трогаешь — settings.py читает
+DATABASE_ENGINE из .env, иначе уходит в SQLite по умолчанию:
+
+   "ENGINE": os.environ.get("DATABASE_ENGINE", "django.db.backends.sqlite3")
+
+Проверь:
+   grep DATABASE .env
+
+Если DATABASE_ENGINE отсутствует — приложение работает с локальным
+db.sqlite3 в корне проекта. Для PostgreSQL .env должен содержать:
+   DATABASE_ENGINE=django.db.backends.postgresql
+   DATABASE_NAME=kiuc
+   DATABASE_USER=kiuc
+   DATABASE_PASSWORD=...
+   DATABASE_HOST=localhost
+   DATABASE_PORT=5432
+
+
+Если уже работает, не делай ничего
+-----------------------------------
+
+Если `showmigrations core` показывает [X] на 0002, и страница реально
+открывается без ошибки — значит таблица существует и всё уже хорошо.

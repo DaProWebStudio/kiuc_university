@@ -1,0 +1,155 @@
+ПЕРЕЕЗД ПРОДА С POETRY НА UV (ФИНАЛ)
+======================================
+
+Цель: оставить на сервере один venv (uv в /var/www/kiuc_university/.venv/),
+одну БД (PostgreSQL), и убрать старый Poetry venv. После этого деплой
+будет: git pull → uv sync → migrate → restart.
+
+ВАЖНО: коммит 5f237e5 заменил `django-environs` (древний, ломался в uv)
+на `python-dotenv` (стандартный). После git pull этого коммита uv-venv
+будет корректно читать .env и видеть PostgreSQL.
+
+
+ПРЕДУСЛОВИЯ
+-----------
+
+* uv установлен. Проверить:
+    uv --version
+  Если нет:
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+
+* config/deploy/kiuc.kg.conf указывает на .venv/bin/gunicorn (уже так).
+
+* .env содержит креды PostgreSQL.
+
+
+ШАГ 1. БЭКАП БД
+---------------
+
+cd /var/www/kiuc_university
+./scripts/backup_db.sh
+ls -lh backups/
+
+
+ШАГ 2. PULL И ПЕРЕСОБРАТЬ UV-VENV
+---------------------------------
+
+git pull
+rm -rf .venv
+uv sync --no-dev
+
+Проверь:
+    ls .venv/bin/gunicorn
+    ls .venv/bin/python
+
+
+ШАГ 3. ПРОВЕРИТЬ ЧТО UV-VENV ВИДИТ POSTGRES
+-------------------------------------------
+
+После коммита 5f237e5 это должно работать сразу — .env читается
+через python-dotenv независимо от cwd.
+
+    uv run python3 -c "import os; os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings'); import django; django.setup(); from django.conf import settings; print('ENGINE:', settings.DATABASES['default']['ENGINE']); print('NAME:', settings.DATABASES['default']['NAME'])"
+
+Ожидаемый вывод:
+    ENGINE: django.db.backends.postgresql
+    NAME: kiuc_university
+
+Если sqlite3 — пересобери uv-venv заново (rm -rf .venv && uv sync).
+
+
+ШАГ 4. ПРИМЕНИТЬ МИГРАЦИИ
+-------------------------
+
+    uv run python manage.py showmigrations
+    uv run python manage.py migrate
+
+
+ШАГ 5. COMPILEMESSAGES
+----------------------
+
+    uv run python manage.py compilemessages -l en -l ky
+
+
+ШАГ 6. COLLECTSTATIC
+--------------------
+
+Прежде чем запускать — раскомментируй STATIC_ROOT в
+config/settings.py:132 (локально), закоммить, git pull на сервере.
+
+    uv run python manage.py collectstatic --noinput
+
+
+ШАГ 7. ПЕРЕЗАПУСТИТЬ SUPERVISOR
+-------------------------------
+
+    sudo supervisorctl restart university
+    sudo supervisorctl status university
+
+Должен быть RUNNING. Открой kiuc.kg/reception-applicants/.
+Если падает — лог:
+    tail -50 config/logs/debug.log
+
+
+ШАГ 8. УДАЛИТЬ POETRY
+---------------------
+
+После того как убедился что всё работает:
+
+# Удалить виртуальное окружение Poetry
+rm -rf ~/.cache/pypoetry/virtualenvs/kiuc-university-*
+
+# Если Poetry устанавливался через pip:
+pip3 uninstall poetry --yes 2>/dev/null || true
+
+# Если через curl-скрипт:
+~/.local/bin/poetry self uninstall 2>/dev/null || true
+
+
+ШАГ 9. (ОПЦИОНАЛЬНО) УДАЛИТЬ ЛОКАЛЬНЫЙ SQLITE
+---------------------------------------------
+
+Если случайно создался во время разборок:
+
+    rm -f db.sqlite3
+
+
+ИТОГ — НОРМАЛЬНЫЙ FLOW ДЕПЛОЯ
+------------------------------
+
+Локально:
+    # меняешь код / модели
+    uv run python manage.py makemigrations
+    git add . && git commit -m "..." && git push
+
+На сервере:
+    cd /var/www/kiuc_university
+    ./scripts/backup_db.sh             # дамп на всякий
+    git pull
+    uv sync                             # подтянуть новые зависимости
+    uv run python manage.py migrate
+    uv run python manage.py compilemessages -l en -l ky
+    uv run python manage.py collectstatic --noinput
+    sudo supervisorctl restart university
+
+
+ОТКАТ ЕСЛИ ЧТО-ТО ПОШЛО НЕ ТАК
+-------------------------------
+
+Восстановить БД из дампа:
+
+    set -a; source .env; set +a
+    PGPASSWORD="$DATABASE_PASSWORD" pg_restore \
+        -h "$DATABASE_HOST" \
+        -U "$DATABASE_USER" \
+        -d "$DATABASE_NAME" \
+        --clean --if-exists --no-owner \
+        backups/kiuc-YYYYMMDD-HHMMSS.dump
+
+Откатить supervisor на Poetry (если venv ещё не удалён):
+
+    # Временно поменять config/deploy/kiuc.kg.conf:
+    # command=/home/kiuc/.cache/pypoetry/virtualenvs/kiuc-university-ZQgt2XpO-py3.10/bin/gunicorn ...
+    sudo supervisorctl reread
+    sudo supervisorctl update
+    sudo supervisorctl restart university
