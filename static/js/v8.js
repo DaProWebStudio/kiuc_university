@@ -23,6 +23,10 @@
   // -------------------------------------------------------------------- //
   // Reveal on scroll
   // -------------------------------------------------------------------- //
+  // threshold: 0 — раскрываем, как только элемент коснулся вьюпорта.
+  // Доля площади (было 0.08) для длинных контейнеров не работает: сетка из
+  // 56 новостей высотой ~8000px не может показать 8% своей площади в экране
+  // высотой 700px — блок оставался скрытым навсегда.
   const revealTargets = document.querySelectorAll('.reveal');
   if (revealTargets.length && 'IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
@@ -32,7 +36,7 @@
           io.unobserve(e.target);
         }
       });
-    }, { threshold: 0.08 });
+    }, { threshold: 0, rootMargin: '0px 0px -5% 0px' });
     revealTargets.forEach(el => io.observe(el));
   } else {
     revealTargets.forEach(el => el.classList.add('in'));

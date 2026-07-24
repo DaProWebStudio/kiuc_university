@@ -1,2 +1,4 @@
 {% load static %}
-<script src="{% static 'js/v8.js' %}" defer></script>
+{# Cache-bust по той же переменной, что и app.css: без него браузер держит
+   старый v8.js после деплоя и правки поведения до пользователя не доезжают. #}
+<script src="{% static 'js/v8.js' %}?{{ style_core_version }}" defer></script>
