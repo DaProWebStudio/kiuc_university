@@ -4,30 +4,50 @@
 {% block title %}{% trans 'Международное сотрудничество' %}{% endblock %}
 
 {% block content %}
-<section class="section">
-    <div class="container">
-        <header class="page-hero reveal">
-            <div class="page-hero__eye">{% trans 'Сотрудничество' %}</div>
-            <h1 class="page-hero__h">{% trans 'Международное' %} <span class="ital">сотрудничество</span></h1>
-            <p class="page-hero__lead">{% trans 'Партнёры из разных стран, совместные программы, стажировки и обменные инициативы.' %}</p>
-        </header>
 
-        <div class="page-layout">
-            <div class="spec-grid reveal">
-                {% for international in internationals %}
-                    <article class="card international-card">
-                        <a href="{{ international.get_absolute_url }}" class="card-link">
-                            <div class="card-img">
-                                {% generateimage 'main:thumbnail' source=international.image -- class="mypicture" %}
-                            </div>
-                            <div class="card-body">
-                                <h2 class="card-title">{{ international.title|truncatechars:63 }}</h2>
-                            </div>
-                        </a>
-                    </article>
-                {% endfor %}
+{% trans 'Сотрудничество' as hero_eyebrow %}
+{% trans 'Международное' as hero_title %}
+{% trans 'сотрудничество' as hero_title_em %}
+{% trans 'Партнёры из разных стран, совместные программы, стажировки и обменные инициативы.' as hero_lead %}
+{% include 'base/page-hero.html' with eyebrow=hero_eyebrow title=hero_title title_em=hero_title_em lead=hero_lead %}
+
+<section class="bg-cream-100 py-16 lg:py-20">
+  <div class="container-page">
+
+    {% if internationals %}
+      <div class="reveal grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {% for international in internationals %}
+          <a href="{{ international.get_absolute_url }}" class="photo-card group aspect-[4/3]">
+            {% generateimage 'main:thumbnail' source=international.image -- class="h-full w-full object-cover transition duration-700 group-hover:scale-105" %}
+            <div class="photo-card-overlay">
+              <p class="font-display text-base font-semibold leading-snug text-white">
+                {{ international.title|truncatechars:63 }}
+              </p>
+              <span class="mt-3 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.14em] text-white/70">
+                {% trans 'Подробнее' %}
+                <svg class="h-3 w-3 transition group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </span>
             </div>
-        </div>
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="flex flex-col items-center justify-center rounded-3xl border-2 border-dashed border-sage-200 bg-cream-50 px-6 py-16 text-center">
+        <svg class="h-10 w-10 text-sage-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18z"/></svg>
+        <p class="mt-4 font-display text-lg font-semibold text-ink/75">{% trans 'Партнёры скоро появятся' %}</p>
+      </div>
+    {% endif %}
+
+    <div class="mt-16 flex flex-wrap items-center justify-between gap-5 border-t border-cream-300/70 pt-10">
+      <p class="max-w-md text-sm text-ink/65">
+        {% trans 'Документы о локальном сотрудничестве с вузами и организациями Кыргызстана — на отдельной странице.' %}
+      </p>
+      <a href="{% url 'cooperation' %}" class="btn-pill-dark">
+        {% trans 'Локальное сотрудничество' %}
+        <span class="btn-pill-icon"><svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+      </a>
     </div>
+
+  </div>
 </section>
 {% endblock %}

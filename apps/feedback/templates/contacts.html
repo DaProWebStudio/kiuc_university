@@ -4,91 +4,176 @@
 {% block title %}{% trans 'Контакты' %}{% endblock %}
 
 {% block content %}
-<section class="section">
-    <div class="container">
-        <header class="page-hero reveal">
-            <div class="page-hero__eye">{% trans 'Связаться с нами' %}</div>
-            <h1 class="page-hero__h">{% trans 'Напишите' %} <span class="ital">нам</span></h1>
-            <p class="page-hero__lead">{% trans 'Заполните форму — ответим в течение рабочего дня. Либо позвоните нашим менеджерам напрямую.' %}</p>
-        </header>
 
-        <div class="page-layout page-layout--with-aside">
-            <div class="page-layout__main">
-                <div class="info-card reveal" style="padding-bottom: 8px; margin-bottom: 24px;">
-                    <h3 class="info-card__title">{% trans 'Система обратной связи' %}</h3>
-                </div>
-                <form action="" method="post" class="form-v8 reveal">
-                    {% csrf_token %}
-                    <div class="field">
-                        {{ form.name }}
-                        <label for="id_name">{% trans 'Ваше имя' %}</label>
-                    </div>
-                    <div class="field">
-                        {{ form.email }}
-                        <label for="id_email">{% trans 'Ваша почта' %}</label>
-                    </div>
-                    <div class="field field--full">
-                        {{ form.message }}
-                        <label for="id_message">{% trans 'Ваше сообщение' %}</label>
-                    </div>
-                    <div class="field field--full field--agree">
-                        <input id="agree" required type="checkbox">
-                        <label for="agree">{% trans 'Согласен на обработку персональных данных' %}</label>
-                    </div>
-                    <div class="field field--captcha">
-                        <img src="{{ recaptcha.image.url }}" alt="captcha">
-                    </div>
-                    <div class="field {% if form.user_answer.errors %}field--invalid{% endif %}">
-                        {{ form.user_answer }}
-                        <label for="id_user_answer">
-                            {% if form.user_answer.errors %}
-                                {% for error in form.user_answer.errors %}{{ error }}{% endfor %}
-                            {% else %}
-                                {% trans 'Напишите ответ' %}
-                            {% endif %}
-                        </label>
-                    </div>
-                    <button type="submit" class="btn btn-primary form-submit">
-                        {% trans 'Отправить сообщение' %}
-                    </button>
-                </form>
-            </div>
+{% trans 'Связаться с нами' as hero_eyebrow %}
+{% trans 'Напишите' as hero_title %}
+{% trans 'нам' as hero_title_em %}
+{% trans 'Заполните форму — ответим в течение рабочего дня. Либо позвоните нашим менеджерам напрямую.' as hero_lead %}
+{% include 'base/page-hero.html' with eyebrow=hero_eyebrow title=hero_title title_em=hero_title_em lead=hero_lead %}
 
-            <aside class="page-layout__aside">
-                <div class="contacts-card reveal">
-                    <ul class="contacts-card__list">
-                        <li>
-                            <b>{% trans 'Наш адрес' %}</b>
-                            {% trans 'Чуйская обл., Сокулукский р., Шопоков, ул. Машиностроительная, 25а' %}
-                        </li>
-                        <li>
-                            <b>{% trans 'Менеджеры КИЯК' %}</b>
-                            <div style="font-weight: 600; color: var(--title); margin-bottom: 4px;">
-                                {% trans 'Алиева Наргиза Жумадиловна' %}
-                            </div>
-                            <ul>
-                                <li>
-                                    <a href="https://api.whatsapp.com/send/?phone=996552955677&text=Здравствуйте%21%0A%0AПишу+из+вашего+сайта+www.kiuc.kg.%0A%0A&type=phone_number&app_absent=0" target="_blank" rel="noopener">
-                                        +996 (552) 95-56-77 (WhatsApp)
-                                    </a>
-                                </li>
-                                <li><a href="tel:+996706955677">+996 (706) 95-56-77</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <b>{% trans 'Приёмная' %}</b>
-                            <span>—</span>
-                        </li>
-                    </ul>
-                </div>
-            </aside>
+<section class="bg-cream-100 py-16 lg:py-20">
+  <div class="container-page grid gap-12 lg:grid-cols-12">
+
+    <div class="lg:col-span-7">
+      <span class="section-eyebrow">{% trans 'Система обратной связи' %}</span>
+      <h2 class="display mt-4 text-2xl sm:text-3xl">
+        {% trans 'Задайте' %} <em class="italic-soft text-sage-700">{% trans 'вопрос' %}</em>
+      </h2>
+
+      <form action="" method="post" class="reveal mt-8 rounded-[28px] border border-cream-300/70 bg-cream-50 p-7 lg:p-9">
+        {% csrf_token %}
+
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label for="id_name" class="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-sage-700/70">{% trans 'Ваше имя' %}</label>
+            {{ form.name }}
+          </div>
+          <div>
+            <label for="id_email" class="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-sage-700/70">{% trans 'Ваша почта' %}</label>
+            {{ form.email }}
+          </div>
         </div>
+
+        <div class="mt-5">
+          <label for="id_message" class="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-sage-700/70">{% trans 'Ваше сообщение' %}</label>
+          {{ form.message }}
+        </div>
+
+        <div class="mt-6 grid items-end gap-5 sm:grid-cols-2">
+          <div class="flex items-center gap-4 rounded-2xl border border-cream-300 bg-white p-3">
+            <img src="{{ recaptcha.image.url }}" alt="{% trans 'Проверочный вопрос' %}" class="h-14 w-auto rounded-xl">
+            <span class="text-xs leading-relaxed text-ink/55">{% trans 'Решите пример, чтобы подтвердить, что вы не робот.' %}</span>
+          </div>
+          <div>
+            <label for="id_user_answer" class="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] {% if form.user_answer.errors %}text-red-600{% else %}text-sage-700/70{% endif %}">
+              {% if form.user_answer.errors %}
+                {% for error in form.user_answer.errors %}{{ error }}{% endfor %}
+              {% else %}
+                {% trans 'Напишите ответ' %}
+              {% endif %}
+            </label>
+            {{ form.user_answer }}
+          </div>
+        </div>
+
+        <label for="agree" class="mt-6 flex cursor-pointer items-start gap-3 text-sm text-ink/70">
+          <input id="agree" required type="checkbox"
+                 class="mt-0.5 h-4.5 w-4.5 shrink-0 cursor-pointer rounded border-cream-300 text-sage-700 accent-sage-700 focus:ring-sage-500/30">
+          {% trans 'Согласен на обработку персональных данных' %}
+        </label>
+
+        <button type="submit" class="mt-8 btn-pill-dark">
+          {% trans 'Отправить сообщение' %}
+          <span class="btn-pill-icon"><svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+        </button>
+      </form>
     </div>
+
+    <aside class="lg:col-span-5">
+      <div class="reveal lg:sticky lg:top-28">
+        <div class="rounded-[28px] bg-sage-900 p-8 text-cream-200 lg:p-9">
+          <span class="section-eyebrow-light">{% trans 'Контакты' %}</span>
+
+          <div class="mt-7 space-y-7">
+            {% if site_contacts.address_full %}
+            <div>
+              <p class="text-[11px] uppercase tracking-[0.18em] text-cream-200/50">{% trans 'Наш адрес' %}</p>
+              <a href="{{ site_contacts.address_url }}" target="_blank" rel="noopener"
+                 class="mt-2.5 block text-sm leading-relaxed text-cream-200/85 transition hover:text-cream-200">
+                {{ site_contacts.address_full }}
+              </a>
+            </div>
+            {% endif %}
+
+            {% if site_contacts.phone or site_contacts.whatsapp %}
+            <div class="border-t border-white/10 pt-7">
+              <p class="text-[11px] uppercase tracking-[0.18em] text-cream-200/50">{% trans 'Приёмная комиссия' %}</p>
+              <ul class="mt-4 space-y-2.5 text-sm">
+                {% if site_contacts.whatsapp %}
+                <li>
+                  <a href="{{ site_contacts.whatsapp_link }}" target="_blank" rel="noopener"
+                     class="flex items-center gap-3 text-cream-200/85 transition hover:text-cream-200">
+                    <svg viewBox="0 0 24 24" class="h-4 w-4 text-cream-200/50" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.4A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1a13 13 0 0 1-5.6-4.9c-.4-.6-.9-1.5-.9-2.3s.4-1.3.6-1.5c.2-.2.4-.3.6-.3h.4c.2 0 .4 0 .5.4l.7 1.7c.1.2 0 .4-.1.5l-.4.5c-.1.1-.2.3-.1.5.4.7 1 1.4 1.6 1.9.5.4 1 .6 1.3.7.2.1.4 0 .5-.1l.6-.7c.2-.2.3-.2.5-.1l1.6.8c.2.1.3.2.4.3v.6z"/></svg>
+                    <span class="font-mono">{{ site_contacts.whatsapp }}</span>
+                  </a>
+                </li>
+                {% endif %}
+                {% if site_contacts.phone %}
+                <li>
+                  <a href="tel:{{ site_contacts.phone_link }}" class="flex items-center gap-3 text-cream-200/85 transition hover:text-cream-200">
+                    <svg viewBox="0 0 24 24" class="h-4 w-4 text-cream-200/50" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L7.9 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>
+                    <span class="font-mono">{{ site_contacts.phone }}</span>
+                  </a>
+                </li>
+                {% endif %}
+                {% if site_contacts.email %}
+                <li>
+                  <a href="mailto:{{ site_contacts.email }}" class="flex items-center gap-3 text-cream-200/85 transition hover:text-cream-200">
+                    <svg viewBox="0 0 24 24" class="h-4 w-4 text-cream-200/50" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M2 6l10 7 10-7"/></svg>
+                    <span>{{ site_contacts.email }}</span>
+                  </a>
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+            {% endif %}
+
+            {% if site_contacts.active_managers %}
+            <div class="border-t border-white/10 pt-7">
+              <p class="text-[11px] uppercase tracking-[0.18em] text-cream-200/50">{% trans 'Менеджеры КИЯК' %}</p>
+              {% for manager in site_contacts.active_managers %}
+                <div class="{% if not forloop.first %}mt-6 {% endif %}">
+                  <p class="mt-2.5 font-display text-base font-semibold">{{ manager.full_name }}</p>
+                  {% if manager.position %}
+                    <p class="mt-1 text-xs text-cream-200/60">{{ manager.position }}</p>
+                  {% endif %}
+                  <ul class="mt-3 space-y-2.5 text-sm">
+                    {% if manager.whatsapp %}
+                    <li>
+                      <a href="{{ manager.whatsapp_link }}" target="_blank" rel="noopener"
+                         class="flex items-center gap-3 text-cream-200/85 transition hover:text-cream-200">
+                        <svg viewBox="0 0 24 24" class="h-4 w-4 text-cream-200/50" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.4A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1a13 13 0 0 1-5.6-4.9c-.4-.6-.9-1.5-.9-2.3s.4-1.3.6-1.5c.2-.2.4-.3.6-.3h.4c.2 0 .4 0 .5.4l.7 1.7c.1.2 0 .4-.1.5l-.4.5c-.1.1-.2.3-.1.5.4.7 1 1.4 1.6 1.9.5.4 1 .6 1.3.7.2.1.4 0 .5-.1l.6-.7c.2-.2.3-.2.5-.1l1.6.8c.2.1.3.2.4.3v.6z"/></svg>
+                        <span class="font-mono">{{ manager.whatsapp }}</span>
+                      </a>
+                    </li>
+                    {% endif %}
+                    {% if manager.phone %}
+                    <li>
+                      <a href="tel:{{ manager.phone_link }}" class="flex items-center gap-3 text-cream-200/85 transition hover:text-cream-200">
+                        <svg viewBox="0 0 24 24" class="h-4 w-4 text-cream-200/50" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L7.9 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>
+                        <span class="font-mono">{{ manager.phone }}</span>
+                      </a>
+                    </li>
+                    {% endif %}
+                  </ul>
+                </div>
+              {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="border-t border-white/10 pt-7">
+              <p class="text-[11px] uppercase tracking-[0.18em] text-cream-200/50">{% trans 'Приёмная' %}</p>
+              <a href="{% url 'reception' %}" class="mt-3 inline-flex items-center gap-2 text-sm font-medium text-tan-300 transition hover:text-tan-200">
+                {% trans 'Условия поступления' %}
+                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+  </div>
 </section>
 
-<div class="container" style="margin-bottom: 60px;">
-    <div class="map-embed reveal">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1056.5517421664722!2d74.33675432651926!3d42.86404867698774!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389ed965acdeec3b%3A0xa3d3a2bafb4618e1!2z0JrRi9GA0LPRi9C30YHQutC40Lkg0JzQtdC20LTRg9C90LDRgNC-0LTQvdGL0Lkg0KPQvdC40LLQtdGA0YHQsNC70YzQvdGL0Lkg0JrQvtC70LvQtdC00LYgKNCa0JzQo9CaKQ!5e1!3m2!1sru!2skg!4v1682148536639!5m2!1sru!2skg" height="520" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen=""></iframe>
+<section class="bg-cream-100 pb-16 lg:pb-20">
+  <div class="container-page">
+    <div class="reveal overflow-hidden rounded-[28px] border border-cream-300/70 shadow-xl shadow-sage-950/5">
+      <iframe src="{{ site_contacts.map_embed_url }}"
+              title="{% trans 'Карта проезда' %}"
+              class="block h-[420px] w-full border-0 lg:h-[520px]"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen=""></iframe>
     </div>
-</div>
+  </div>
+</section>
 {% endblock %}

@@ -1318,3 +1318,7 @@ msgstr "Байланыш"
 
 #~ msgid "Подробнее"
 #~ msgstr "Кененирээк"
+
+#: templates/base/base.html
+msgid "Приёмная комиссия"
+msgstr "Кабыл алуу комиссиясы"

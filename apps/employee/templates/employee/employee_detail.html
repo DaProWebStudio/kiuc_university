@@ -4,79 +4,13 @@
 {% block title %}{{ employee.get_full_name }}{% endblock %}
 
 {% block content %}
-<section class="section">
-    <div class="container">
-        <div class="resume-v8 reveal">
-            <aside class="resume-v8__side">
-                <div class="resume-v8__avatar">
-                    {% if employee.image %}
-                        <img src="{{ employee.image.url }}" alt="{{ employee.get_full_name }}">
-                    {% elif employee.gender == 'men' %}
-                        <img src="{% static 'images/more/avatar_men.webp' %}" alt="Avatar men">
-                    {% else %}
-                        <img src="{% static 'images/more/avatar_women.webp' %}" alt="Avatar women">
-                    {% endif %}
-                </div>
-                <h2 class="resume-v8__name">{{ employee.get_full_name }}</h2>
-                <p class="resume-v8__role">{{ employee.position }}</p>
 
-                <div class="resume-v8__section">
-                    <h4>{% trans 'О себе' %}</h4>
-                    <p><b>{% trans 'День рождения' %}:</b> {{ employee.date_of_birth }}</p>
-                </div>
+{% trans 'Профиль' as hero_eyebrow %}
+{% trans 'Должность' as meta_label %}
+{% trans 'Вся структура' as back_label %}
+{% url 'employees' as back_url %}
+{% include 'base/page-hero-cover.html' with eyebrow=hero_eyebrow title=employee.get_full_name image_url=employee.image.url meta_label=meta_label meta_value=employee.position back_url=back_url back_label=back_label %}
 
-                {% if employee.email or employee.instagram or employee.facebook %}
-                    <div class="resume-v8__section">
-                        <h4>{% trans 'Контакты' %}</h4>
-                        {% if employee.email %}
-                            <div class="resume-v8__contact-row">
-                                <span class="lbl">Email</span>
-                                <a href="mailto:{{ employee.email }}" class="val">{{ employee.email }}</a>
-                            </div>
-                        {% endif %}
-                        <div class="resume-v8__social">
-                            {% if employee.instagram %}
-                                <a href="{{ employee.instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                        <rect x="2" y="2" width="20" height="20" rx="5"/>
-                                        <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
-                                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-                                    </svg>
-                                </a>
-                            {% endif %}
-                            {% if employee.facebook %}
-                                <a href="{{ employee.facebook }}" target="_blank" rel="noopener" aria-label="Facebook">
-                                    <svg viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M22 12a10 10 0 10-11.56 9.88v-7H7.9V12h2.54V9.8c0-2.5 1.5-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 2.88h-2.33v7A10 10 0 0022 12z"/>
-                                    </svg>
-                                </a>
-                            {% endif %}
-                        </div>
-                    </div>
-                {% endif %}
-            </aside>
+{% include 'base/resume.html' with person=employee skills=employee.work_skills %}
 
-            <div class="resume-v8__main">
-                <div class="resume-v8__intro">
-                    <span class="eye">{% trans 'Профиль' %}</span>
-                    <h1 class="name">{{ employee.get_full_name }}</h1>
-                    <p class="role">{{ employee.position }}</p>
-                </div>
-
-                <div class="prose">
-                    {% autoescape off %}{{ employee.description }}{% endautoescape %}
-                </div>
-
-                {% if employee.work_skills %}
-                    <div class="page-hero" style="padding: 48px 0 16px;">
-                        <div class="page-hero__eye">{% trans 'Навыки' %}</div>
-                    </div>
-                    <div class="prose">
-                        {% autoescape off %}{{ employee.work_skills }}{% endautoescape %}
-                    </div>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-</section>
 {% endblock %}

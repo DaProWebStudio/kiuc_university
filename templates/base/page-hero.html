@@ -1,0 +1,47 @@
+{% comment %}
+Тёмная шапка внутренней страницы.
+
+Фиксированный nav-shell в состоянии data-state="top" рисует ссылки белым,
+поэтому первый экран любой страницы обязан быть тёмным — иначе меню сливается
+с фоном до первого скролла.
+
+Параметры (все опциональны, кроме title / title_html):
+    eyebrow     — надпись над заголовком
+    title       — заголовок (экранируется)
+    title_em    — часть заголовка курсивом акцентным цветом
+    title_html  — заголовок с разметкой; имеет приоритет над title/title_em
+    lead        — вводный абзац
+    meta_label  — подпись мета-строки под лидом (например «Опубликовано»)
+    meta_value  — значение мета-строки
+{% endcomment %}
+<section class="relative isolate overflow-hidden bg-sage-950 pt-32 pb-16 text-cream-200 lg:pt-40 lg:pb-20">
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
+    <div class="absolute -top-40 left-1/4 h-[28rem] w-[28rem] rounded-full bg-sage-700/35 blur-3xl"></div>
+    <div class="absolute -bottom-40 right-1/4 h-[24rem] w-[24rem] rounded-full bg-tan-300/10 blur-3xl"></div>
+    <div class="absolute inset-0 opacity-[0.05] [background-image:radial-gradient(rgba(255,255,255,.9)_1px,transparent_1px)] [background-size:22px_22px]"></div>
+  </div>
+
+  <div class="container-page">
+    {% if eyebrow %}<span class="section-eyebrow-light">{{ eyebrow }}</span>{% endif %}
+
+    {# [&_i]:… — заголовок может прийти из БД с курсивом внутри (ReceptionPage.heading) #}
+    <h1 class="display mt-5 max-w-4xl text-4xl leading-[1.02] sm:text-5xl lg:text-display-sm [&_i]:italic [&_i]:text-tan-300">
+      {% if title_html %}
+        {{ title_html|safe }}
+      {% else %}
+        {{ title }}{% if title_em %} <em class="italic-soft text-tan-300">{{ title_em }}</em>{% endif %}
+      {% endif %}
+    </h1>
+
+    {% if lead %}
+      <p class="mt-6 max-w-2xl text-base leading-relaxed text-cream-200/75">{{ lead }}</p>
+    {% endif %}
+
+    {% if meta_value %}
+      <div class="mt-8 inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/5 px-5 py-2 text-xs backdrop-blur">
+        {% if meta_label %}<span class="uppercase tracking-[0.18em] text-cream-200/55">{{ meta_label }}</span>{% endif %}
+        <span class="font-mono text-cream-200">{{ meta_value }}</span>
+      </div>
+    {% endif %}
+  </div>
+</section>

@@ -4,23 +4,27 @@
 {% block title %}{% trans 'Сотрудничество' %}{% endblock %}
 
 {% block content %}
-<section class="section">
-    <div class="container">
-        <header class="page-hero reveal">
-            <div class="page-hero__eye">{% trans 'Об институте' %}</div>
-            <h1 class="page-hero__h">{% trans 'Локальное' %} <span class="ital">сотрудничество</span></h1>
-            <p class="page-hero__lead">{% trans 'Партнёры и документы о совместной работе с вузами и организациями.' %}</p>
-        </header>
 
-        <div class="page-layout">
-            <ul class="file-list reveal">
-                {% for item in cooperation %}
-                    <li>
-                        <a href="{{ item.file.url }}">{{ item.title }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
+{% trans 'Об институте' as hero_eyebrow %}
+{% trans 'Локальное' as hero_title %}
+{% trans 'сотрудничество' as hero_title_em %}
+{% trans 'Партнёры и документы о совместной работе с вузами и организациями.' as hero_lead %}
+{% include 'base/page-hero.html' with eyebrow=hero_eyebrow title=hero_title title_em=hero_title_em lead=hero_lead %}
+
+<section class="bg-cream-100 py-16 lg:py-20">
+  <div class="container-page">
+    <div class="flex flex-wrap items-center justify-between gap-5">
+      <span class="section-eyebrow">{% trans 'Договоры' %}</span>
+      <a href="{% url 'internationals' %}" class="inline-flex items-center gap-2 text-sm font-medium text-sage-700 transition hover:text-sage-500">
+        {% trans 'Международное сотрудничество' %}
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
     </div>
+
+    <div class="mt-8">
+      {% trans 'Документы пока не загружены' as empty_text %}
+      {% include 'base/file-list.html' with files=cooperation empty_text=empty_text %}
+    </div>
+  </div>
 </section>
 {% endblock %}

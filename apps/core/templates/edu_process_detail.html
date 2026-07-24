@@ -4,22 +4,18 @@
 {% block title %}{{ process.title }}{% endblock %}
 
 {% block content %}
-<section class="section">
-    <div class="container">
-        <header class="page-hero reveal">
-            <div class="page-hero__eye">{% trans 'Учебный процесс' %}</div>
-            <h1 class="page-hero__h">{{ process.title }}</h1>
-        </header>
 
-        <div class="page-layout">
-            <ul class="file-list reveal">
-                {% for item in process.files.all %}
-                    <li>
-                        <a href="{{ item.file.url }}">{{ item.title }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
+{% trans 'Учебный процесс' as hero_eyebrow %}
+{% include 'base/page-hero.html' with eyebrow=hero_eyebrow title=process.title %}
+
+<section class="bg-cream-100 py-16 lg:py-20">
+  <div class="container-page">
+    <span class="section-eyebrow">{% trans 'Файлы' %}</span>
+
+    <div class="mt-8">
+      {% trans 'Файлы пока не загружены' as empty_text %}
+      {% include 'base/file-list.html' with files=process.files.all empty_text=empty_text %}
     </div>
+  </div>
 </section>
 {% endblock %}

@@ -4,22 +4,24 @@
 {% block title %}{{ document.title }}{% endblock %}
 
 {% block content %}
-<section class="section">
-    <div class="container">
-        <header class="page-hero reveal">
-            <div class="page-hero__eye">{% trans 'Об институте' %}</div>
-            <h1 class="page-hero__h">{{ document.title }}</h1>
-        </header>
 
-        <div class="page-layout">
-            <ul class="file-list reveal">
-                {% for item in document.files.all %}
-                    <li>
-                        <a href="{{ item.file.url }}">{{ item.title }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
+{% trans 'Нормативные документы' as hero_eyebrow %}
+{% include 'base/page-hero.html' with eyebrow=hero_eyebrow title=document.title %}
+
+<section class="bg-cream-100 py-16 lg:py-20">
+  <div class="container-page">
+    <div class="flex flex-wrap items-center justify-between gap-5">
+      <span class="section-eyebrow">{% trans 'Файлы' %}</span>
+      <a href="{% url 'documents_list' %}" class="inline-flex items-center gap-2 text-sm font-medium text-sage-700 transition hover:text-sage-500">
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        {% trans 'Все документы' %}
+      </a>
     </div>
+
+    <div class="mt-8">
+      {% trans 'В этом документе пока нет файлов' as empty_text %}
+      {% include 'base/file-list.html' with files=document.files.all empty_text=empty_text %}
+    </div>
+  </div>
 </section>
 {% endblock %}

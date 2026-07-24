@@ -4,53 +4,104 @@
 {% block title %}{% trans 'Абитуриентам' %}{% endblock %}
 
 {% block content %}
-<section class="section">
-    <div class="container">
-        <header class="page-hero reveal">
-            <div class="page-hero__eye">{% trans 'Абитуриентам' %}</div>
-            <h1 class="page-hero__h">{{ page.heading|safe }}</h1>
-            <p class="page-hero__lead">{{ page.lead }}</p>
-        </header>
 
-        <div class="page-layout page-layout--with-aside">
-            <div class="page-layout__main">
-                <div class="prose reveal">
-                    {{ page.body|safe }}
-                </div>
-            </div>
+{% trans 'Абитуриентам' as hero_eyebrow %}
+{% include 'base/page-hero.html' with eyebrow=hero_eyebrow title_html=page.heading lead=page.lead %}
 
-            <aside class="page-layout__aside">
-                <div class="info-card reveal">
-                    <h3 class="info-card__title">{{ page.contacts_title }}</h3>
-                    <ul class="info-card__list">
-                        {% if page.contact_phone %}
-                        <li>
-                            <span>{% trans 'Телефон' %}</span>
-                            <a href="tel:{{ page.contact_phone|cut:' '|cut:'('|cut:')'|cut:'-' }}">{{ page.contact_phone }}</a>
-                        </li>
-                        {% endif %}
-                        {% if page.contact_whatsapp %}
-                        <li>
-                            <span>WhatsApp</span>
-                            <a href="https://api.whatsapp.com/send/?phone={{ page.contact_whatsapp|cut:' '|cut:'('|cut:')'|cut:'-'|cut:'+' }}&text=Здравствуйте%21%0A%0AПишу+из+вашего+сайта+www.kiuc.kg.%0A%0A&type=phone_number&app_absent=0" target="_blank" rel="noopener">{{ page.contact_whatsapp }}</a>
-                        </li>
-                        {% endif %}
-                        {% if page.contact_website_url %}
-                        <li>
-                            <span>{% trans 'Сайт' %}</span>
-                            <a href="{{ page.contact_website_url }}" target="_blank" rel="noopener">{{ page.contact_website_label }}</a>
-                        </li>
-                        {% endif %}
-                        {% if page.contact_email %}
-                        <li>
-                            <span>Email</span>
-                            <a href="mailto:{{ page.contact_email }}">{{ page.contact_email }}</a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </aside>
-        </div>
+<section class="bg-cream-100 py-16 lg:py-20">
+  <div class="container-page grid gap-12 lg:grid-cols-12">
+
+    <div class="lg:col-span-8">
+      <div class="prose prose-lg max-w-none">
+        {{ page.body|safe }}
+      </div>
     </div>
+
+    <aside class="lg:col-span-4">
+      <div class="reveal lg:sticky lg:top-28">
+        <div class="info-card">
+          <h3 class="info-card-title">{{ page.contacts_title }}</h3>
+
+          <dl class="mt-5">
+            {% if page.contact_phone %}
+              <div class="info-row">
+                <dt class="info-row-label">{% trans 'Телефон' %}</dt>
+                <dd class="info-row-value">
+                  <a href="tel:{{ page.contact_phone|cut:' '|cut:'('|cut:')'|cut:'-' }}" class="font-mono text-sage-700 transition hover:text-sage-500">{{ page.contact_phone }}</a>
+                </dd>
+              </div>
+            {% endif %}
+            {% if page.contact_whatsapp %}
+              <div class="info-row">
+                <dt class="info-row-label">WhatsApp</dt>
+                <dd class="info-row-value">
+                  <a href="https://api.whatsapp.com/send/?phone={{ page.contact_whatsapp|cut:' '|cut:'('|cut:')'|cut:'-'|cut:'+' }}&text=Здравствуйте%21%0A%0AПишу+из+вашего+сайта+www.kiuc.kg.%0A%0A&type=phone_number&app_absent=0"
+                     target="_blank" rel="noopener" class="font-mono text-sage-700 transition hover:text-sage-500">{{ page.contact_whatsapp }}</a>
+                </dd>
+              </div>
+            {% endif %}
+            {% if page.contact_website_url %}
+              <div class="info-row">
+                <dt class="info-row-label">{% trans 'Сайт' %}</dt>
+                <dd class="info-row-value">
+                  <a href="{{ page.contact_website_url }}" target="_blank" rel="noopener" class="text-sage-700 transition hover:text-sage-500">{{ page.contact_website_label }}</a>
+                </dd>
+              </div>
+            {% endif %}
+            {% if page.contact_email %}
+              <div class="info-row">
+                <dt class="info-row-label">Email</dt>
+                <dd class="info-row-value">
+                  <a href="mailto:{{ page.contact_email }}" class="text-sage-700 transition hover:text-sage-500">{{ page.contact_email }}</a>
+                </dd>
+              </div>
+            {% endif %}
+          </dl>
+
+          <a href="{% url 'contacts' %}" class="mt-7 inline-flex btn-pill-dark">
+            {% trans 'Написать нам' %}
+            <span class="btn-pill-icon"><svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
 </section>
+
+{% if specialties %}
+<section class="bg-cream-200 py-16 lg:py-20">
+  <div class="container-page">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div>
+        <span class="section-eyebrow">{% trans 'Направления' %}</span>
+        <h2 class="display mt-4 text-3xl sm:text-4xl">
+          {% trans 'Куда можно' %} <em class="italic-soft text-sage-700">{% trans 'поступить' %}</em>
+        </h2>
+      </div>
+      <a href="{% url 'specialties_list' %}" class="btn-pill-dark">
+        {% trans 'Все программы' %}
+        <span class="btn-pill-icon"><svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+      </a>
+    </div>
+
+    <div class="reveal mt-10 scroll-row">
+      {% for specialty in specialties %}
+        <a href="{{ specialty.get_absolute_url }}" class="photo-card group w-80 sm:w-96">
+          {% if specialty.image %}<img loading="lazy" src="{{ specialty.image.url }}" alt="" class="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-105">{% endif %}
+          <div class="absolute right-4 top-4 rounded-full bg-tan-300 px-4 py-1.5 text-xs font-bold text-ink">
+            {{ specialty.contract }} {% trans 'сом' %}
+          </div>
+          <div class="photo-card-overlay">
+            <p class="text-xs font-medium uppercase tracking-wider text-white/70">{{ specialty.form_verbose }}</p>
+            <p class="mt-2 font-display text-base font-semibold leading-snug text-white">
+              {{ specialty.title|truncatechars:80 }}
+            </p>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
 {% endblock %}

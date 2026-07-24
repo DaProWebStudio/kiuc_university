@@ -1,0 +1,83 @@
+{% comment %}
+Тело страницы-резюме: сайдбар с фото и контактами + основной текст.
+Используется профилями преподавателей и членов студсовета.
+
+Параметры:
+    person — наследник AbstractResume
+    skills — необязательный HTML-блок навыков (у преподавателей — work_skills)
+{% endcomment %}
+{% load static i18n %}
+
+<section class="bg-cream-100 py-16 lg:py-20">
+  <div class="container-page grid gap-12 lg:grid-cols-12">
+
+    <aside class="lg:col-span-4">
+      <div class="reveal lg:sticky lg:top-28">
+        <div class="overflow-hidden rounded-[28px] bg-sage-100 shadow-xl shadow-sage-950/5">
+          {% if person.image %}
+            <img src="{{ person.image.url }}" alt="{{ person.get_full_name }}" class="aspect-[4/5] w-full object-cover">
+          {% elif person.gender == 'men' %}
+            <img src="{% static 'images/more/avatar_men.webp' %}" alt="" class="aspect-[4/5] w-full object-cover">
+          {% else %}
+            <img src="{% static 'images/more/avatar_women.webp' %}" alt="" class="aspect-[4/5] w-full object-cover">
+          {% endif %}
+        </div>
+
+        <div class="info-card mt-6">
+          <h3 class="info-card-title">{% trans 'О себе' %}</h3>
+          <dl class="mt-4">
+            <div class="info-row">
+              <dt class="info-row-label">{% trans 'День рождения' %}</dt>
+              <dd class="info-row-value font-mono">{{ person.date_of_birth|date:"d.m.Y" }}</dd>
+            </div>
+            {% if person.email %}
+              <div class="info-row">
+                <dt class="info-row-label">Email</dt>
+                <dd class="info-row-value">
+                  <a href="mailto:{{ person.email }}" class="text-sage-700 transition hover:text-sage-500">{{ person.email }}</a>
+                </dd>
+              </div>
+            {% endif %}
+          </dl>
+
+          {% if person.instagram or person.facebook %}
+            <div class="mt-6 flex items-center gap-3">
+              {% if person.instagram %}
+                <a href="{{ person.instagram }}" target="_blank" rel="noopener" aria-label="Instagram"
+                   class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-cream-300 text-ink/70 transition hover:border-sage-700 hover:bg-sage-700 hover:text-cream-100">
+                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                </a>
+              {% endif %}
+              {% if person.facebook %}
+                <a href="{{ person.facebook }}" target="_blank" rel="noopener" aria-label="Facebook"
+                   class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-cream-300 text-ink/70 transition hover:border-sage-700 hover:bg-sage-700 hover:text-cream-100">
+                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M13 22v-8h3l1-4h-4V7.5c0-1.2.5-2 2-2h2V2h-3c-3 0-5 1.8-5 5v3H6v4h3v8z"/></svg>
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </aside>
+
+    <div class="lg:col-span-8">
+      <span class="section-eyebrow">{% trans 'Резюме' %}</span>
+      <div class="prose prose-lg mt-6 max-w-none">
+        {% autoescape off %}{{ person.description }}{% endautoescape %}
+      </div>
+
+      {% if skills %}
+        <div class="mt-14">
+          <span class="section-eyebrow">{% trans 'Навыки' %}</span>
+          <h2 class="display mt-4 text-2xl sm:text-3xl">
+            {% trans 'Профессиональные' %} <em class="italic-soft text-sage-700">{% trans 'компетенции' %}</em>
+          </h2>
+          <div class="prose mt-6 max-w-none rounded-3xl border border-cream-300/70 bg-cream-50 p-7">
+            {% autoescape off %}{{ skills|linebreaks }}{% endautoescape %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+  </div>
+</section>

@@ -4,34 +4,71 @@
 {% block title %}{% trans 'Наши специальности' %}{% endblock %}
 
 {% block content %}
-<section class="section">
-    <div class="container">
-        <header class="page-hero reveal">
-            <div class="page-hero__eye">{% trans 'Что мы вам предлагаем' %}</div>
-            <h1 class="page-hero__h">{% trans 'Наши' %} <span class="ital">специальности</span></h1>
-            <p class="page-hero__lead">{% trans 'Программы бакалавриата с практикой у носителей языка, стажировками и сильной академической базой.' %}</p>
-        </header>
 
-        <div class="page-layout">
-            <div class="spec-grid reveal">
-                {% for specialty in specialties %}
-                    <article class="card">
-                        <a href="{{ specialty.get_absolute_url }}" class="card-link">
-                            <div class="card-img">
-                                {% generateimage 'main:thumbnail' source=specialty.image -- class="mypicture" %}
-                            </div>
-                            <div class="card-body">
-                                <h2 class="card-title">{{ specialty.title|truncatechars:63 }}</h2>
-                            </div>
-                            <div class="card-inner">
-                                <span class="card-inner_btn_left">{{ specialty.form_verbose }}</span>
-                                <span class="card-inner_btn_right">{{ specialty.contract }} {% trans 'сом' %}</span>
-                            </div>
-                        </a>
-                    </article>
-                {% endfor %}
-            </div>
+{% trans 'Что мы вам предлагаем' as hero_eyebrow %}
+{% trans 'Наши' as hero_title %}
+{% trans 'специальности' as hero_title_em %}
+{% trans 'Программы бакалавриата с практикой у носителей языка, стажировками и сильной академической базой.' as hero_lead %}
+{% include 'base/page-hero.html' with eyebrow=hero_eyebrow title=hero_title title_em=hero_title_em lead=hero_lead %}
+
+<section class="bg-cream-100 py-16 lg:py-20">
+  <div class="container-page">
+
+    {% if specialties %}
+      <div class="reveal grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {% for specialty in specialties %}
+          <article class="group flex flex-col overflow-hidden rounded-3xl border border-cream-300/60 bg-cream-50 transition hover:border-sage-200 hover:shadow-xl hover:shadow-sage-950/5">
+            <a href="{{ specialty.get_absolute_url }}" class="flex h-full flex-col">
+              <div class="relative aspect-[16/10] overflow-hidden bg-sage-100">
+                {% generateimage 'main:thumbnail' source=specialty.image -- class="h-full w-full object-cover transition duration-700 group-hover:scale-105" %}
+                <span class="absolute right-4 top-4 rounded-full bg-tan-300 px-4 py-1.5 text-xs font-bold text-ink shadow-sm">
+                  {{ specialty.contract }} {% trans 'сом' %}
+                </span>
+              </div>
+              <div class="flex flex-1 flex-col p-6">
+                <span class="inline-flex w-fit items-center rounded-full bg-sage-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-sage-700">
+                  {{ specialty.form_verbose }}
+                </span>
+                <h2 class="mt-4 font-display text-lg font-semibold leading-snug text-ink">
+                  {{ specialty.title|truncatechars:63 }}
+                </h2>
+                <span class="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-medium text-sage-700">
+                  {% trans 'Подробнее' %}
+                  <svg class="h-3.5 w-3.5 transition group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </span>
+              </div>
+            </a>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="flex flex-col items-center justify-center rounded-3xl border-2 border-dashed border-sage-200 bg-cream-50 px-6 py-16 text-center">
+        <svg class="h-10 w-10 text-sage-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        <p class="mt-4 font-display text-lg font-semibold text-ink/75">{% trans 'Программы скоро появятся' %}</p>
+        <p class="mt-1 max-w-sm text-sm text-ink/55">{% trans 'Добавьте специальности через админ-панель — они появятся здесь с фото и ценой.' %}</p>
+      </div>
+    {% endif %}
+
+    <div class="mt-16 overflow-hidden rounded-[32px] bg-sage-900 px-8 py-14 text-cream-200 md:px-14">
+      <div class="grid items-center gap-8 md:grid-cols-12">
+        <div class="md:col-span-7">
+          <span class="section-eyebrow-light">{% trans 'Абитуриентам' %}</span>
+          <h2 class="display mt-4 text-3xl sm:text-4xl">
+            {% trans 'Готовы' %} <em class="italic-soft text-tan-300">{% trans 'поступить' %}</em>?
+          </h2>
+          <p class="mt-4 max-w-md text-sm leading-relaxed text-cream-200/75">
+            {% trans 'Условия приёма, список документов и контакты приёмной комиссии — на одной странице.' %}
+          </p>
         </div>
+        <div class="md:col-span-5 md:text-right">
+          <a href="{% url 'reception' %}" class="btn-pill-accent">
+            {% trans 'Приёмная комиссия' %}
+            <span class="btn-pill-icon"><svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+          </a>
+        </div>
+      </div>
     </div>
+
+  </div>
 </section>
 {% endblock %}

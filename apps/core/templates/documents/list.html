@@ -4,23 +4,35 @@
 {% block title %}{% trans 'Нормативные документы' %}{% endblock %}
 
 {% block content %}
-<section class="section">
-    <div class="container">
-        <header class="page-hero reveal">
-            <div class="page-hero__eye">{% trans 'Об институте' %}</div>
-            <h1 class="page-hero__h">{% trans 'Нормативные' %} <span class="ital">документы</span></h1>
-            <p class="page-hero__lead">{% trans 'Уставы, положения и публичные документы института.' %}</p>
-        </header>
 
-        <div class="page-layout">
-            <ul class="file-list reveal">
-                {% for document in documents %}
-                    <li>
-                        <a href="{% url 'documents_detail' document.pk %}">{{ document }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
+{% trans 'Об институте' as hero_eyebrow %}
+{% trans 'Нормативные' as hero_title %}
+{% trans 'документы' as hero_title_em %}
+{% trans 'Уставы, положения и публичные документы института.' as hero_lead %}
+{% include 'base/page-hero.html' with eyebrow=hero_eyebrow title=hero_title title_em=hero_title_em lead=hero_lead %}
+
+<section class="bg-cream-100 py-16 lg:py-20">
+  <div class="container-page">
+    {% if documents %}
+      <ul class="reveal grid gap-3 lg:grid-cols-2">
+        {% for document in documents %}
+          <li>
+            <a href="{% url 'documents_detail' document.pk %}" class="file-row group">
+              <span class="file-row-icon">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-8l-2-3H4a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1z"/></svg>
+              </span>
+              <span class="min-w-0 flex-1 text-sm font-medium text-ink">{{ document }}</span>
+              <svg class="h-4 w-4 shrink-0 text-ink/35 transition group-hover:translate-x-1 group-hover:text-sage-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="flex flex-col items-center justify-center rounded-3xl border-2 border-dashed border-sage-200 bg-cream-50 px-6 py-16 text-center">
+        <svg class="h-10 w-10 text-sage-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 20h16a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-8l-2-3H4a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1z"/></svg>
+        <p class="mt-4 font-display text-lg font-semibold text-ink/75">{% trans 'Документов пока нет' %}</p>
+      </div>
+    {% endif %}
+  </div>
 </section>
 {% endblock %}

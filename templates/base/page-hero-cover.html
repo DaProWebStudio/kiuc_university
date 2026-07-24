@@ -1,0 +1,41 @@
+{% comment %}
+Тёмная шапка детальной страницы с фотографией-обложкой на фоне.
+
+Параметры:
+    eyebrow     — надпись над заголовком
+    title       — заголовок
+    image_url   — URL обложки; без него фон остаётся просто тёмным
+    meta_label  — подпись мета-строки (например «Опубликовано»)
+    meta_value  — значение мета-строки
+    back_url    — ссылка «назад к списку»
+    back_label  — подпись этой ссылки
+{% endcomment %}
+<section class="relative isolate overflow-hidden bg-sage-950 text-cream-200">
+  <div aria-hidden="true" class="absolute inset-0 -z-10">
+    {% if image_url %}
+      <img src="{{ image_url }}" alt="" class="h-full w-full object-cover opacity-40">
+    {% endif %}
+    <div class="absolute inset-0 bg-gradient-to-t from-sage-950 via-sage-950/90 to-sage-950/75"></div>
+    <div class="absolute -top-40 left-1/4 h-[28rem] w-[28rem] rounded-full bg-sage-700/25 blur-3xl"></div>
+  </div>
+
+  <div class="container-page pt-32 pb-16 lg:pt-40 lg:pb-20">
+    {% if back_url %}
+      <a href="{{ back_url }}" class="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-cream-200/60 transition hover:text-cream-200">
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        {{ back_label }}
+      </a>
+    {% endif %}
+
+    {% if eyebrow %}<div class="{% if back_url %}mt-7 {% endif %}"><span class="section-eyebrow-light">{{ eyebrow }}</span></div>{% endif %}
+
+    <h1 class="display mt-5 max-w-4xl text-3xl leading-[1.05] sm:text-4xl lg:text-5xl">{{ title }}</h1>
+
+    {% if meta_value %}
+      <div class="mt-8 inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/5 px-5 py-2 text-xs backdrop-blur">
+        {% if meta_label %}<span class="uppercase tracking-[0.18em] text-cream-200/55">{{ meta_label }}</span>{% endif %}
+        <span class="font-mono text-cream-200">{{ meta_value }}</span>
+      </div>
+    {% endif %}
+  </div>
+</section>

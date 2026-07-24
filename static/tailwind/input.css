@@ -1,0 +1,471 @@
+/* tailwindcss установлен в static/build/node_modules — резолвим относительно. */
+@import "../build/node_modules/tailwindcss";
+@plugin "../build/node_modules/@tailwindcss/typography";
+
+/* Сканируем Django-шаблоны. */
+@source "../../templates/**/*.html";
+@source "../../apps/**/templates/**/*.html";
+
+@theme {
+  --font-sans:    "Bricolage Grotesque", "Inter", system-ui, -apple-system, "Segoe UI", "Roboto", sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, monospace;
+
+  /* Брендовая палитра — королевский синий КИЯК (из логотипа, #24489c).
+     Токен исторически называется `sage`; значения теперь синие, чтобы
+     перекрасить весь сайт под фирменный цвет без переименования утилит. */
+  --color-sage-50:  #eef3fc;
+  --color-sage-100: #dbe5f8;
+  --color-sage-200: #bccdf0;
+  --color-sage-300: #93ace3;
+  --color-sage-400: #6184d4;
+  --color-sage-500: #3d60bd;
+  --color-sage-600: #24489c;
+  --color-sage-700: #1f3c82;
+  --color-sage-800: #1b3168;
+  --color-sage-900: #172a52;
+  --color-sage-950: #101b37;
+
+  /* Cream — тёплый светлый фон / текст. */
+  --color-cream-50:  #fdfaf2;
+  --color-cream-100: #f9f4e6;
+  --color-cream-200: #f6f1e6;
+  --color-cream-300: #efe7d2;
+  --color-cream-400: #e6d9b8;
+
+  /* Tan — золотистый акцент (пара к королевскому синему). */
+  --color-tan-200: #f5e2ac;
+  --color-tan-300: #e7c479;
+  --color-tan-400: #d4a64f;
+  --color-tan-500: #bd8a35;
+  --color-tan-600: #a0712f;
+
+  /* Ink — чёрный с зелёным подтоном. */
+  --color-ink: #181a17;
+
+  /* Display-кегли. */
+  --text-display-sm: clamp(2.5rem, 5vw, 4rem);
+  --text-display-md: clamp(3rem, 7vw, 6rem);
+  --text-display-lg: clamp(3.5rem, 9vw, 8rem);
+  --text-display-xl: clamp(4rem, 14vw, 9rem);
+
+  /* Анимации. */
+  --animate-marquee: marquee 38s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    background: var(--color-cream-100);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "ss01";
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+  .display {
+    font-family: var(--font-display);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 0.92;
+  }
+  .display em, .italic-soft {
+    font-style: italic;
+    font-feature-settings: "ss01";
+    font-variation-settings: "opsz" 144, "SOFT" 80, "WONK" 1;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12;
+  }
+
+  /* ===== Pill-кнопки ===== */
+  .btn-pill {
+    @apply inline-flex items-center gap-2 rounded-full bg-cream-200 py-2 pl-6 pr-2 text-sm font-medium text-ink shadow-sm transition hover:bg-white;
+  }
+  .btn-pill-icon {
+    @apply flex h-9 w-9 items-center justify-center rounded-full bg-ink text-cream-200 transition;
+  }
+  .btn-pill:hover .btn-pill-icon { @apply bg-sage-700; }
+
+  .btn-pill-dark {
+    @apply inline-flex items-center gap-2 rounded-full bg-ink py-2 pl-6 pr-2 text-sm font-medium text-cream-200 shadow-sm transition hover:bg-sage-800;
+  }
+  .btn-pill-dark .btn-pill-icon { @apply bg-cream-200 text-ink; }
+  .btn-pill-dark:hover .btn-pill-icon { @apply bg-tan-300; }
+
+  .btn-pill-accent {
+    @apply inline-flex items-center gap-2 rounded-full bg-tan-300 py-2 pl-6 pr-2 text-sm font-semibold text-ink shadow-sm transition hover:bg-tan-400;
+  }
+  .btn-pill-accent .btn-pill-icon { @apply bg-ink text-cream-200; }
+
+  .btn-outline-light {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/30 py-2 pl-6 pr-2 text-sm font-medium text-white transition hover:border-white hover:bg-white/10;
+  }
+  .btn-outline-light .btn-pill-icon { @apply bg-white/10 text-white; }
+  .btn-outline-light:hover .btn-pill-icon { @apply bg-white text-sage-800; }
+
+  /* ===== Eyebrow ===== */
+  .section-eyebrow {
+    @apply inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-sage-700;
+  }
+  .section-eyebrow::before {
+    content: "";
+    @apply h-px w-8 bg-sage-700;
+  }
+  .section-eyebrow-light {
+    @apply inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-cream-200/70;
+  }
+  .section-eyebrow-light::before {
+    content: "";
+    @apply h-px w-8 bg-tan-300;
+  }
+
+  /* ===== Lента горизонтальной прокрутки ===== */
+  .scroll-row {
+    @apply flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4 [scrollbar-width:thin];
+  }
+  .scroll-row > * { @apply snap-start shrink-0; }
+
+  /* ===== Фото-карточка с тёмным overlay ===== */
+  .photo-card {
+    @apply relative block overflow-hidden rounded-3xl bg-sage-100;
+  }
+  .photo-card-overlay {
+    @apply absolute inset-x-0 bottom-0 bg-gradient-to-t from-sage-950/90 via-sage-950/35 to-transparent p-5 text-white;
+  }
+
+  /* ===== Marquee ===== */
+  .marquee {
+    @apply overflow-hidden;
+  }
+  .marquee-track {
+    @apply flex w-max items-center gap-12;
+    animation: var(--animate-marquee);
+  }
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  /* ===== Nav shell: прозрачная над hero, плотная на скролле ===== */
+  .nav-shell {
+    @apply fixed inset-x-0 top-0 z-40 transition-all duration-300;
+  }
+  .nav-shell[data-state="top"] {
+    @apply bg-transparent;
+  }
+  .nav-shell[data-state="scrolled"] {
+    @apply border-b border-cream-300/60 bg-cream-100/95 backdrop-blur shadow-sm;
+  }
+  .nav-link {
+    @apply whitespace-nowrap rounded-full px-3 py-2 text-sm font-medium transition xl:px-4;
+  }
+  .nav-shell[data-state="top"] .nav-link {
+    @apply text-white/85 hover:bg-white/10 hover:text-white;
+  }
+  .nav-shell[data-state="top"] .nav-link-active {
+    @apply bg-cream-200 text-ink hover:bg-cream-200 hover:text-ink;
+  }
+  .nav-shell[data-state="scrolled"] .nav-link {
+    @apply text-ink/75 hover:bg-sage-50 hover:text-sage-800;
+  }
+  .nav-shell[data-state="scrolled"] .nav-link-active {
+    @apply bg-sage-700 text-cream-200 hover:bg-sage-800 hover:text-cream-200;
+  }
+  .nav-pill {
+    @apply flex items-center gap-1 rounded-full border px-2 py-2 backdrop-blur transition;
+  }
+  .nav-shell[data-state="top"] .nav-pill {
+    @apply border-white/15 bg-white/5;
+  }
+  .nav-shell[data-state="scrolled"] .nav-pill {
+    @apply border-cream-300/60 bg-cream-50;
+  }
+
+  .nav-dropdown {
+    @apply invisible absolute left-1/2 top-full z-50 mt-3 w-64 -translate-x-1/2 rounded-2xl border border-cream-300/70 bg-cream-50 p-2 opacity-0 shadow-2xl transition;
+  }
+  /* Прозрачный «мост» через отступ mt-3: без него курсор по дороге от кнопки
+     к списку пересекает пустоту, теряет :hover — и меню захлопывается. */
+  .nav-dropdown::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -0.85rem;
+    height: 0.85rem;
+  }
+  /* focus-within — чтобы меню раскрывалось и с клавиатуры, не только мышью. */
+  .group:hover > .nav-dropdown,
+  .group:focus-within > .nav-dropdown { @apply visible opacity-100; }
+  .nav-dropdown-link {
+    @apply block rounded-xl px-4 py-2.5 text-sm text-ink/80 hover:bg-sage-50 hover:text-sage-800;
+  }
+
+  .nav-brand {
+    @apply flex items-center gap-2 transition;
+  }
+  .nav-shell[data-state="top"] .nav-brand { @apply text-white; }
+  .nav-shell[data-state="scrolled"] .nav-brand { @apply text-ink; }
+
+  .nav-lang {
+    @apply inline-flex items-center gap-0.5 rounded-full p-1 transition;
+  }
+  .nav-lang-btn {
+    @apply cursor-pointer rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider transition;
+  }
+  .nav-lang-btn-active { @apply pointer-events-none shadow-sm; }
+  .nav-shell[data-state="top"] .nav-lang { @apply bg-white/10 backdrop-blur; }
+  .nav-shell[data-state="top"] .nav-lang-btn { @apply text-white/60 hover:text-white; }
+  .nav-shell[data-state="top"] .nav-lang-btn-active { @apply bg-cream-200 text-ink; }
+  .nav-shell[data-state="scrolled"] .nav-lang { @apply bg-sage-50; }
+  .nav-shell[data-state="scrolled"] .nav-lang-btn { @apply text-ink/55 hover:text-ink; }
+  .nav-shell[data-state="scrolled"] .nav-lang-btn-active { @apply bg-cream-200 text-ink; }
+
+  /* ===== Мобильное меню (выпадает под шапкой на < lg) ===== */
+  .mobile-link {
+    @apply block rounded-xl px-4 py-3 text-[15px] text-ink/80 transition hover:bg-sage-50 hover:text-sage-800;
+  }
+  .mobile-summary {
+    @apply flex cursor-pointer list-none items-center justify-between rounded-xl px-4 py-3 text-[15px] text-ink/80 transition hover:bg-sage-50 hover:text-sage-800;
+  }
+  /* прячем нативный маркер <summary> в обоих движках */
+  .mobile-summary::-webkit-details-marker { display: none; }
+  .mobile-summary::marker { content: ""; }
+  .mobile-chevron {
+    @apply h-3 w-3 shrink-0 opacity-60 transition-transform duration-200;
+  }
+  .mobile-group[open] > .mobile-summary .mobile-chevron { @apply rotate-180; }
+  .mobile-sublink {
+    @apply block rounded-lg px-3 py-2 text-sm text-ink/65 transition hover:text-sage-800;
+  }
+
+  /* ===== Карточка-ссылка на файл (документы, учебный процесс, договоры) ===== */
+  .file-row {
+    @apply flex items-center gap-4 rounded-2xl border border-cream-300/70 bg-cream-50 px-5 py-4 transition hover:border-sage-300 hover:bg-white hover:shadow-sm;
+  }
+  .file-row-icon {
+    @apply flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-sage-50 text-sage-700 transition;
+  }
+  .file-row:hover .file-row-icon { @apply bg-sage-700 text-cream-100; }
+
+  /* ===== Сайдбар-карточка со списком «поле → значение» ===== */
+  .info-card {
+    @apply rounded-3xl border border-cream-300/70 bg-cream-50 p-7;
+  }
+  .info-card-title {
+    @apply font-display text-lg font-semibold text-ink;
+  }
+  .info-row {
+    @apply flex flex-col gap-1 border-b border-cream-300/70 py-3.5 last:border-0;
+  }
+  .info-row-label {
+    @apply text-[11px] font-semibold uppercase tracking-[0.18em] text-sage-700/70;
+  }
+  .info-row-value {
+    @apply text-sm text-ink;
+  }
+
+  /* ===== Поля формы обратной связи ===== */
+  /* Классы .input / .message приходят из apps/feedback/forms.py — задаём их здесь,
+     чтобы не переписывать виджеты в Python. */
+  .input,
+  .message {
+    @apply w-full rounded-2xl border border-cream-300 bg-cream-50 px-5 py-3.5 text-sm text-ink transition placeholder:text-ink/40 focus:border-sage-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-sage-500/10;
+  }
+  .message { @apply min-h-[160px] resize-y; }
+
+  /* ===== Bento-плитка ===== */
+  .bento-tile {
+    @apply relative flex flex-col overflow-hidden rounded-3xl p-7 transition;
+  }
+  .bento-tile-light {
+    @apply bg-cream-50 text-ink hover:bg-cream-200;
+  }
+  .bento-tile-dark {
+    @apply bg-sage-900 text-cream-200 hover:bg-sage-950;
+  }
+  .bento-tile-brand {
+    @apply bg-sage-700 text-cream-200 hover:bg-sage-800;
+  }
+  .bento-tile-accent {
+    @apply bg-tan-300 text-ink hover:bg-tan-400;
+  }
+}
+
+/* ===== Outline-текст для гигантских заголовков. ===== */
+.text-outline {
+  -webkit-text-stroke: 2px currentColor;
+  color: transparent;
+}
+
+/* ===== Scroll-progress bar (управляется v8.js через style.transform) ===== */
+.scroll-prog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  height: 2px;
+  width: 100%;
+  background-color: var(--color-sage-400);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+/* ===== Scroll-to-top (v8.js переключает upShow__hide) ===== */
+.upShow__hide { display: none !important; }
+
+/* ===== Скрыть скроллбар, но оставить прокрутку ===== */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ===== Декоративная точечная сетка ===== */
+.dot-grid {
+  background-image: radial-gradient(rgba(0,0,0,.06) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+
+/* ===== Reveal-on-scroll (v8.js вешает .in при пересечении вьюпорта) ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1);
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ===== Блокировка прокрутки под лайтбоксом (v8.js вешает ._lock на body) ===== */
+body._lock { overflow: hidden; }
+
+/* ===== Лайтбокс галереи =====
+   Разметку целиком создаёт v8.js, поэтому Tailwind не увидит эти классы
+   при сканировании шаблонов — описываем обычным CSS. */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: color-mix(in srgb, var(--color-sage-950) 92%, transparent);
+  backdrop-filter: blur(6px);
+}
+.lightbox._open { display: flex; }
+.lightbox__stage {
+  position: relative;
+  display: flex;
+  max-height: 100%;
+  max-width: min(1100px, 100%);
+  flex-direction: column;
+  align-items: center;
+  gap: .75rem;
+  margin: 0;
+}
+.lightbox__stage img {
+  max-height: 82vh;
+  max-width: 100%;
+  border-radius: 1.25rem;
+  object-fit: contain;
+  box-shadow: 0 30px 80px rgb(0 0 0 / .45);
+}
+.lightbox__count {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .08em;
+  color: color-mix(in srgb, var(--color-cream-200) 70%, transparent);
+}
+.lightbox__close,
+.lightbox__nav {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid rgb(255 255 255 / .2);
+  background: rgb(255 255 255 / .08);
+  color: var(--color-cream-200);
+  cursor: pointer;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.lightbox__close:hover,
+.lightbox__nav:hover {
+  background: var(--color-cream-200);
+  border-color: var(--color-cream-200);
+  color: var(--color-ink);
+}
+.lightbox__close {
+  top: 1.25rem;
+  right: 1.25rem;
+  height: 2.75rem;
+  width: 2.75rem;
+  font-size: 26px;
+  line-height: 1;
+}
+.lightbox__nav {
+  top: 50%;
+  height: 3rem;
+  width: 3rem;
+  transform: translateY(-50%);
+  font-size: 30px;
+  line-height: 1;
+}
+.lightbox__nav--prev { left: 1.25rem; }
+.lightbox__nav--next { right: 1.25rem; }
+
+/* ===== Типографика CKEditor-контента =====
+   Переменные плагина @tailwindcss/typography перекрашены под палитру института. */
+.prose {
+  --tw-prose-body: color-mix(in srgb, var(--color-ink) 78%, transparent);
+  --tw-prose-headings: var(--color-ink);
+  --tw-prose-lead: color-mix(in srgb, var(--color-ink) 65%, transparent);
+  --tw-prose-links: var(--color-sage-700);
+  --tw-prose-bold: var(--color-ink);
+  --tw-prose-counters: var(--color-sage-600);
+  --tw-prose-bullets: var(--color-sage-300);
+  --tw-prose-hr: var(--color-cream-300);
+  --tw-prose-quotes: var(--color-ink);
+  --tw-prose-quote-borders: var(--color-tan-300);
+  --tw-prose-captions: color-mix(in srgb, var(--color-ink) 55%, transparent);
+  --tw-prose-th-borders: var(--color-cream-300);
+  --tw-prose-td-borders: var(--color-cream-300);
+}
+.prose :where(h1, h2, h3, h4, h5) {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+.prose :where(blockquote) {
+  font-family: var(--font-display);
+  font-style: italic;
+  border-radius: 0 1rem 1rem 0;
+  background: var(--color-cream-200);
+  padding: 1rem 1.5rem;
+}
+.prose :where(img) { border-radius: 1.25rem; }
+.prose :where(a):hover { color: var(--color-sage-500); }
+/* Тёмный вариант — для prose на секциях sage-900. */
+.prose-invert {
+  --tw-prose-body: color-mix(in srgb, var(--color-cream-200) 80%, transparent);
+  --tw-prose-headings: var(--color-cream-200);
+  --tw-prose-links: var(--color-tan-300);
+  --tw-prose-bold: var(--color-cream-200);
+  --tw-prose-bullets: var(--color-sage-400);
+  --tw-prose-quotes: var(--color-cream-200);
+  --tw-prose-quote-borders: var(--color-tan-300);
+}

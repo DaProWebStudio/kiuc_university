@@ -1327,3 +1327,7 @@ msgstr "Contact"
 
 #~ msgid "Подробнее"
 #~ msgstr "Read more"
+
+#: templates/base/base.html
+msgid "Приёмная комиссия"
+msgstr "Admission committee"

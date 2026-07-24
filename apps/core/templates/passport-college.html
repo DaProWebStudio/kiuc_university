@@ -4,32 +4,41 @@
 {% block title %}{% trans 'Паспорт колледжа' %}{% endblock %}
 
 {% block links %}
-    <link rel="stylesheet" href="{% static 'libs/flipbook/flipbook.style.css' %}">
+  <link rel="stylesheet" href="{% static 'libs/flipbook/flipbook.style.css' %}">
 {% endblock %}
 
 {% block content %}
-<section class="section">
-    <div class="container">
-        <header class="page-hero reveal">
-            <div class="page-hero__eye">{% trans 'Об институте' %}</div>
-            <h1 class="page-hero__h">{% trans 'Паспорт' %} <span class="ital">института</span></h1>
-            <p class="page-hero__lead">{% trans 'Официальный документ с полной информацией об институте — учредители, структура, материально-техническая база.' %}</p>
-        </header>
 
-        <div class="page-layout">
-            <div class="flipbook-wrap reveal">
-                <div id="flip_book" style="height: 600px; position: relative;">
-                    <input type="hidden" id="url_pdf" value="{% static 'documents/password-college.pdf' %}">
-                </div>
-            </div>
-        </div>
+{% trans 'Об институте' as hero_eyebrow %}
+{% trans 'Паспорт' as hero_title %}
+{% trans 'института' as hero_title_em %}
+{% trans 'Официальный документ с полной информацией об институте — учредители, структура, материально-техническая база.' as hero_lead %}
+{% include 'base/page-hero.html' with eyebrow=hero_eyebrow title=hero_title title_em=hero_title_em lead=hero_lead %}
+
+<section class="bg-cream-100 py-16 lg:py-20">
+  <div class="container-page">
+    <div class="reveal overflow-hidden rounded-[28px] border border-cream-300/70 bg-cream-50 p-4 shadow-xl shadow-sage-950/5 sm:p-6">
+      <div id="flip_book" class="relative h-[600px]">
+        <input type="hidden" id="url_pdf" value="{% static 'documents/password-college.pdf' %}">
+      </div>
     </div>
+
+    <div class="mt-8 flex flex-wrap items-center justify-between gap-5">
+      <p class="max-w-md text-sm text-ink/60">
+        {% trans 'Листайте страницы стрелками или перетаскиванием. Документ также доступен для скачивания.' %}
+      </p>
+      <a href="{% static 'documents/password-college.pdf' %}" target="_blank" rel="noopener" class="btn-pill-dark">
+        {% trans 'Скачать PDF' %}
+        <span class="btn-pill-icon"><svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="17"/><polyline points="6 12 12 18 18 12"/></svg></span>
+      </a>
+    </div>
+  </div>
 </section>
 {% endblock %}
 
 {% block scripts %}
-    {# flipbook — единственная жива́я зависимость от jQuery, грузим точечно. #}
-    <script src="{% static 'libs/jquery/jquery.js' %}"></script>
-    <script src="{% static 'libs/flipbook/js/flipbook.min.js' %}"></script>
-    <script src="{% static 'libs/flipbook/js/book.js' %}"></script>
+  {# flipbook — единственная жива́я зависимость от jQuery, грузим точечно. #}
+  <script src="{% static 'libs/jquery/jquery.js' %}"></script>
+  <script src="{% static 'libs/flipbook/js/flipbook.min.js' %}"></script>
+  <script src="{% static 'libs/flipbook/js/book.js' %}"></script>
 {% endblock %}

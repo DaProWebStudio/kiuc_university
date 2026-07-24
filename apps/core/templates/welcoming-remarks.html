@@ -4,48 +4,60 @@
 {% block title %}{% trans 'Приветственное слово' %} — {% trans 'Ли Ён Гвон' %}{% endblock %}
 
 {% block content %}
-<section class="section">
-    <div class="container">
-        <header class="page-hero reveal">
-            <div class="page-hero__eye">{% trans 'Приветственное слово' %}</div>
-            <h1 class="page-hero__h">{% trans 'Ли Ён' %} <span class="ital">Гвон</span></h1>
-            <p class="page-hero__lead">{% trans 'Ректор КИЯК, профессор, доктор филологических наук. Президент Корейской ассоциации славянских языков.' %}</p>
-        </header>
 
-        <div class="page-layout page-layout--aside-left">
-            <aside class="page-layout__aside">
-                <div class="info-card reveal" style="padding: 0; overflow: hidden;">
-                    <img src="{% static 'images/university/Lee_Young_Kwon.webp' %}" alt="{% trans 'Ли Ён Гвон' %}" style="width: 100%; display: block;">
-                    <div style="padding: 22px 24px;">
-                        <div style="font-family: var(--f-display); font-weight: 500; font-size: 22px; color: var(--title); margin-bottom: 4px;">{% trans 'Ли Ён Гвон' %}</div>
-                        <p style="font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; color: var(--blue); margin: 0 0 12px; text-transform: uppercase;">{% trans 'Ректор КИЯК' %}</p>
-                        <p style="font-size: 14px; color: var(--text); margin: 0 0 6px;">{% trans 'Профессор, доктор филологических наук' %}</p>
-                        <p style="font-size: 14px; color: var(--text); margin: 0;">{% trans 'Президент Корейской ассоциации славянских языков' %}</p>
-                    </div>
-                </div>
-            </aside>
+{% trans 'Приветственное слово' as hero_eyebrow %}
+{% trans 'Ли Ён' as hero_title %}
+{% trans 'Гвон' as hero_title_em %}
+{% trans 'Ректор КИЯК, профессор, доктор филологических наук. Президент Корейской ассоциации славянских языков.' as hero_lead %}
+{% include 'base/page-hero.html' with eyebrow=hero_eyebrow title=hero_title title_em=hero_title_em lead=hero_lead %}
 
-            <div class="page-layout__main">
-                <div class="prose reveal">
-                    <p>{% trans 'Приветствую Вас на официальном сайте Кыргызского института языков и культуры!' %}</p>
-                    <p>{% trans 'Кыргызский институт языков и культуры — это один из самых престижных международных институтов нашей страны.' %}</p>
-                    <p>{% trans 'Мы сотрудничаем с ведущими университетами мира, в рамках ежегодного прохождения стажировок в США, КНР, Южной Корее, Турции и других странах.' %}</p>
-                    <p>{% trans 'Обучение ведётся по двум направлениям высшего образования (бакалавриат, 4 года):' %}</p>
-                    <ul>
-                        <li>{% trans 'Лингвистика' %}</li>
-                        <li>{% trans 'Туризм' %}</li>
-                    </ul>
-                    <p>{% trans 'Студенты нашего института могут обучаться на 5 языках: кыргызский, русский, английский, корейский, испанский.' %}</p>
-                    <p>{% trans 'Также в институте действует культурный класс «Сокулук Седжон», где наши студенты могут погрузиться в культуру Кореи: K-Pop танцы, вокал, таэквондо, барабан Нанта, корейские народные танцы.' %}</p>
-                    <p>{% trans 'Жизнь студентов насыщена яркими событиями — семинары, дебаты, творчество, экскурсии, знакомства с интересными людьми.' %}</p>
-                    <p>{% trans 'Разрабатывая сайт, мы стремились сделать его максимально удобным. На сайте представлена информация для абитуриентов и их родителей, студентов и всех, кто хочет быть в курсе жизни нашего заведения.' %}</p>
-                    <p>{% trans 'Добро пожаловать на наш обновлённый сайт KILC / КИЯК!' %}</p>
-                    <blockquote>
-                        {% trans 'С уважением, ректор КИЯК, профессор Ли Ён Гвон' %}
-                    </blockquote>
-                </div>
-            </div>
+<section class="bg-cream-100 py-16 lg:py-20">
+  <div class="container-page grid gap-12 lg:grid-cols-12">
+
+    <aside class="lg:col-span-4">
+      <div class="reveal lg:sticky lg:top-28">
+        <div class="overflow-hidden rounded-[28px] bg-cream-50 ring-1 ring-cream-300/70">
+          <img src="{% static 'images/university/Lee_Young_Kwon.webp' %}" alt="{% trans 'Ли Ён Гвон' %}" class="aspect-[4/5] w-full object-cover">
+          <div class="p-7">
+            <p class="font-display text-xl font-semibold text-ink">{% trans 'Ли Ён Гвон' %}</p>
+            <p class="mt-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-sage-700">{% trans 'Ректор КИЯК' %}</p>
+            <p class="mt-4 text-sm text-ink/65">{% trans 'Профессор, доктор филологических наук' %}</p>
+            <p class="mt-1 text-sm text-ink/65">{% trans 'Президент Корейской ассоциации славянских языков' %}</p>
+          </div>
         </div>
+      </div>
+    </aside>
+
+    <div class="lg:col-span-8">
+      <div class="prose prose-lg max-w-none">
+        <p>{% trans 'Приветствую Вас на официальном сайте Кыргызского института языков и культуры!' %}</p>
+        <p>{% trans 'Кыргызский институт языков и культуры — это один из самых престижных международных институтов нашей страны.' %}</p>
+        <p>{% trans 'Мы сотрудничаем с ведущими университетами мира, в рамках ежегодного прохождения стажировок в США, КНР, Южной Корее, Турции и других странах.' %}</p>
+        <p>{% trans 'Обучение ведётся по двум направлениям высшего образования (бакалавриат, 4 года):' %}</p>
+        <ul>
+          <li>{% trans 'Лингвистика' %}</li>
+          <li>{% trans 'Туризм' %}</li>
+        </ul>
+        <p>{% trans 'Студенты нашего института могут обучаться на 5 языках: кыргызский, русский, английский, корейский, испанский.' %}</p>
+        <p>{% trans 'Также в институте действует культурный класс «Сокулук Седжон», где наши студенты могут погрузиться в культуру Кореи: K-Pop танцы, вокал, таэквондо, барабан Нанта, корейские народные танцы.' %}</p>
+        <p>{% trans 'Жизнь студентов насыщена яркими событиями — семинары, дебаты, творчество, экскурсии, знакомства с интересными людьми.' %}</p>
+        <p>{% trans 'Разрабатывая сайт, мы стремились сделать его максимально удобным. На сайте представлена информация для абитуриентов и их родителей, студентов и всех, кто хочет быть в курсе жизни нашего заведения.' %}</p>
+        <p>{% trans 'Добро пожаловать на наш обновлённый сайт KILC / КИЯК!' %}</p>
+        <blockquote>{% trans 'С уважением, ректор КИЯК, профессор Ли Ён Гвон' %}</blockquote>
+      </div>
+
+      <div class="mt-12 flex flex-wrap gap-4">
+        <a href="{% url 'history' %}" class="btn-pill-dark">
+          {% trans 'История института' %}
+          <span class="btn-pill-icon"><svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+        </a>
+        <a href="{% url 'specialties_list' %}" class="btn-pill">
+          {% trans 'Программы' %}
+          <span class="btn-pill-icon"><svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </a>
+      </div>
     </div>
+
+  </div>
 </section>
 {% endblock %}

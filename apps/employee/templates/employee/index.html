@@ -4,67 +4,71 @@
 {% block title %}{% trans 'Структура института' %}{% endblock %}
 
 {% block content %}
-<section class="section">
-    <div class="container">
-        <header class="page-hero reveal">
-            <div class="page-hero__eye">{% trans 'Об институте' %}</div>
-            <h1 class="page-hero__h">{% trans 'Команда' %} <span class="ital">КИЯК</span></h1>
-            <p class="page-hero__lead">{% trans 'Преподаватели, администрация и эксперты — те, кто каждый день делает институт сильнее.' %}</p>
-        </header>
 
-        <div class="page-layout">
-            {% with head=employees|dictsort:"number" %}{% endwith %}
+{% trans 'Об институте' as hero_eyebrow %}
+{% trans 'Команда' as hero_title %}
+{% trans 'КИЯК' as hero_title_em %}
+{% trans 'Преподаватели, администрация и эксперты — те, кто каждый день делает институт сильнее.' as hero_lead %}
+{% include 'base/page-hero.html' with eyebrow=hero_eyebrow title=hero_title title_em=hero_title_em lead=hero_lead %}
 
-            {% for employee in employees %}
-                {% if employee.number == 0 %}
-                    <div class="list_employee list_employee--lead reveal">
-                        <a href="{{ employee.get_absolute_url }}" class="card">
-                            <div class="image-content">
-                                <span class="overlay"></span>
-                                <div class="card-image">
-                                    {% if employee.image %}
-                                        <img src="{{ employee.image.url }}" class="card-img" alt="{{ employee.get_full_name }}">
-                                    {% elif employee.gender == 'men' %}
-                                        <img src="{% static 'images/more/avatar_men.webp' %}" class="card-img" alt="Avatar men">
-                                    {% else %}
-                                        <img src="{% static 'images/more/avatar_women.webp' %}" class="card-img" alt="Avatar women">
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <div class="card-content">
-                                <h2 class="name">{{ employee.get_full_name }}</h2>
-                                <p class="description">{{ employee.position }}</p>
-                            </div>
-                        </a>
-                    </div>
-                {% endif %}
-            {% endfor %}
+<section class="bg-cream-100 py-16 lg:py-20">
+  <div class="container-page space-y-16">
 
-            <div class="list_employee reveal">
-                {% for employee in employees %}
-                    {% if employee.number > 0 %}
-                        <a href="{{ employee.get_absolute_url }}" class="card">
-                            <div class="image-content">
-                                <span class="overlay"></span>
-                                <div class="card-image">
-                                    {% if employee.image %}
-                                        <img src="{{ employee.image.url }}" class="card-img" alt="{{ employee.get_full_name }}">
-                                    {% elif employee.gender == 'men' %}
-                                        <img src="{% static 'images/more/avatar_men.webp' %}" class="card-img" alt="Avatar men">
-                                    {% else %}
-                                        <img src="{% static 'images/more/avatar_women.webp' %}" class="card-img" alt="Avatar women">
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <div class="card-content">
-                                <h2 class="name">{{ employee.get_full_name }}</h2>
-                                <p class="description">{{ employee.position }}</p>
-                            </div>
-                        </a>
-                    {% endif %}
-                {% endfor %}
+    {# Руководитель — number == 0 #}
+    {% for employee in employees %}
+      {% if employee.number == 0 %}
+        <div class="reveal overflow-hidden rounded-[32px] bg-cream-50 ring-1 ring-cream-300/70">
+          <a href="{{ employee.get_absolute_url }}" class="group grid gap-0 md:grid-cols-12">
+            <div class="relative aspect-[4/3] overflow-hidden bg-sage-100 md:col-span-5 md:aspect-auto md:min-h-[24rem]">
+              {% if employee.image %}
+                <img src="{{ employee.image.url }}" alt="{{ employee.get_full_name }}" class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105">
+              {% elif employee.gender == 'men' %}
+                <img src="{% static 'images/more/avatar_men.webp' %}" alt="" class="absolute inset-0 h-full w-full object-cover">
+              {% else %}
+                <img src="{% static 'images/more/avatar_women.webp' %}" alt="" class="absolute inset-0 h-full w-full object-cover">
+              {% endif %}
             </div>
+            <div class="flex flex-col justify-center p-8 md:col-span-7 lg:p-12">
+              <span class="section-eyebrow">{% trans 'Руководство' %}</span>
+              <h2 class="display mt-5 text-3xl sm:text-4xl">{{ employee.get_full_name }}</h2>
+              <p class="mt-4 text-base text-ink/65">{{ employee.position }}</p>
+              <span class="mt-8 inline-flex w-fit btn-pill-dark">
+                {% trans 'Открыть профиль' %}
+                <span class="btn-pill-icon"><svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+              </span>
+            </div>
+          </a>
         </div>
+      {% endif %}
+    {% endfor %}
+
+    {# Остальные сотрудники #}
+    <div>
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <div>
+          <span class="section-eyebrow">{% trans 'Состав' %}</span>
+          <h2 class="display mt-4 text-3xl sm:text-4xl">
+            {% trans 'Преподаватели' %} <em class="italic-soft text-sage-700">{% trans 'и сотрудники' %}</em>
+          </h2>
+        </div>
+      </div>
+
+      {% if employees %}
+        <div class="reveal mt-10 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+          {% for employee in employees %}
+            {% if employee.number > 0 %}
+              {% include 'base/person-card.html' with person=employee %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="mt-10 flex flex-col items-center justify-center rounded-3xl border-2 border-dashed border-sage-200 bg-cream-50 px-6 py-16 text-center">
+          <svg class="h-10 w-10 text-sage-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <p class="mt-4 font-display text-lg font-semibold text-ink/75">{% trans 'Педагоги скоро появятся' %}</p>
+        </div>
+      {% endif %}
     </div>
+
+  </div>
 </section>
 {% endblock %}

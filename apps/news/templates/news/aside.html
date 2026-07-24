@@ -1,9 +1,11 @@
 {% load i18n %}
 
-<div class="widget">
-    <h4 class="widget-title">{% trans 'Поиск новостей' %}</h4>
-    <form method="get" class="widget-form-search">
-        <input placeholder="{% trans 'Поиск по ключевому слову...' %}" type="text" name="q">
-        <button type="submit">{% trans 'Поиск' %}</button>
-    </form>
-</div>
+<form method="get" role="search" class="flex w-full items-center gap-2 rounded-full border border-cream-300/70 bg-cream-50 p-1.5 pl-5 transition focus-within:border-sage-400 focus-within:bg-white sm:w-auto">
+  <svg class="h-4 w-4 shrink-0 text-ink/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  <input type="search" name="q" value="{{ request.GET.q }}"
+         placeholder="{% trans 'Поиск по ключевому слову...' %}"
+         class="w-full min-w-0 bg-transparent py-2 text-sm text-ink placeholder:text-ink/40 focus:outline-none sm:w-56">
+  <button type="submit" class="shrink-0 rounded-full bg-ink px-5 py-2 text-sm font-medium text-cream-200 transition hover:bg-sage-800">
+    {% trans 'Поиск' %}
+  </button>
+</form>
