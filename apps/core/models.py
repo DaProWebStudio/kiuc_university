@@ -356,12 +356,12 @@ class AbstractResume(models.Model):
     slug = models.SlugField(max_length=250, null=True, blank=True)
     gender = models.CharField(_('Пол'), max_length=10, choices=GENDER_CHOICES, default=cons.MEN)
     date_of_birth = models.DateField(_('День рождения'))
-    description = RichTextField(verbose_name='Резюме')
+    description = RichTextField(verbose_name=_('Резюме'))
     email = models.EmailField('Email', blank=True, null=True)
     instagram = models.URLField('instagram', blank=True, null=True)
     facebook = models.URLField('facebook', blank=True, null=True)
 
-    is_active = models.BooleanField("Активный", default=True)
+    is_active = models.BooleanField(_('Активный'), default=True)
 
     objects = models.Manager()
     active = ActiveManager()

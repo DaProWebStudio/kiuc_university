@@ -6,10 +6,9 @@
 {% block content %}
 
 {% trans 'Связаться с нами' as hero_eyebrow %}
-{% trans 'Напишите' as hero_title %}
-{% trans 'нам' as hero_title_em %}
+{% blocktranslate asvar hero_title_html %}Напишите <em class="italic-soft text-tan-300">нам</em>{% endblocktranslate %}
 {% trans 'Заполните форму — ответим в течение рабочего дня. Либо позвоните нашим менеджерам напрямую.' as hero_lead %}
-{% include 'base/page-hero.html' with eyebrow=hero_eyebrow title=hero_title title_em=hero_title_em lead=hero_lead %}
+{% include 'base/page-hero.html' with eyebrow=hero_eyebrow title_html=hero_title_html lead=hero_lead %}
 
 <section class="bg-cream-100 py-16 lg:py-20">
   <div class="container-page grid gap-12 lg:grid-cols-12">
@@ -17,7 +16,7 @@
     <div class="lg:col-span-7">
       <span class="section-eyebrow">{% trans 'Система обратной связи' %}</span>
       <h2 class="display mt-4 text-2xl sm:text-3xl">
-        {% trans 'Задайте' %} <em class="italic-soft text-sage-700">{% trans 'вопрос' %}</em>
+        {% blocktranslate %}Задайте <em class="italic-soft text-sage-700">вопрос</em>{% endblocktranslate %}
       </h2>
 
       <form action="" method="post" class="reveal mt-8 rounded-[28px] border border-cream-300/70 bg-cream-50 p-7 lg:p-9">

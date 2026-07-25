@@ -10,10 +10,9 @@
 {% block content %}
 
 {% trans 'Об институте' as hero_eyebrow %}
-{% trans 'Паспорт' as hero_title %}
-{% trans 'института' as hero_title_em %}
+{% blocktranslate asvar hero_title_html %}Паспорт <em class="italic-soft text-tan-300">института</em>{% endblocktranslate %}
 {% trans 'Официальный документ с полной информацией об институте — учредители, структура, материально-техническая база.' as hero_lead %}
-{% include 'base/page-hero.html' with eyebrow=hero_eyebrow title=hero_title title_em=hero_title_em lead=hero_lead %}
+{% include 'base/page-hero.html' with eyebrow=hero_eyebrow title_html=hero_title_html lead=hero_lead %}
 
 <section class="bg-cream-100 py-16 lg:py-20">
   <div class="container-page">

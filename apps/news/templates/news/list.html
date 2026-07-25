@@ -10,10 +10,9 @@
   {% include 'base/page-hero.html' with eyebrow=sub_title title=title lead=hero_lead %}
 {% else %}
   {% trans 'Об институте' as hero_eyebrow %}
-  {% trans 'Новости' as hero_title %}
-  {% trans 'института' as hero_title_em %}
+  {% blocktranslate asvar hero_title_html %}Новости <em class="italic-soft text-tan-300">института</em>{% endblocktranslate %}
   {% trans 'Свежие объявления, события и репортажи из жизни КИЯК.' as hero_lead %}
-  {% include 'base/page-hero.html' with eyebrow=hero_eyebrow title=hero_title title_em=hero_title_em lead=hero_lead %}
+  {% include 'base/page-hero.html' with eyebrow=hero_eyebrow title_html=hero_title_html lead=hero_lead %}
 {% endif %}
 
 <section class="bg-cream-100 py-16 lg:py-20">

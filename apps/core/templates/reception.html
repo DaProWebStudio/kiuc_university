@@ -35,7 +35,8 @@
               <div class="info-row">
                 <dt class="info-row-label">WhatsApp</dt>
                 <dd class="info-row-value">
-                  <a href="https://api.whatsapp.com/send/?phone={{ page.contact_whatsapp|cut:' '|cut:'('|cut:')'|cut:'-'|cut:'+' }}&text=Здравствуйте%21%0A%0AПишу+из+вашего+сайта+www.kiuc.kg.%0A%0A&type=phone_number&app_absent=0"
+                  {% trans 'Здравствуйте! Пишу с вашего сайта www.kiuc.kg.' as whatsapp_text %}
+                  <a href="https://api.whatsapp.com/send/?phone={{ page.contact_whatsapp|cut:' '|cut:'('|cut:')'|cut:'-'|cut:'+' }}&text={{ whatsapp_text|urlencode }}&type=phone_number&app_absent=0"
                      target="_blank" rel="noopener" class="font-mono text-sage-700 transition hover:text-sage-500">{{ page.contact_whatsapp }}</a>
                 </dd>
               </div>

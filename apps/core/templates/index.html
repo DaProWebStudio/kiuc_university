@@ -34,9 +34,7 @@
         </span>
 
         <h1 class="display mt-auto pt-12 text-5xl leading-[0.95] sm:text-6xl xl:text-7xl text-cream-200">
-          {% trans 'Откройте свой' %}
-          <em class="italic-soft text-tan-300">{% trans 'потенциал' %}</em>
-          {% trans 'в языках' %}
+          {% blocktranslate %}Откройте свой <em class="italic-soft text-tan-300">потенциал</em> в языках{% endblocktranslate %}
         </h1>
 
         <p class="mt-6 max-w-md text-base leading-relaxed text-cream-200/80">
@@ -116,8 +114,8 @@
           <span class="whitespace-nowrap text-xs uppercase tracking-[0.28em]">SOSI · Educational</span>
           <span class="flex items-center gap-2 whitespace-nowrap text-sm"><span class="inline-block h-3 w-3 rounded-full border border-current"></span> CultureXchange</span>
           <span class="font-display italic whitespace-nowrap text-lg">Bishkek <span class="not-italic">·</span> KG</span>
-          <span class="font-display italic whitespace-nowrap text-lg">Институт <span class="not-italic">·</span> языков</span>
-          <span class="whitespace-nowrap text-xs uppercase tracking-[0.28em]">Корейская · Ассоциация</span>
+          <span class="font-display italic whitespace-nowrap text-lg">{% trans 'Институт' %} <span class="not-italic">·</span> {% trans 'языков' %}</span>
+          <span class="whitespace-nowrap text-xs uppercase tracking-[0.28em]">{% trans 'Корейская · Ассоциация' %}</span>
         {% endfor %}
       </div>
     </div>
@@ -171,7 +169,7 @@
       <div>
         <span class="section-eyebrow">{% trans 'Почему КИЯК' %}</span>
         <h2 class="display mt-4 max-w-2xl text-3xl sm:text-4xl lg:text-display-sm">
-          {% trans 'Институт, где' %} <em class="italic-soft text-sage-700">{% trans 'языки' %}</em> {% trans 'открывают новые горизонты' %}
+          {% blocktranslate %}Институт, где <em class="italic-soft text-sage-700">языки</em> открывают новые горизонты{% endblocktranslate %}
         </h2>
       </div>
       <p class="max-w-sm text-sm text-ink/65">
@@ -184,7 +182,7 @@
             <div class="bento-tile bento-tile-brand lg:col-span-2 lg:row-span-2 min-h-[24rem]">
         <span class="text-[11px] font-semibold uppercase tracking-[0.22em] text-tan-300">01 / {% trans 'International' %}</span>
         <h3 class="display mt-auto pt-12 text-4xl sm:text-5xl">
-          {% trans 'Образование' %} <em class="italic-soft">{% trans 'международного' %}</em> {% trans 'уровня' %}
+          {% blocktranslate %}Образование <em class="italic-soft">международного</em> уровня{% endblocktranslate %}
         </h3>
         <p class="mt-4 max-w-sm text-sm text-cream-200/80">
           {% trans 'Партнёрские программы с университетами Кореи, Кыргызстана и Центральной Азии. Реальная практика, реальные дипломы.' %}
@@ -403,7 +401,7 @@
         <a href="{{ specialty.get_absolute_url }}" class="photo-card group w-80 sm:w-96">
           {% if specialty.image %}<img loading="lazy" src="{{ specialty.image.url }}" alt="" class="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-105">{% endif %}
           <div class="absolute right-4 top-4 rounded-full bg-tan-300 px-4 py-1.5 text-xs font-bold text-ink">
-            {{ specialty.contract }} сом
+            {{ specialty.contract }} {% trans 'сом' %}
           </div>
           <div class="photo-card-overlay">
             <p class="text-xs font-medium uppercase tracking-wider text-white/70">{{ specialty.form_verbose }}</p>
@@ -434,7 +432,7 @@
         <div class="md:col-span-7">
           <span class="section-eyebrow-light">{% trans 'О библиотеке' %}</span>
           <h2 class="display mt-4 text-4xl sm:text-5xl lg:text-display-md">
-            {% trans 'Электронно-' %}<em class="italic-soft text-tan-300">{% trans 'библиотечная' %}</em> {% trans 'система' %}
+            {% blocktranslate %}Электронно-<em class="italic-soft text-tan-300">библиотечная</em> система{% endblocktranslate %}
           </h2>
         </div>
         <div class="md:col-span-5">
@@ -524,7 +522,7 @@
         <div>
           <span class="section-eyebrow">{% trans 'Студентам' %}</span>
           <h2 class="display mt-4 text-3xl sm:text-4xl lg:text-display-sm">
-            {% trans 'Члены' %} <em class="italic-soft text-sage-700">{% trans 'студсовета' %}</em>
+            {% blocktranslate %}Члены <em class="italic-soft text-sage-700">студсовета</em>{% endblocktranslate %}
           </h2>
         </div>
         <a href="{% url 'students' %}" class="btn-pill-dark">

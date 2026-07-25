@@ -6,10 +6,9 @@
 {% block content %}
 
 {% trans 'Об институте' as hero_eyebrow %}
-{% trans 'История' as hero_title %}
-{% trans 'КИЯК' as hero_title_em %}
+{% blocktranslate asvar hero_title_html %}История <em class="italic-soft text-tan-300">КИЯК</em>{% endblocktranslate %}
 {% trans 'Как языковые курсы в г. Шопоков выросли в институт языков и культуры — хронология и важные вехи.' as hero_lead %}
-{% include 'base/page-hero.html' with eyebrow=hero_eyebrow title=hero_title title_em=hero_title_em lead=hero_lead %}
+{% include 'base/page-hero.html' with eyebrow=hero_eyebrow title_html=hero_title_html lead=hero_lead %}
 
 <section class="bg-cream-100 py-16 lg:py-20">
   <div class="container-page grid gap-12 lg:grid-cols-12">
