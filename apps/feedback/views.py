@@ -13,19 +13,32 @@ class ContactsView(FormView):
     template_name = 'contacts.html'
     success_url = '/'
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.recaptcha: Recaptcha = get_random_model(Recaptcha)
+    def get_recaptcha(self) -> Recaptcha | None:
+        if not hasattr(self, '_recaptcha'):
+            # POST сверяет ответ с той капчей, что показали на GET, а не с новой случайной
+            pk = self.request.session.get('recaptcha_id') if self.request.method == 'POST' else None
+            self._recaptcha = Recaptcha.objects.filter(pk=pk).first() if pk else None
+            if self._recaptcha is None:
+                self._recaptcha = get_random_model(Recaptcha)
+            if self._recaptcha is not None:
+                self.request.session['recaptcha_id'] = self._recaptcha.pk
+        return self._recaptcha
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        # без капчи поле ответа не выводится — значит, и не обязательно
+        form.fields['user_answer'].required = self.get_recaptcha() is not None
+        return form
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['recaptcha'] = self.recaptcha
+        context['recaptcha'] = self.get_recaptcha()
         return context
 
     def form_valid(self, form):
-        form.save(commit=False)
-        if int(form.cleaned_data.get('user_answer')) == int(self.recaptcha.answer):
-            form.save()
-            return super().form_valid(form)
-        form.add_error('user_answer', _('Не правильный ответ'))
-        return super().form_invalid(form)
+        recaptcha = self.get_recaptcha()
+        if recaptcha is not None and int(form.cleaned_data.get('user_answer')) != int(recaptcha.answer):
+            form.add_error('user_answer', _('Не правильный ответ'))
+            return self.form_invalid(form)
+        form.save()
+        return super().form_valid(form)

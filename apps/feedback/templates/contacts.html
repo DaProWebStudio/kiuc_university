@@ -38,6 +38,7 @@
           {{ form.message }}
         </div>
 
+        {% if recaptcha %}
         <div class="mt-6 grid items-end gap-5 sm:grid-cols-2">
           <div class="flex items-center gap-4 rounded-2xl border border-cream-300 bg-white p-3">
             <img src="{{ recaptcha.image.url }}" alt="{% trans 'Проверочный вопрос' %}" class="h-14 w-auto rounded-xl">
@@ -54,6 +55,7 @@
             {{ form.user_answer }}
           </div>
         </div>
+        {% endif %}
 
         <label for="agree" class="mt-6 flex cursor-pointer items-start gap-3 text-sm text-ink/70">
           <input id="agree" required type="checkbox"
